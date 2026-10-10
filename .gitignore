@@ -8,5 +8,5 @@ dist/
 *.tsbuildinfo
 .env*
 !.env.example
-public/maplibre/
+**/public/maplibre/
 .DS_Store

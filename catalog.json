@@ -1,0 +1,920 @@
+[
+  {
+    "slug": "business-locator",
+    "kind": "template",
+    "item": "business-locator-01",
+    "lanes": [
+      "react"
+    ],
+    "preview": "experience",
+    "style": "muted",
+    "lane": "react",
+    "title": "Business locator",
+    "description": "Connect your locations to a searchable list. Help visitors find the right place and see what it offers.",
+    "route": "next/app/business-locator/page.tsx",
+    "url": "/business-locator/",
+    "docs": "https://unmap.dev/templates/business-locator",
+    "files": [
+      "apps/registry/registry/blocks/unmap-business-locator.tsx",
+      "apps/registry/registry/blocks/map-template.tsx",
+      "apps/registry/registry/lib/map-template.ts",
+      "apps/registry/registry/lib/business-locator-01-data.ts"
+    ]
+  },
+  {
+    "slug": "local-guide",
+    "kind": "template",
+    "item": "local-guide-01",
+    "lanes": [
+      "react"
+    ],
+    "preview": "experience",
+    "style": "canopy",
+    "lane": "react",
+    "title": "Local guide",
+    "description": "Give your places a point of view. Connect short stories to a sequence of stops on the map.",
+    "route": "next/app/local-guide/page.tsx",
+    "url": "/local-guide/",
+    "docs": "https://unmap.dev/templates/local-guide",
+    "files": [
+      "apps/registry/registry/blocks/unmap-local-guide.tsx",
+      "apps/registry/registry/blocks/map-template.tsx",
+      "apps/registry/registry/lib/map-template.ts",
+      "apps/registry/registry/lib/local-guide-01-data.ts"
+    ]
+  },
+  {
+    "slug": "public-notices",
+    "kind": "template",
+    "item": "public-notices-01",
+    "lanes": [
+      "react"
+    ],
+    "preview": "experience",
+    "style": "base",
+    "lane": "react",
+    "title": "Public notices",
+    "description": "Make local updates easy to find. Put a place, a status, and a clear explanation behind each notice.",
+    "route": "next/app/public-notices/page.tsx",
+    "url": "/public-notices/",
+    "docs": "https://unmap.dev/templates/public-notices",
+    "files": [
+      "apps/registry/registry/blocks/unmap-public-notices.tsx",
+      "apps/registry/registry/blocks/map-template.tsx",
+      "apps/registry/registry/lib/map-template.ts",
+      "apps/registry/registry/lib/public-notices-01-data.ts"
+    ]
+  },
+  {
+    "slug": "map-story",
+    "kind": "template",
+    "item": "map-story-01",
+    "lanes": [
+      "react"
+    ],
+    "preview": "frame",
+    "style": "outdoor",
+    "lane": "react",
+    "title": "Map story",
+    "description": "Tell a story the map can follow. As readers scroll, each chapter moves the camera and reveals a route or a travel-time area.",
+    "route": "next/app/map-story/page.tsx",
+    "url": "/map-story/",
+    "docs": "https://unmap.dev/templates/map-story",
+    "files": [
+      "apps/registry/registry/blocks/unmap-map-story.tsx",
+      "apps/registry/registry/blocks/map-template.tsx",
+      "apps/registry/registry/lib/map-template.ts",
+      "apps/registry/registry/lib/map-story-01-data.ts"
+    ]
+  },
+  {
+    "slug": "store-locator",
+    "kind": "block",
+    "item": "store-locator",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/blocks#find-a-branch",
+    "lane": "react",
+    "title": "Store Locator",
+    "description": "A page that finds stores: search a place and the map pulls in to it and its nearest stores, a list that follows the view and answers the map on hover, a drive-time halo round the store you pick, and directions to it. Calls /geocode/autocomplete (and /geocode/reverse for typed coordinates), /isochrone and /route. Ships with Ottawa Public Library branches (City of Ottawa open data).",
+    "route": "next/app/store-locator/page.tsx",
+    "url": "/store-locator/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#find-a-branch",
+    "files": [
+      "apps/registry/registry/blocks/store-locator/page.tsx",
+      "apps/registry/registry/blocks/store-locator/store-locator.tsx",
+      "apps/registry/registry/lib/store-locator-data.ts"
+    ]
+  },
+  {
+    "slug": "directions",
+    "kind": "block",
+    "item": "directions",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/blocks#get-directions",
+    "lane": "react",
+    "title": "Directions",
+    "description": "A page that gets directions: choose a start and a destination and the route draws in with its travel time as the headline. A drive, cycle or walk switch redraws the route for that mode and keeps each mode's time on it, and a reachable-area toggle shades how far you can go from the start. Calls /route, /isochrone and the geocoder.",
+    "route": "next/app/directions/page.tsx",
+    "url": "/directions/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#get-directions",
+    "files": [
+      "apps/registry/registry/blocks/directions/page.tsx",
+      "apps/registry/registry/blocks/directions/directions.tsx"
+    ]
+  },
+  {
+    "slug": "flow-map",
+    "kind": "block",
+    "item": "flow-map",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/blocks#follow-interprovincial-migration",
+    "lane": "react",
+    "title": "Migration Flow Map",
+    "description": "A page of interprovincial migration flows between the capitals, from Statistics Canada Table 17-10-0022-01 (2021/2022 to 2025/2026, Statistics Canada Open Licence), with a year scrubber that animates the flows and each province's net gain or loss. Calls no API beyond the map.",
+    "route": "next/app/flow-map/page.tsx",
+    "url": "/flow-map/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#follow-interprovincial-migration",
+    "files": [
+      "apps/registry/registry/blocks/flow-map/page.tsx",
+      "apps/registry/registry/blocks/flow-map/flow-map.tsx",
+      "apps/registry/registry/lib/flow-map-data.ts"
+    ]
+  },
+  {
+    "slug": "elevation-explorer",
+    "kind": "block",
+    "item": "elevation-explorer",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/blocks#see-the-climb",
+    "lane": "react",
+    "title": "Elevation Explorer",
+    "description": "A page that profiles a line from the unmap elevation API: pick a mountain trip, route your own by bike or draw one, and read every climb on a chart that answers the map. Hover either and the other follows; the line is coloured by grade. Calls /route, /geocode/autocomplete (and /geocode/reverse for typed coordinates) and /elevation.",
+    "route": "next/app/elevation-explorer/page.tsx",
+    "url": "/elevation-explorer/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#see-the-climb",
+    "files": [
+      "apps/registry/registry/blocks/elevation-explorer/page.tsx",
+      "apps/registry/registry/blocks/elevation-explorer/elevation-explorer.tsx"
+    ]
+  },
+  {
+    "slug": "delivery-tracker",
+    "kind": "block",
+    "item": "delivery-tracker",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/blocks#track-a-delivery",
+    "lane": "react",
+    "title": "Delivery Tracker",
+    "description": "A page that routes a delivery from a depot to a drop-off, fills in the travelled part of the line as a courier marker moves along it, and keeps a living arrival card: the time, what is left and each stage of the trip. Calls /route once per branch; Restart replays it. Stops are Ottawa Public Library branches (City of Ottawa open data).",
+    "route": "next/app/delivery-tracker/page.tsx",
+    "url": "/delivery-tracker/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#track-a-delivery",
+    "files": [
+      "apps/registry/registry/blocks/delivery-tracker/page.tsx",
+      "apps/registry/registry/blocks/delivery-tracker/delivery-tracker.tsx"
+    ]
+  },
+  {
+    "slug": "census-choropleth",
+    "kind": "block",
+    "item": "census-choropleth",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/blocks#compare-provinces-and-territories",
+    "lane": "react",
+    "title": "Census Choropleth",
+    "description": "A page that colours the provinces and territories by 2021 Census population, change since 2016 or people per km², joined by id with feature-state, with a legend that lists each class's provinces and the number for whatever the pointer is on. Ships Statistics Canada boundaries and counts (Statistics Canada Open Licence); calls no API beyond the map.",
+    "route": "next/app/census-choropleth/page.tsx",
+    "url": "/census-choropleth/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#compare-provinces-and-territories",
+    "files": [
+      "apps/registry/registry/blocks/census-choropleth/page.tsx",
+      "apps/registry/registry/blocks/census-choropleth/census-choropleth.tsx",
+      "apps/registry/registry/lib/census-choropleth-data.ts"
+    ]
+  },
+  {
+    "slug": "land-treaty-inspector",
+    "kind": "block",
+    "item": "land-treaty-inspector",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "addon": "legalLand",
+    "guide": "/docs/frontend/blocks#look-up-legal-land-and-treaties",
+    "lane": "react",
+    "title": "Legal Land and Treaty Inspector",
+    "description": "A page that answers a map click or a legal land description with one card: the survey cell, hatched on the map, and the treaty records at that point, dotted, with every survey unit there listed. Legal land needs the Legal Land add-on (Energy and Agriculture include it); without it the page says why, links pricing, and keeps the treaty context with a municipality lookup. Calls /identify and /geocode/reverse per point and /geocode/autocomplete as you type, after one add-on check.",
+    "route": "next/app/land-treaty-inspector/page.tsx",
+    "url": "/land-treaty-inspector/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#look-up-legal-land-and-treaties",
+    "files": [
+      "apps/registry/registry/blocks/land-treaty-inspector/page.tsx",
+      "apps/registry/registry/blocks/land-treaty-inspector/land-treaty-inspector.tsx"
+    ]
+  },
+  {
+    "slug": "address-playground",
+    "kind": "block",
+    "item": "address-playground",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/blocks#look-up-any-place-in-canada",
+    "lane": "react",
+    "title": "Address Playground",
+    "description": "A search page with no map: autocomplete in English and French, typed coordinates, every name a result carries with its language (Inuktitut syllabics beside the name where the record has them), its type, precision, match and source, and the nearest places of six categories around it. Calls /geocode/autocomplete (and /geocode/reverse for typed coordinates) and /geocode/nearby.",
+    "route": "next/app/address-playground/page.tsx",
+    "url": "/address-playground/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#look-up-any-place-in-canada",
+    "files": [
+      "apps/registry/registry/blocks/address-playground/page.tsx",
+      "apps/registry/registry/blocks/address-playground/address-playground.tsx"
+    ]
+  },
+  {
+    "slug": "energy-explorer",
+    "kind": "block",
+    "item": "energy-explorer",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "addon": "energy",
+    "guide": "/docs/frontend/blocks#explore-albertas-wells-and-pipelines",
+    "lane": "react",
+    "title": "Energy Explorer",
+    "description": "A page with Alberta wells, pipelines and facilities: UWI and licence search, a layer legend and click-to-identify. Needs the Energy add-on; without it the page says why and shows the basemap. Calls /geocode/autocomplete per search and /identify per click, after one add-on check.",
+    "route": "next/app/energy-explorer/page.tsx",
+    "url": "/energy-explorer/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#explore-albertas-wells-and-pipelines",
+    "files": [
+      "apps/registry/registry/blocks/energy-explorer/page.tsx",
+      "apps/registry/registry/blocks/energy-explorer/energy-explorer.tsx"
+    ]
+  },
+  {
+    "slug": "map-markers",
+    "kind": "example",
+    "item": "map-markers-01",
+    "lanes": [
+      "react"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/map#markers-and-interaction",
+    "lane": "react",
+    "title": "Marker and popup example",
+    "description": "An accessible marker with a click-to-open popup, composed from the Unmap map and shadcn Button.",
+    "route": "next/app/map-markers/page.tsx",
+    "url": "/map-markers/",
+    "docs": "https://unmap.dev/docs/frontend/map#markers-and-interaction",
+    "files": [
+      "apps/registry/registry/blocks/map-markers-01.tsx"
+    ]
+  },
+  {
+    "slug": "map-measure",
+    "kind": "example",
+    "item": "map-measure-01",
+    "lanes": [
+      "react"
+    ],
+    "preview": "frame",
+    "data": "none",
+    "guide": "/docs/frontend/tools#measure-distances",
+    "lane": "react",
+    "title": "Measure a distance example",
+    "description": "Click points on the map and read the distance as you go, composed from the Unmap map and the measure item.",
+    "route": "next/app/map-measure/page.tsx",
+    "url": "/map-measure/",
+    "docs": "https://unmap.dev/docs/frontend/tools#measure-distances",
+    "files": [
+      "apps/registry/registry/blocks/map-measure-01.tsx"
+    ]
+  },
+  {
+    "slug": "map-inspect",
+    "kind": "example",
+    "item": "map-inspect-01",
+    "lanes": [
+      "react"
+    ],
+    "preview": "frame",
+    "data": "none",
+    "guide": "/docs/frontend/tools#inspect-features",
+    "lane": "react",
+    "title": "Inspect map features example",
+    "description": "Click anything on a map of Ottawa to list the features there and read their properties, composed from the Unmap map and the feature-inspector item.",
+    "route": "next/app/map-inspect/page.tsx",
+    "url": "/map-inspect/",
+    "docs": "https://unmap.dev/docs/frontend/tools#inspect-features",
+    "files": [
+      "apps/registry/registry/blocks/map-inspect-01.tsx"
+    ]
+  },
+  {
+    "slug": "map-timeline",
+    "kind": "example",
+    "item": "map-timeline-01",
+    "lanes": [
+      "react"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/tools#time-slider",
+    "lane": "react",
+    "title": "Play a timeline example",
+    "description": "Play or drag a time slider to add sample bike-share docks to Calgary year by year, composed from the Unmap map, the geojson-layer and time-slider items and your Card.",
+    "route": "next/app/map-timeline/page.tsx",
+    "url": "/map-timeline/",
+    "docs": "https://unmap.dev/docs/frontend/tools#time-slider",
+    "files": [
+      "apps/registry/registry/blocks/map-timeline-01.tsx"
+    ]
+  },
+  {
+    "slug": "map-draw",
+    "kind": "example",
+    "item": "map-draw-01",
+    "lanes": [
+      "react"
+    ],
+    "preview": "frame",
+    "data": "none",
+    "guide": "/docs/frontend/tools#draw-on-the-map",
+    "lane": "react",
+    "title": "Draw on the map example",
+    "description": "Draw points, lines, areas and circles on a map of Calgary and get them back as GeoJSON, composed from the Unmap map and the draw item.",
+    "route": "next/app/map-draw/page.tsx",
+    "url": "/map-draw/",
+    "docs": "https://unmap.dev/docs/frontend/tools#draw-on-the-map",
+    "files": [
+      "apps/registry/registry/blocks/map-draw-01.tsx"
+    ]
+  },
+  {
+    "slug": "map-compare",
+    "kind": "example",
+    "item": "map-compare-01",
+    "lanes": [
+      "react"
+    ],
+    "preview": "frame",
+    "data": "none",
+    "guide": "/docs/frontend/tools#compare-two-maps",
+    "lane": "react",
+    "title": "Compare two styles example",
+    "description": "Drag a divider across Vancouver to compare the base and outdoor styles, composed from the compare-swipe item and your Badge.",
+    "route": "next/app/map-compare/page.tsx",
+    "url": "/map-compare/",
+    "docs": "https://unmap.dev/docs/frontend/tools#compare-two-maps",
+    "files": [
+      "apps/registry/registry/blocks/map-compare-01.tsx"
+    ]
+  },
+  {
+    "slug": "map-elevation",
+    "kind": "example",
+    "item": "map-elevation-01",
+    "lanes": [
+      "react"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/tools#elevation-profile",
+    "lane": "react",
+    "title": "Trail elevation profile example",
+    "description": "The elevation profile of a sample trail up Tunnel Mountain in Banff, linked to the map on hover, composed from the Unmap map and the geojson-layer and elevation-profile items.",
+    "route": "next/app/map-elevation/page.tsx",
+    "url": "/map-elevation/",
+    "docs": "https://unmap.dev/docs/frontend/tools#elevation-profile",
+    "files": [
+      "apps/registry/registry/blocks/map-elevation-01.tsx"
+    ]
+  },
+  {
+    "slug": "map-geojson",
+    "kind": "example",
+    "item": "map-geojson-01",
+    "lanes": [
+      "react"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/layers#geojson",
+    "lane": "react",
+    "title": "Service zones example",
+    "description": "Three illustrative service zones over Calgary; click one for its name and hours, composed from the Unmap map and the geojson-layer item.",
+    "route": "next/app/map-geojson/page.tsx",
+    "url": "/map-geojson/",
+    "docs": "https://unmap.dev/docs/frontend/layers#geojson",
+    "files": [
+      "apps/registry/registry/blocks/map-geojson-01.tsx"
+    ]
+  },
+  {
+    "slug": "map-clusters",
+    "kind": "example",
+    "item": "map-clusters-01",
+    "lanes": [
+      "react"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/layers#clusters",
+    "lane": "react",
+    "title": "Clustered points example",
+    "description": "60 illustrative points in Montréal, in clusters that zoom in until they split, composed from the Unmap map and the cluster-layer item.",
+    "route": "next/app/map-clusters/page.tsx",
+    "url": "/map-clusters/",
+    "docs": "https://unmap.dev/docs/frontend/layers#clusters",
+    "files": [
+      "apps/registry/registry/blocks/map-clusters-01.tsx"
+    ]
+  },
+  {
+    "slug": "map-heatmap",
+    "kind": "example",
+    "item": "map-heatmap-01",
+    "lanes": [
+      "react"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/layers#heatmap",
+    "lane": "react",
+    "title": "Weighted heatmap example",
+    "description": "A heatmap of 60 illustrative points in Toronto, counted or weighted, composed from the Unmap map, the heatmap-layer item and your ToggleGroup.",
+    "route": "next/app/map-heatmap/page.tsx",
+    "url": "/map-heatmap/",
+    "docs": "https://unmap.dev/docs/frontend/layers#heatmap",
+    "files": [
+      "apps/registry/registry/blocks/map-heatmap-01.tsx"
+    ]
+  },
+  {
+    "slug": "map-arcs",
+    "kind": "example",
+    "item": "map-arcs-01",
+    "lanes": [
+      "react"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/layers#arcs",
+    "lane": "react",
+    "title": "Arcs from Winnipeg example",
+    "description": "Arcs from Winnipeg to six capitals; click one or pick a city for its distance, composed from the Unmap map, the arc-layer item and your ToggleGroup.",
+    "route": "next/app/map-arcs/page.tsx",
+    "url": "/map-arcs/",
+    "docs": "https://unmap.dev/docs/frontend/layers#arcs",
+    "files": [
+      "apps/registry/registry/blocks/map-arcs-01.tsx"
+    ]
+  },
+  {
+    "slug": "map-flows",
+    "kind": "example",
+    "item": "map-flows-01",
+    "lanes": [
+      "react"
+    ],
+    "preview": "frame",
+    "data": "source",
+    "guide": "/docs/frontend/layers#flows",
+    "lane": "react",
+    "title": "Migration flows example",
+    "description": "A year of Statistics Canada migration between the western provinces, as flows; hover a province or pin one below the map, composed from the Unmap map, the flow-layer item and your ToggleGroup.",
+    "route": "next/app/map-flows/page.tsx",
+    "url": "/map-flows/",
+    "docs": "https://unmap.dev/docs/frontend/layers#flows",
+    "files": [
+      "apps/registry/registry/blocks/map-flows-01.tsx"
+    ]
+  },
+  {
+    "slug": "store-locator",
+    "kind": "block",
+    "item": "store-locator",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/blocks#find-a-branch",
+    "lane": "vue",
+    "title": "Store Locator (Vue)",
+    "description": "A Nuxt page that finds stores: search a place and the map pulls in to it and its nearest stores, a list that follows the view and answers the map on hover, a drive-time halo round the store you pick, and directions to it. Calls /geocode/autocomplete (and /geocode/reverse for typed coordinates), /isochrone and /route. Ships with Ottawa Public Library branches (City of Ottawa open data).",
+    "route": "nuxt/app/pages/store-locator.vue",
+    "url": "/store-locator/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#find-a-branch",
+    "files": [
+      "apps/registry/registry/vue/blocks/store-locator/page.vue",
+      "apps/registry/registry/vue/components/ui/store-locator/UnmapStoreLocator.vue",
+      "apps/registry/registry/vue/components/ui/store-locator/index.ts",
+      "apps/registry/registry/vue/components/ui/store-locator-data/index.ts"
+    ]
+  },
+  {
+    "slug": "directions",
+    "kind": "block",
+    "item": "directions",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/blocks#get-directions",
+    "lane": "vue",
+    "title": "Directions (Vue)",
+    "description": "A Nuxt page that gets directions: choose a start and a destination and the route draws in with its travel time as the headline. A drive, cycle or walk switch redraws the route for that mode and keeps each mode's time on it, and a reachable-area toggle shades how far you can go from the start. Calls /route, /isochrone and the geocoder.",
+    "route": "nuxt/app/pages/directions.vue",
+    "url": "/directions/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#get-directions",
+    "files": [
+      "apps/registry/registry/vue/blocks/directions/page.vue",
+      "apps/registry/registry/vue/components/ui/directions/UnmapDirections.vue",
+      "apps/registry/registry/vue/components/ui/directions/index.ts"
+    ]
+  },
+  {
+    "slug": "flow-map",
+    "kind": "block",
+    "item": "flow-map",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/blocks#follow-interprovincial-migration",
+    "lane": "vue",
+    "title": "Migration Flow Map (Vue)",
+    "description": "A Nuxt page of interprovincial migration flows between the capitals, from Statistics Canada Table 17-10-0022-01 (2021/2022 to 2025/2026, Statistics Canada Open Licence), with a year scrubber that animates the flows and each province's net gain or loss. Calls no API beyond the map.",
+    "route": "nuxt/app/pages/flow-map.vue",
+    "url": "/flow-map/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#follow-interprovincial-migration",
+    "files": [
+      "apps/registry/registry/vue/blocks/flow-map/page.vue",
+      "apps/registry/registry/vue/components/ui/flow-map/UnmapFlowMap.vue",
+      "apps/registry/registry/vue/components/ui/flow-map/index.ts",
+      "apps/registry/registry/vue/components/ui/flow-map-data/index.ts"
+    ]
+  },
+  {
+    "slug": "elevation-explorer",
+    "kind": "block",
+    "item": "elevation-explorer",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/blocks#see-the-climb",
+    "lane": "vue",
+    "title": "Elevation Explorer (Vue)",
+    "description": "A Nuxt page that profiles a line from the unmap elevation API: pick a mountain trip, route your own by bike or draw one, and read every climb on a chart that answers the map. Hover either and the other follows; the line is coloured by grade. Calls /route, /geocode/autocomplete (and /geocode/reverse for typed coordinates) and /elevation.",
+    "route": "nuxt/app/pages/elevation-explorer.vue",
+    "url": "/elevation-explorer/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#see-the-climb",
+    "files": [
+      "apps/registry/registry/vue/blocks/elevation-explorer/page.vue",
+      "apps/registry/registry/vue/components/ui/elevation-explorer/UnmapElevationExplorer.vue",
+      "apps/registry/registry/vue/components/ui/elevation-explorer/index.ts"
+    ]
+  },
+  {
+    "slug": "delivery-tracker",
+    "kind": "block",
+    "item": "delivery-tracker",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/blocks#track-a-delivery",
+    "lane": "vue",
+    "title": "Delivery Tracker (Vue)",
+    "description": "A Nuxt page that routes a delivery from a depot to a drop-off, fills in the travelled part of the line as a courier marker moves along it, and keeps a living arrival card: the time, what is left and each stage of the trip. Calls /route once per branch; Restart replays it. Stops are Ottawa Public Library branches (City of Ottawa open data).",
+    "route": "nuxt/app/pages/delivery-tracker.vue",
+    "url": "/delivery-tracker/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#track-a-delivery",
+    "files": [
+      "apps/registry/registry/vue/blocks/delivery-tracker/page.vue",
+      "apps/registry/registry/vue/components/ui/delivery-tracker/UnmapDeliveryTracker.vue",
+      "apps/registry/registry/vue/components/ui/delivery-tracker/index.ts"
+    ]
+  },
+  {
+    "slug": "census-choropleth",
+    "kind": "block",
+    "item": "census-choropleth",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/blocks#compare-provinces-and-territories",
+    "lane": "vue",
+    "title": "Census Choropleth (Vue)",
+    "description": "A Nuxt page that colours the provinces and territories by 2021 Census population, change since 2016 or people per km², joined by id with feature-state, with a legend that lists each class's provinces and the number for whatever the pointer is on. Ships Statistics Canada boundaries and counts (Statistics Canada Open Licence); calls no API beyond the map.",
+    "route": "nuxt/app/pages/census-choropleth.vue",
+    "url": "/census-choropleth/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#compare-provinces-and-territories",
+    "files": [
+      "apps/registry/registry/vue/blocks/census-choropleth/page.vue",
+      "apps/registry/registry/vue/components/ui/census-choropleth/UnmapCensusChoropleth.vue",
+      "apps/registry/registry/vue/components/ui/census-choropleth/index.ts",
+      "apps/registry/registry/vue/components/ui/census-choropleth-data/index.ts"
+    ]
+  },
+  {
+    "slug": "land-treaty-inspector",
+    "kind": "block",
+    "item": "land-treaty-inspector",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "addon": "legalLand",
+    "guide": "/docs/frontend/blocks#look-up-legal-land-and-treaties",
+    "lane": "vue",
+    "title": "Legal Land and Treaty Inspector (Vue)",
+    "description": "A Nuxt page that answers a map click or a legal land description with one card: the survey cell, hatched on the map, and the treaty records at that point, dotted, with every survey unit there listed. Legal land needs the Legal Land add-on (Energy and Agriculture include it); without it the page says why, links pricing, and keeps the treaty context with a municipality lookup. Calls /identify and /geocode/reverse per point and /geocode/autocomplete as you type, after one add-on check.",
+    "route": "nuxt/app/pages/land-treaty-inspector.vue",
+    "url": "/land-treaty-inspector/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#look-up-legal-land-and-treaties",
+    "files": [
+      "apps/registry/registry/vue/blocks/land-treaty-inspector/page.vue",
+      "apps/registry/registry/vue/components/ui/land-treaty-inspector/UnmapLandTreatyInspector.vue",
+      "apps/registry/registry/vue/components/ui/land-treaty-inspector/index.ts"
+    ]
+  },
+  {
+    "slug": "address-playground",
+    "kind": "block",
+    "item": "address-playground",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/blocks#look-up-any-place-in-canada",
+    "lane": "vue",
+    "title": "Address Playground (Vue)",
+    "description": "A Nuxt search page with no map: autocomplete in English and French, typed coordinates, every name a result carries with its language (Inuktitut syllabics beside the name where the record has them), its type, precision, match and source, and the nearest places of six categories around it. Calls /geocode/autocomplete (and /geocode/reverse for typed coordinates) and /geocode/nearby.",
+    "route": "nuxt/app/pages/address-playground.vue",
+    "url": "/address-playground/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#look-up-any-place-in-canada",
+    "files": [
+      "apps/registry/registry/vue/blocks/address-playground/page.vue",
+      "apps/registry/registry/vue/components/ui/address-playground/UnmapAddressPlayground.vue",
+      "apps/registry/registry/vue/components/ui/address-playground/index.ts"
+    ]
+  },
+  {
+    "slug": "energy-explorer",
+    "kind": "block",
+    "item": "energy-explorer",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "addon": "energy",
+    "guide": "/docs/frontend/blocks#explore-albertas-wells-and-pipelines",
+    "lane": "vue",
+    "title": "Energy Explorer (Vue)",
+    "description": "A Nuxt page with Alberta wells, pipelines and facilities: UWI and licence search, a layer legend and click-to-identify. Needs the Energy add-on; without it the page says why and shows the basemap. Calls /geocode/autocomplete per search and /identify per click, after one add-on check.",
+    "route": "nuxt/app/pages/energy-explorer.vue",
+    "url": "/energy-explorer/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#explore-albertas-wells-and-pipelines",
+    "files": [
+      "apps/registry/registry/vue/blocks/energy-explorer/page.vue",
+      "apps/registry/registry/vue/components/ui/energy-explorer/UnmapEnergyExplorer.vue",
+      "apps/registry/registry/vue/components/ui/energy-explorer/index.ts"
+    ]
+  },
+  {
+    "slug": "add-a-marker",
+    "title": "Add a marker",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/add-a-marker/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/add-a-marker"
+  },
+  {
+    "slug": "agriculture-map",
+    "title": "Agriculture map",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/agriculture-map/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/agriculture-map"
+  },
+  {
+    "slug": "apply-a-theme",
+    "title": "Apply a theme",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/apply-a-theme/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/apply-a-theme"
+  },
+  {
+    "slug": "autocomplete",
+    "title": "Autocomplete as you type",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/autocomplete/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/autocomplete"
+  },
+  {
+    "slug": "batch-geocode",
+    "title": "Geocode many addresses",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/batch-geocode/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/batch-geocode"
+  },
+  {
+    "slug": "canadian-overlays",
+    "title": "Canadian overlays",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/canadian-overlays/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/canadian-overlays"
+  },
+  {
+    "slug": "change-language",
+    "title": "Change the map language",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/change-language/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/change-language"
+  },
+  {
+    "slug": "change-the-map-style",
+    "title": "Change the map style",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/change-the-map-style/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/change-the-map-style"
+  },
+  {
+    "slug": "dark-mode",
+    "title": "Dark mode",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/dark-mode/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/dark-mode"
+  },
+  {
+    "slug": "display-a-map",
+    "title": "Display a map",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/display-a-map/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/display-a-map"
+  },
+  {
+    "slug": "energy-map",
+    "title": "Energy map",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/energy-map/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/energy-map"
+  },
+  {
+    "slug": "find-nearby-places",
+    "title": "Find nearby places",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/find-nearby-places/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/find-nearby-places"
+  },
+  {
+    "slug": "find-the-elevation",
+    "title": "Find the elevation of a point",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/find-the-elevation/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/find-the-elevation"
+  },
+  {
+    "slug": "get-directions",
+    "title": "Get directions",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/get-directions/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/get-directions"
+  },
+  {
+    "slug": "mining-map",
+    "title": "Mining map",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/mining-map/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/mining-map"
+  },
+  {
+    "slug": "navigation-controls",
+    "title": "Navigation controls",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/navigation-controls/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/navigation-controls"
+  },
+  {
+    "slug": "outdoor-map",
+    "title": "Outdoor map",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/outdoor-map/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/outdoor-map"
+  },
+  {
+    "slug": "place-a-marker",
+    "title": "Place a marker from search",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/place-a-marker/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/place-a-marker"
+  },
+  {
+    "slug": "remote-map",
+    "title": "Remote map",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/remote-map/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/remote-map"
+  },
+  {
+    "slug": "reverse-geocode",
+    "title": "Reverse geocode a point",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/reverse-geocode/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/reverse-geocode"
+  },
+  {
+    "slug": "search-for-a-place",
+    "title": "Search for a place",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/search-for-a-place/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/search-for-a-place"
+  },
+  {
+    "slug": "show-the-globe",
+    "title": "Show the globe",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/show-the-globe/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/show-the-globe"
+  },
+  {
+    "slug": "travel-modes",
+    "title": "Travel modes",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/travel-modes/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/travel-modes"
+  },
+  {
+    "slug": "travel-time-areas",
+    "title": "Travel-time areas",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/travel-time-areas/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/travel-time-areas"
+  },
+  {
+    "slug": "walking-directions",
+    "title": "Walking directions",
+    "kind": "api-example",
+    "lane": "typescript",
+    "route": "sdk/examples/walking-directions/main.ts",
+    "docs": "https://unmap.dev/docs/guides/examples/walking-directions"
+  }
+]

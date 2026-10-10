@@ -1,0 +1,7 @@
+packages:
+  - next
+  - nuxt
+  - sdk
+onlyBuiltDependencies:
+  - esbuild
+  - sharp

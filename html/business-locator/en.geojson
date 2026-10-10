@@ -1,0 +1,73 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "downtown",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0695,
+          51.0457
+        ]
+      },
+      "properties": {
+        "name": "Downtown shop",
+        "detail": "Our sample flagship, with the full collection and a place to try things out.",
+        "meta": "Sample hours: Mon–Sat, 10–18",
+        "category": "Shops"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "kensington",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0865,
+          51.0526
+        ]
+      },
+      "properties": {
+        "name": "Kensington shop",
+        "detail": "A smaller neighbourhood shop with a focused selection of everyday essentials.",
+        "meta": "Sample hours: Tue–Sun, 11–18",
+        "category": "Shops"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inglewood",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0335,
+          51.0398
+        ]
+      },
+      "properties": {
+        "name": "Inglewood pickup",
+        "detail": "Collect an online order here. This sample location offers pickup only.",
+        "meta": "Sample hours: Mon–Fri, 9–17",
+        "category": "Pickup points"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mission",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0713,
+          51.028
+        ]
+      },
+      "properties": {
+        "name": "Mission pickup",
+        "detail": "A convenient sample pickup point south of downtown. Choose it when you place an order.",
+        "meta": "Sample hours: Mon–Fri, 10–18",
+        "category": "Pickup points"
+      }
+    }
+  ]
+}

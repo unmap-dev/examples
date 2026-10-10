@@ -1,0 +1,5 @@
+import { Unmap } from "@unmap/sdk";
+
+const unmap = new Unmap({ key: "um_live_..." });
+
+const results = await unmap.geocoder.search("Calgary Tower", { limit: 3 });

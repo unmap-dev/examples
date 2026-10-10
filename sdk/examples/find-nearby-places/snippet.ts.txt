@@ -1,0 +1,5 @@
+import { Unmap } from "@unmap/sdk";
+
+const unmap = new Unmap({ key: "um_live_..." });
+
+const nearby = await unmap.geocoder.nearby("pharmacy", { near: [-114.0719, 51.0447], radius: 1500, limit: 5 });

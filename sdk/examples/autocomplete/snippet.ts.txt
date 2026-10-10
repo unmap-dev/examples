@@ -1,0 +1,5 @@
+import { Unmap } from "@unmap/sdk";
+
+const unmap = new Unmap({ key: "um_live_..." });
+
+const results = await unmap.geocoder.autocomplete("rue sainte-cath", { limit: 5, lang: "fr" });

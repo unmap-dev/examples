@@ -1,0 +1,7 @@
+import { Geocoder } from "@unmap/geocoding";
+
+const geocoder = new Geocoder({ key: "um_live_..." });
+const results = await geocoder.batch(
+  ["17 Ave SW Calgary", "Springfield", ""],
+  { limit: 1 },
+);

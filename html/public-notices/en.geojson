@@ -1,0 +1,73 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "path",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0838,
+          51.0547
+        ]
+      },
+      "properties": {
+        "name": "Path maintenance",
+        "detail": "Sample notice: a short section of pathway is being resurfaced. Add a verified detour and contact details to your own notice.",
+        "meta": "Sample timing: 5–9 October",
+        "category": "In progress"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "crossing",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0653,
+          51.0488
+        ]
+      },
+      "properties": {
+        "name": "Crossing improvements",
+        "detail": "Sample notice: crews are updating a pedestrian crossing. Describe the affected area and how people can get around it.",
+        "meta": "Sample timing: 1–7 October",
+        "category": "In progress"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "planting",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0474,
+          51.0517
+        ]
+      },
+      "properties": {
+        "name": "New tree planting",
+        "detail": "Sample notice: planting is scheduled for a neighbourhood green space. Use this space to explain the work and expected access.",
+        "meta": "Sample timing: 12–16 October",
+        "category": "Planned"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "lighting",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0779,
+          51.0387
+        ]
+      },
+      "properties": {
+        "name": "Lighting repairs",
+        "detail": "Sample notice: repairs have been completed. Keep resolved notices available so residents can see what changed.",
+        "meta": "Sample timing: completed 28 September",
+        "category": "Complete"
+      }
+    }
+  ]
+}

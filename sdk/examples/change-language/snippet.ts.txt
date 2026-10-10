@@ -1,0 +1,11 @@
+import { Unmap } from "@unmap/sdk";
+
+const unmap = new Unmap({
+  key: "um_live_...",
+  container: "map",
+  style: "base",
+  mode: "light",
+  lang: "fr",
+  center: [-73.5673, 45.5017],
+  zoom: 12,
+});

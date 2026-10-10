@@ -1,0 +1,10 @@
+import { Unmap } from "@unmap/sdk";
+
+const unmap = new Unmap({
+  key: "um_live_...",
+  container: "map",
+  style: "muted",
+  overlays: ["mining.occurrences"],
+  center: [-114.5, 56],
+  zoom: 6,
+});

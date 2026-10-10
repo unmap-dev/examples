@@ -1,0 +1,15 @@
+import { Unmap, maplibregl } from "@unmap/sdk";
+
+const unmap = new Unmap({
+  key: "um_live_...",
+  container: "map",
+  center: [-114.0719, 51.0447],
+  zoom: 11,
+});
+
+const [place] = await unmap.geocoder.search("Calgary Tower");
+
+new maplibregl.Marker({ color: "#FF3E9A" })
+  .setLngLat([place.lng, place.lat])
+  .setPopup(new maplibregl.Popup().setText(place.name))
+  .addTo(unmap.map!);

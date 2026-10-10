@@ -1,0 +1,15 @@
+import { Unmap } from "@unmap/sdk";
+
+const unmap = new Unmap({
+  key: "um_live_...",
+  container: "map",
+  center: [-114.0719, 51.0447],
+  zoom: 11,
+});
+
+const [metres] = await unmap.elevation.get([-114.0719, 51.0447]);
+
+unmap.map!.on("click", async (e) => {
+  const [here] = await unmap.elevation.get([e.lngLat.lng, e.lngLat.lat]);
+  console.log(here === null ? "no data here" : `${here} m`);
+});

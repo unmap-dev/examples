@@ -1,0 +1,73 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "canal",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.5684,
+          45.4885
+        ]
+      },
+      "properties": {
+        "name": "Lachine Canal",
+        "detail": "Begin beside the water. The canal gives this guide its first change of pace: a long view through a city usually seen block by block.",
+        "meta": "Waterfront",
+        "category": "By the water"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "old-port",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.5508,
+          45.5057
+        ]
+      },
+      "properties": {
+        "name": "Old Port",
+        "detail": "Stay with the water a little longer. Here the scale opens up, with the river on one side and the older city on the other.",
+        "meta": "Riverfront",
+        "category": "By the water"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "square",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.5688,
+          45.5084
+        ]
+      },
+      "properties": {
+        "name": "Place des Arts",
+        "detail": "Move into the centre of the city. Use this stop for your own photographs, recommendations, or a story about what brought you here.",
+        "meta": "Arts + public space",
+        "category": "City + green space"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mount-royal",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.5878,
+          45.5039
+        ]
+      },
+      "properties": {
+        "name": "Mount Royal",
+        "detail": "Finish above the street grid. The mountain offers a different perspective on the places you have just explored.",
+        "meta": "Park + viewpoint",
+        "category": "City + green space"
+      }
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "path",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0838,
+          51.0547
+        ]
+      },
+      "properties": {
+        "name": "Entretien du sentier",
+        "detail": "Avis fictif : une courte section de sentier est en réfection. Ajoutez un détour vérifié et des coordonnées à votre propre avis.",
+        "meta": "Dates fictives : du 5 au 9 octobre",
+        "category": "En cours"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "crossing",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0653,
+          51.0488
+        ]
+      },
+      "properties": {
+        "name": "Amélioration d’une traversée",
+        "detail": "Avis fictif : une équipe améliore une traversée piétonne. Décrivez la zone touchée et les façons de la contourner.",
+        "meta": "Dates fictives : du 1er au 7 octobre",
+        "category": "En cours"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "planting",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0474,
+          51.0517
+        ]
+      },
+      "properties": {
+        "name": "Plantation d’arbres",
+        "detail": "Avis fictif : une plantation est prévue dans un espace vert du quartier. Expliquez les travaux et l’accès prévu.",
+        "meta": "Dates fictives : du 12 au 16 octobre",
+        "category": "Prévus"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "lighting",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0779,
+          51.0387
+        ]
+      },
+      "properties": {
+        "name": "Réparation de l’éclairage",
+        "detail": "Avis fictif : les réparations sont terminées. Conservez les avis résolus pour montrer aux résidents ce qui a changé.",
+        "meta": "Date fictive : terminé le 28 septembre",
+        "category": "Terminés"
+      }
+    }
+  ]
+}

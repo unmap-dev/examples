@@ -1,0 +1,12 @@
+node_modules/
+.next/
+.nuxt/
+.output/
+.turbo/
+out/
+dist/
+*.tsbuildinfo
+.env*
+!.env.example
+public/maplibre/
+.DS_Store

@@ -1,0 +1,35 @@
+{
+  "source": "https://github.com/unovue/shadcn-vue",
+  "items": {
+    "alert": "https://www.shadcn-vue.com/r/styles/new-york/alert.json",
+    "badge": "https://www.shadcn-vue.com/r/styles/new-york/badge.json",
+    "button": "https://www.shadcn-vue.com/r/styles/new-york/button.json",
+    "card": "https://www.shadcn-vue.com/r/styles/new-york/card.json",
+    "chart": "https://www.shadcn-vue.com/r/styles/new-york/chart.json",
+    "checkbox": "https://www.shadcn-vue.com/r/styles/new-york/checkbox.json",
+    "combobox": "https://www.shadcn-vue.com/r/styles/new-york/combobox.json",
+    "field": "https://www.shadcn-vue.com/r/styles/new-york/field.json",
+    "label": "https://www.shadcn-vue.com/r/styles/new-york/label.json",
+    "separator": "https://www.shadcn-vue.com/r/styles/new-york/separator.json",
+    "input": "https://www.shadcn-vue.com/r/styles/new-york/input.json",
+    "skeleton": "https://www.shadcn-vue.com/r/styles/new-york/skeleton.json",
+    "slider": "https://www.shadcn-vue.com/r/styles/new-york/slider.json",
+    "spinner": "https://www.shadcn-vue.com/r/styles/new-york/spinner.json",
+    "switch": "https://www.shadcn-vue.com/r/styles/new-york/switch.json",
+    "toggle-group": "https://www.shadcn-vue.com/r/styles/new-york/toggle-group.json",
+    "toggle": "https://www.shadcn-vue.com/r/styles/new-york/toggle.json",
+    "tooltip": "https://www.shadcn-vue.com/r/styles/new-york/tooltip.json"
+  },
+  "dependencies": [
+    "@unovis/ts",
+    "@unovis/vue",
+    "@vueuse/core",
+    "reka-ui"
+  ],
+  "adaptations": [
+    "Normalize registry aliases to @/components/ui",
+    "Use @lucide/vue, the icon library used by Unmap",
+    "Keep the chart version vendored with the Unmap registry (ChartContainer/ChartTooltipContent API)",
+    "Forward ComboboxRoot generic value/emits and ToggleGroupItem required value"
+  ]
+}

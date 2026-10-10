@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Fieldwork Supply</title>
+  <meta name="description" content="Everyday goods. Around the corner.">
+  <link rel="stylesheet" href="https://cdn.unmap.dev/sdk/0.20.0/unmap.css">
+  <style>
+    :root{color-scheme:light;--bg:#edf1f1;--card:#fff;--fg:#0c1418;--muted:#576e76;--line:#c6d2d4;--accent:#cf116a;--on-accent:#fff}
+    @media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#0c1418;--card:#16222a;--fg:#dce6e4;--muted:#7c929a;--line:#294049;--accent:#ff3e9a;--on-accent:#0c1418}}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,sans-serif}
+    main{max-width:1100px;margin:48px auto;padding:0 24px}h1,h2,button,label,input,.meta{font-family:ui-monospace,monospace}h1{font-size:clamp(24px,4vw,40px);line-height:1.2;margin:0 0 12px}h2{font-size:18px;margin:0 0 6px}
+    p{margin:0 0 18px;color:var(--muted)}.experience{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.9fr);border:1px solid var(--line);background:var(--card)}.panel{min-width:0}.intro,.filters,.detail{padding:20px;border-bottom:1px solid var(--line)}.map-wrap{position:relative;min-height:580px;border-left:1px solid var(--line)}#map{position:absolute;inset:0}.notice{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:30px;background:var(--card)}.notice[hidden]{display:none}
+    button,input{font-size:13px;color:var(--fg);border:1px solid var(--line);border-radius:0;background:var(--card);padding:10px;line-height:1.4}button{cursor:pointer}button:hover{border-color:var(--fg)}button:disabled{opacity:.5;cursor:default}:focus-visible{outline:2px solid var(--accent);outline-offset:3px}label{display:block;font-size:12px;margin-bottom:8px}input{width:100%;margin-bottom:14px}.filters button{margin:0 6px 6px 0}.filters button[aria-pressed=true]{border-color:var(--accent);color:var(--accent)}#places{max-height:380px;overflow:auto}.place{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);border-left:2px solid transparent;padding:16px}.place[aria-pressed=true]{border-left-color:var(--accent);background:var(--bg)}.place span{display:block}.meta{font-size:12px;color:var(--muted)}.detail p{font-size:14px}.detail button{margin-right:8px}.pin{width:32px;height:32px;padding:0;border-color:var(--accent);color:var(--accent);font-weight:bold}.pin[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}.sample{margin-top:16px;font-size:12px}.maplibregl-ctrl-group,.maplibregl-ctrl-attrib{border-radius:0!important;box-shadow:none!important}
+    @media(max-width:700px){main{margin:24px auto;padding:0 16px}.experience{grid-template-columns:1fr}.map-wrap{grid-row:1;min-height:320px;border-left:0;border-bottom:1px solid var(--line)}#places{max-height:none}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+  </style>
+  <script defer src="https://cdn.unmap.dev/sdk/0.20.0/unmap.js"></script>
+</head>
+<body>
+<main>
+  <h1>Fieldwork Supply</h1>
+  <p>Everyday goods. Around the corner.</p>
+  <section class="experience" aria-label="Business locator">
+    <div class="panel"><div id="filters" class="filters"></div><div id="places"></div><div id="detail" class="detail" aria-live="polite"></div></div>
+    <div class="map-wrap" role="region" aria-label="Map of Business locator"><div id="map"></div><div id="notice" class="notice" role="status"></div></div>
+  </section>
+  <p class="sample">Demonstration content. Business locations and public notices are fictional; guide landmarks are real.</p>
+</main>
+<script>
+// Add your browser key, edit the data, and serve this file from an allowed origin.
+const API_KEY = "YOUR_UNMAP_API_KEY";
+const data = {"slug":"business-locator","center":[-114.069,51.042],"zoom":13,"places":[{"id":"downtown","coordinates":[-114.0695,51.0457],"category":0,"name":"Downtown shop","detail":"Our sample flagship, with the full collection and a place to try things out.","meta":"Sample hours: Mon–Sat, 10–18"},{"id":"kensington","coordinates":[-114.0865,51.0526],"category":0,"name":"Kensington shop","detail":"A smaller neighbourhood shop with a focused selection of everyday essentials.","meta":"Sample hours: Tue–Sun, 11–18"},{"id":"inglewood","coordinates":[-114.0335,51.0398],"category":1,"name":"Inglewood pickup","detail":"Collect an online order here. This sample location offers pickup only.","meta":"Sample hours: Mon–Fri, 9–17"},{"id":"mission","coordinates":[-114.0713,51.028],"category":1,"name":"Mission pickup","detail":"A convenient sample pickup point south of downtown. Choose it when you place an order.","meta":"Sample hours: Mon–Fri, 10–18"}],"style":"muted","title":"Business locator","description":"Connect your locations to a searchable list. Help visitors find the right place and see what it offers.","location":"Calgary","format":"Map + location list","demoTitle":"Fieldwork Supply","demoLead":"Everyday goods. Around the corner.","categories":["Shops","Pickup points"],"features":["Search and category filters","Linked map and location details","Customizable colours and content"],"labels":{"all":"All","search":"Search locations","empty":"No locations match. Try another search or category.","previous":"Previous stop","next":"Next stop","sample":"Sample content","key":"Add your Unmap browser API key in this file to load the map. The sample content is ready to explore.","failed":"The map could not load. Check your API key, allowed origin, and connection, then reload.","reset":"Show all locations"}};
+document.addEventListener("DOMContentLoaded", () => {
+  const guide = data.slug === "local-guide";
+  let selected = guide ? data.places[0].id : null;
+  let category = "all", query = "", map = null, markers = [];
+  const list = document.getElementById("places"), detail = document.getElementById("detail"), notice = document.getElementById("notice");
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  const visible = () => data.places.filter(p => (category === "all" || p.category === Number(category)) && (p.name + " " + p.detail).toLocaleLowerCase().includes(query.toLocaleLowerCase().trim()));
+  function select(id){selected=id;render();const place=data.places.find(p=>p.id===id);if(map && place)map.flyTo({center:place.coordinates,zoom:Math.max(data.zoom,13),duration:reduced?0:600});}
+  function text(tag, value, className){const node=document.createElement(tag);node.textContent=value;if(className)node.className=className;return node;}
+  function button(label, onClick){const node=text("button",label);node.type="button";node.addEventListener("click",onClick);return node;}
+  function fit(){if(!map)return;const places=visible();if(!places.length)return;if(places.length===1){map.easeTo({center:places[0].coordinates,zoom:data.zoom,duration:reduced?0:500});return;}const bounds=new unmap.maplibregl.LngLatBounds();places.forEach(p=>bounds.extend(p.coordinates));map.fitBounds(bounds,{padding:60,maxZoom:data.zoom,duration:reduced?0:500});}
+  function render(){
+    list.replaceChildren();detail.replaceChildren();markers.forEach(m=>m.remove());markers=[];
+    const places=visible();
+    if(!places.length)list.append(text("p",data.labels.empty));
+    places.forEach(p=>{
+      const n=data.places.findIndex(x=>x.id===p.id)+1;
+      const row=button("",()=>select(p.id));row.className="place";row.setAttribute("aria-pressed",String(selected===p.id));row.append(text("span",n+". "+p.name),text("span",guide?p.meta:data.categories[p.category],"meta"));list.append(row);
+      if(map){const pin=button(String(n),()=>select(p.id));pin.className="pin";pin.setAttribute("aria-label",p.name);pin.setAttribute("aria-pressed",String(selected===p.id));markers.push(new unmap.maplibregl.Marker({element:pin}).setLngLat(p.coordinates).addTo(map));}
+    });
+    const active=places.find(p=>p.id===selected);
+    if(active){detail.append(text("h2",active.name),text("p",active.detail),text("p",active.meta,"meta"));}
+    detail.hidden=!active;
+    if(guide && active){const index=data.places.findIndex(p=>p.id===selected);const prev=button(data.labels.previous,()=>select(data.places[index-1].id));prev.disabled=index===0;const next=button(data.labels.next,()=>select(data.places[index+1].id));next.disabled=index===data.places.length-1;detail.append(prev,next);}
+  }
+  const filters=document.getElementById("filters");
+  if(guide)filters.hidden=true;
+  else {
+    if(data.slug==="business-locator"){const label=text("label",data.labels.search);label.htmlFor="search";const input=document.createElement("input");input.id="search";input.type="search";input.addEventListener("input",()=>{query=input.value;selected=null;render();fit();});filters.append(label,input);}
+    const options=[["all",data.labels.all],...data.categories.map((name,index)=>[String(index),name])];
+    const group=document.createElement("div");group.setAttribute("role","group");group.setAttribute("aria-label",data.format);
+    options.forEach(([value,name])=>{const item=button(name,()=>{category=value;selected=null;group.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(b===item)));render();fit();});item.setAttribute("aria-pressed",String(value===category));group.append(item);});filters.append(group);
+  }
+  render();
+  if(API_KEY === "YOUR_UNMAP_API_KEY"){notice.textContent=data.labels.key;return;}
+  if(!window.unmap){notice.textContent=data.labels.failed;return;}
+  notice.textContent="Loading the map…";
+  const timeout=setTimeout(()=>{notice.textContent=data.labels.failed;notice.hidden=false;},25000);
+  try{
+    map=unmap.createMap({key:API_KEY,container:"map",style:data.style,mode,lang:"en",center:data.center,zoom:data.zoom});
+    if(window.matchMedia("(pointer: coarse)").matches)map.cooperativeGestures.enable();
+    map.once("load",()=>{clearTimeout(timeout);notice.hidden=true;map.resize();render();if(selected)select(selected);else fit();});
+  }catch{clearTimeout(timeout);notice.textContent=data.labels.failed;}
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+import { Unmap } from "@unmap/sdk";
+
+const unmap = new Unmap({
+  key: "um_live_...",
+  container: "map",
+  center: [-114.0719, 51.0447],
+  zoom: 11,
+});
+
+const bands = await unmap.router.isochrone([-114.0719, 51.0447], { minutes: [10, 20], mode: "auto" });
+
+unmap.map!.on("load", () => {
+  unmap.map!.addSource("bands", { type: "geojson", data: bands });
+  unmap.map!.addLayer({
+    id: "bands-fill",
+    type: "fill",
+    source: "bands",
+    paint: { "fill-color": "#FF3E9A", "fill-opacity": 0.18 },
+  });
+});

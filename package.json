@@ -1,0 +1,21 @@
+{
+  "name": "unmap-examples",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@10.29.3",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev:next": "pnpm --dir next dev",
+    "dev:nuxt": "pnpm --dir nuxt dev",
+    "dev:sdk": "pnpm --dir sdk dev",
+    "test": "node --test test/*.test.mjs",
+    "check": "pnpm test && pnpm --dir sdk check && pnpm --dir next check && pnpm --dir nuxt check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unmap-dev/examples.git"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "downtown",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0695,
+          51.0457
+        ]
+      },
+      "properties": {
+        "name": "Boutique du centre-ville",
+        "detail": "Notre boutique principale fictive, avec toute la collection et un espace pour essayer les produits.",
+        "meta": "Horaire fictif : lun.–sam., 10–18 h",
+        "category": "Boutiques"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "kensington",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0865,
+          51.0526
+        ]
+      },
+      "properties": {
+        "name": "Boutique de Kensington",
+        "detail": "Une petite boutique de quartier avec une sélection ciblée d’essentiels du quotidien.",
+        "meta": "Horaire fictif : mar.–dim., 11–18 h",
+        "category": "Boutiques"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inglewood",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0335,
+          51.0398
+        ]
+      },
+      "properties": {
+        "name": "Retrait à Inglewood",
+        "detail": "Récupérez une commande en ligne ici. Ce lieu fictif offre uniquement le retrait.",
+        "meta": "Horaire fictif : lun.–ven., 9–17 h",
+        "category": "Points de retrait"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mission",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0713,
+          51.028
+        ]
+      },
+      "properties": {
+        "name": "Retrait à Mission",
+        "detail": "Un point de retrait fictif au sud du centre-ville. Choisissez-le au moment de commander.",
+        "meta": "Horaire fictif : lun.–ven., 10–18 h",
+        "category": "Points de retrait"
+      }
+    }
+  ]
+}

@@ -117,7 +117,7 @@
   },
   "next/components/ui/elevation-profile.tsx": {
     "source": "apps/registry/registry/ui/elevation-profile.tsx",
-    "sha256": "2d96947875ccd6eab602be02b32b49211de6b2526f50f2c806d0a31a2d4685b6"
+    "sha256": "05a0ccafb6fa1dfbc34aa05db74f142b583bbe5047f4a8f9d2e6128a36525bc1"
   },
   "next/app/elevation-explorer/page.tsx": {
     "source": "apps/registry/registry/blocks/elevation-explorer/page.tsx",
@@ -339,6 +339,10 @@
     "source": "apps/registry/preview/ui/button-group.tsx",
     "sha256": "292a090b398795589c871f4d50a3704a00f9b831fc3f2cd646104394d650cfe3"
   },
+  "next/components/ui/collapsible.tsx": {
+    "source": "apps/registry/preview/ui/collapsible.tsx",
+    "sha256": "8f1907e4ec23c4f14472b01d31f8e2cc04c46967704b1aeffa023349c8c491c0"
+  },
   "next/components/ui/input-group.tsx": {
     "source": "apps/registry/preview/ui/input-group.tsx",
     "sha256": "360bce4e650fbe59d5cbbe83d581bd2d7e9d963c0166fbd92a051fb7624367d2"
@@ -513,7 +517,7 @@
   },
   "nuxt/app/components/ui/elevation-profile/UnmapElevationProfile.vue": {
     "source": "apps/registry/registry/vue/components/ui/elevation-profile/UnmapElevationProfile.vue",
-    "sha256": "15bd94a4cf04c27661d76d4373bad2bd8745e254eb956e6144ae00b0e200c2e2"
+    "sha256": "44a1668256412ee02735302511ab02a427c87c9d781c44d03e51efa11f3116da"
   },
   "nuxt/app/components/ui/elevation-profile/index.ts": {
     "source": "apps/registry/registry/vue/components/ui/elevation-profile/index.ts",

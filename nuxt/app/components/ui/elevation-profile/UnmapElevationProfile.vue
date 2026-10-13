@@ -380,7 +380,7 @@ export function isAbort(caught: unknown): boolean {
 export const PROFILE_COPY: Record<
   ProfileLang,
   Record<
-    "label" | "chart" | "empty" | "loading" | "noCoverage" | "noHeight" | "retry" | "source" | StatName | ProfileErrorKind,
+    "label" | "chart" | "empty" | "loading" | "noCoverage" | "noHeight" | "retry" | "source" | "sourceLink" | "sourceUrl" | StatName | ProfileErrorKind,
     string
   >
 > = {
@@ -392,7 +392,9 @@ export const PROFILE_COPY: Record<
     noCoverage: "No elevation data along this line.",
     noHeight: "No data",
     retry: "Retry",
-    source: "Elevation: active DEM. Supplier credits and licences: https://unmap.dev/attribution",
+    source: "Elevation by Unmap.",
+    sourceLink: "Supplier credits and licences",
+    sourceUrl: "https://unmap.dev/attribution",
     key: "The API key was refused. Check the key and its plan.",
     rateLimited: "Too many requests. Wait a moment, then retry.",
     tooLarge: "This line is too long to send in one request. Try a shorter line.",
@@ -412,8 +414,9 @@ export const PROFILE_COPY: Record<
     noCoverage: "Aucune donnée d'altitude le long de cette ligne.",
     noHeight: "Aucune donnée",
     retry: "Réessayer",
-    source:
-      "Altitude : MNA actif. Mentions et licences des fournisseurs : https://unmap.dev/fr/attribution",
+    source: "Altitude par Unmap.",
+    sourceLink: "Mentions et licences des fournisseurs",
+    sourceUrl: "https://unmap.dev/fr/attribution",
     key: "La clé API a été refusée. Vérifiez la clé et son forfait.",
     rateLimited: "Trop de requêtes. Patientez un instant, puis réessayez.",
     tooLarge: "Cette ligne est trop longue pour une seule requête. Essayez une ligne plus courte.",
@@ -850,7 +853,7 @@ const elevationTick = (value: number) => formatElevation(value, props.lang);
         <Spinner :aria-label="copy.loading" />
         <span aria-hidden="true">{{ copy.loading }}</span>
       </div>
-      <p data-unmap-elevation-source="" class="text-xs text-muted-foreground">{{ copy.source }}</p>
+      <p data-unmap-elevation-source="" class="text-xs text-muted-foreground">{{ copy.source }} <a :href="copy.sourceUrl" target="_blank" rel="noreferrer" class="underline underline-offset-4 hover:text-foreground">{{ copy.sourceLink }}</a></p>
     </div>
     <div
       v-else-if="shownStats && shown"
@@ -915,7 +918,7 @@ const elevationTick = (value: number) => formatElevation(value, props.lang);
           </ChartContainer>
         </div>
         <!-- The attribution the elevation data's licence requires. -->
-        <p data-unmap-elevation-source="" class="text-xs text-muted-foreground">{{ copy.source }}</p>
+        <p data-unmap-elevation-source="" class="text-xs text-muted-foreground">{{ copy.source }} <a :href="copy.sourceUrl" target="_blank" rel="noreferrer" class="underline underline-offset-4 hover:text-foreground">{{ copy.sourceLink }}</a></p>
       </div>
       <div v-if="loading" class="absolute inset-0 flex items-center justify-center">
         <Spinner :aria-label="copy.loading" />

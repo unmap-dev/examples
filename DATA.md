@@ -73,7 +73,7 @@ new project with the components already in it.
 
 ## Components
 
-Both lanes ship the same thirty-six items, nine of them blocks (below). `map-themes` is one shared file.
+Both lanes ship the same thirty-nine items, nine of them blocks (below). `map-themes` and `api-calls` are one shared file each.
 
 | Item            | React                                                                                  | Vue                                                                              |
 | --------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
@@ -105,6 +105,8 @@ Both lanes ship the same thirty-six items, nine of them blocks (below). `map-the
 | `legal-land-search` | `<LegalLandSearch>`: geocoder labelled for LSD. Sends the query only — no `profile=`. | `<UnmapLegalLandSearch>`: the same search box for Vue. |
 | `energy-popup` | `<EnergyPopup>`: identify wells / pipelines / facilities on click. | `<UnmapEnergyPopup>`: the same identify popup for Vue. |
 | `treaty-context` | `<TreatyContext>`: historic/modern switches, a coordinate lookup and a bilingual details panel listing every treaty record at a point. Pair with `overlays={["treaties"]}`. Needs `@unmap/sdk` with `createTreatyOverlay`; `onSelect` reports each answer, `onError` a failed lookup and its point. | `<UnmapTreatyContext>`: the same for Vue; `@reload` for a retired dataset version, `@select` for each answer, `@error` for a failed lookup. |
+| `api-calls` | The `window.fetch` recorder behind `api-inspector` (key removed, tile bytes skipped) and the call descriptions: `installRecorder`, `subscribe`, `describeCall`, `curlOf`, `groupCalls`, `abridge`. Plain TypeScript. | Same file. |
+| `api-inspector` | `<ApiInspector>`: every unmap API call the page makes, in your shadcn Sheet, with status, latency, the `@unmap/sdk` line and curl behind it, and the response; a development tool. `<ApiInspectorPanel>` docks it, `useApiCalls()` returns the calls. | `<UnmapApiInspector>` (`v-model:open`) and `<UnmapApiInspectorPanel>` (`@close`) on your shadcn-vue Sheet; `useApiCalls()` returns a shallow ref. |
 
 Both lanes support multiple maps on a page via an optional map id.
 
@@ -323,7 +325,7 @@ pnpm --filter @unmap/registry preview     # the gallery previews -> preview/dist
   registry schema (<https://ui.shadcn.com/schema/registry.json>). Add a component by dropping its
   source in `registry/` and adding an item to the right manifest; the contract tests check that the
   two lanes list the same item names.
-- **Vue items are shadcn-vue items**: `registry:ui` and `registry:lib`, no `target` fields; the file type picks the target directory (`ui` or `lib`) and the batch's common source root supplies the rest, as above. They declare no `utils` registry dependency either — `shadcn-vue init` always writes `lib/utils.ts`, and asking for shadcn-vue's own `utils` item drags its `registry/bases/reka/lib` root into the batch and misplaces the files with it. `registry/vue/components/ui/map-themes/index.ts` is a byte-identical copy of the React file, held equal by a contract test.
+- **Vue items are shadcn-vue items**: `registry:ui` and `registry:lib`, no `target` fields; the file type picks the target directory (`ui` or `lib`) and the batch's common source root supplies the rest, as above. They declare no `utils` registry dependency either — `shadcn-vue init` always writes `lib/utils.ts`, and asking for shadcn-vue's own `utils` item drags its `registry/bases/reka/lib` root into the batch and misplaces the files with it. `registry/vue/components/ui/map-themes/index.ts` is a byte-identical copy of the React file, held equal by a contract test, and so is `api-calls/index.ts`. A ui item may ship a composable beside its components (`api-inspector/useApiCalls.ts`, re-exported from its `index.ts`), the way shadcn-vue's form item ships `useFormField.ts`; its components import it, and each other, by relative path, as shadcn-vue's own components do.
 - **Aliases** (React lane only): distributed source uses canonical consumer paths
   (`@/lib/map-context` and `@/components/ui/*`). Local TypeScript/Vitest aliases map those paths to
   the registry source and validation fixtures without changing what consumers receive.

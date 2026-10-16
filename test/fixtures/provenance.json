@@ -355,6 +355,10 @@
     "source": "apps/registry/preview/ui/popover.tsx",
     "sha256": "cdfc8a1b39f26eefb1f25b46203058b94ced8703d2c265c57273198f13537542"
   },
+  "next/components/ui/select.tsx": {
+    "source": "apps/registry/preview/ui/select.tsx",
+    "sha256": "9f00b04bdb3b340334d643193cd8ae83c3b45619c36da826ce362932ab836e3e"
+  },
   "next/components/ui/separator.tsx": {
     "source": "apps/registry/preview/ui/separator.tsx",
     "sha256": "0a07eaf7503777ccbfcb59adef3045225afed26f4b8ddbf38915aa6a9d94c517"
@@ -362,6 +366,10 @@
   "next/components/ui/sheet.tsx": {
     "source": "apps/registry/preview/ui/sheet.tsx",
     "sha256": "2f950a0339e1e2d50f5fe1b31b641985968ca1029b38d6ec0038c4ebb4ea2c13"
+  },
+  "next/components/ui/tabs.tsx": {
+    "source": "apps/registry/preview/ui/tabs.tsx",
+    "sha256": "009cd2e972bd286fc50bf35534bf2a45d1ad264c822a0069f06638707264b45b"
   },
   "next/components/ui/textarea.tsx": {
     "source": "apps/registry/preview/ui/textarea.tsx",

@@ -44,6 +44,12 @@ import {
 /** A MapLibre projection, as `getProjection()` returns it. */
 type ProjectionSpec = ReturnType<Map["getProjection"]>;
 
+/**
+ * The projection a map is drawn in when the caller does not say. Set here as well as in
+ * `@unmap/maps` so the lifecycle owns it whichever version of the package is installed.
+ */
+const DEFAULT_PROJECTION: NonNullable<UnmapMapOptions["projection"]> = "globe";
+
 /** The default map id, used when a component does not pass one. */
 export const DEFAULT_MAP_ID = "default";
 
@@ -396,7 +402,8 @@ export function useMapLifecycle(
   let appliedLimits = "";
   // The projection the next style load puts back: the `projection` option, or whatever the map
   // showed when a swap began (a control such as map-controls' globe button sets it directly).
-  let carried: ProjectionSpec | undefined;
+  let carried: ProjectionSpec = { type: DEFAULT_PROJECTION };
+  const projection = () => options().projection ?? DEFAULT_PROJECTION;
   // What the active map was created with or last given, so an unchanged value is never re-applied
   // and a caller's raw `maplibre` gesture options survive a map that does not set these options.
   let appliedInteractive = true;
@@ -438,7 +445,7 @@ export function useMapLifecycle(
         ...cartography(),
         center: o.center,
         zoom: o.zoom,
-        projection: o.projection,
+        projection: projection(),
         controls: controlsOff ? false : controlsPosition ? { position: controlsPosition } : true,
         // The caller's own object unless a limit or gesture option (or a limit dropped as invalid)
         // changes it, so a map that sets none of them is created with exactly the options it was given.
@@ -450,7 +457,7 @@ export function useMapLifecycle(
       appliedInteractive = o.interactive ?? maplibre?.interactive ?? true;
       appliedCooperative = o.cooperativeGestures ?? maplibre?.cooperativeGestures ?? false;
       active = map;
-      carried = o.projection ? { type: o.projection } : undefined;
+      carried = { type: projection() };
       appliedStyle = unmapStyle({ key: apiKey, gateway, ...cartography() });
       generation = 0;
       loaded = false;
@@ -479,8 +486,7 @@ export function useMapLifecycle(
         generation += 1;
         // MapLibre 6 keeps the projection on the style, so a swapped style arrives flat. Put back
         // the one the map showed before the swap, or the `projection` option if it changed since.
-        const next = carried;
-        if (next) map.setProjection(next);
+        map.setProjection(carried);
         if (loaded) store.set(mapId, { map, ready: true, generation });
       };
       const onLoad = () => {
@@ -495,14 +501,9 @@ export function useMapLifecycle(
       // `style.load` one would undo the latest projection on the first swap. One-time listeners run
       // in registration order: these, registered after createMap's, put the latest value back: the
       // carried one, so a projection set on the map itself survives the first swap too.
-      if (o.projection) {
-        // Never undefined here: the option set it above, and nothing unsets it while this map lives.
-        const reapply = () => {
-          if (carried) map.setProjection(carried);
-        };
-        map.once("style.load", reapply);
-        map.once("load", reapply);
-      }
+      const reapply = () => map.setProjection(carried);
+      map.once("style.load", reapply);
+      map.once("load", reapply);
       const onMove = () => {
         if (syncing) return;
         report(map, options().onViewportChange, reported);
@@ -562,12 +563,12 @@ export function useMapLifecycle(
   // `setProjection` throws, and the `style.load` handler applies the latest value then.
   // `getStyle()` is undefined exactly then; `isStyleLoaded()` is also false while tiles load,
   // and a change made then would be lost.
-  // A map that never had a projection keeps none.
+  // An omitted option is the globe.
   watch(
-    () => options().projection,
-    (projection) => {
-      if (!active || (projection === undefined && carried === undefined)) return;
-      const next: ProjectionSpec = { type: projection ?? "mercator" };
+    projection,
+    (type) => {
+      if (!active) return;
+      const next: ProjectionSpec = { type };
       carried = next;
       if (generation === 0 || !active.getStyle()) return;
       active.setProjection(next);

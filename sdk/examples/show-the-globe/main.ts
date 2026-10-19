@@ -8,7 +8,6 @@ start(async (key) => {
 const unmap = new Unmap({
   key: key,
   container: "map",
-  projection: "globe",
   center: [-96, 56],
   zoom: 0,
 });

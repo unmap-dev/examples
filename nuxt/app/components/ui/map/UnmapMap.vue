@@ -116,7 +116,7 @@ const props = withDefaults(
      * say) starts from the props' camera, as MapLibre's own remove-and-recreate does.
      */
     hash?: boolean | string;
-    /** `"globe"` draws the map as a sphere. Defaults to `"mercator"`, the flat map. */
+    /** `"globe"` (the default) draws the map as a sphere; `"mercator"` draws the flat map. */
     projection?: Projection;
     /**
      * On-map controls. `true` (the default) adds MapLibre's zoom and compass buttons at

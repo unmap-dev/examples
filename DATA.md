@@ -223,7 +223,8 @@ The registry ships no theme and no brand values. Components take on your design 
   `:controls="false"`. The attribution stays either way. `map-controls` puts zoom, compass,
   locate, fullscreen, globe and 3D terrain buttons on your own ButtonGroup, Button and Tooltip in
   their place; its root carries `data-unmap-controls` and the location dot `data-unmap-location`.
-- `projection="globe"` draws the map as a sphere. The default is `mercator`, the flat map.
+- The map is a globe by default: a sphere zoomed out, flattening into Mercator as it zooms in.
+  `projection="mercator"` draws the flat map at every zoom.
 - `maxBounds` (a `[[west, south], [east, north]]` tuple or `"canada"`), `minZoom`, `maxZoom`,
   `interactive`, `cooperativeGestures` and `hash` (camera in the URL) all change in place. The
   limits and the gesture options each fall back to the raw `maplibre` option when their prop is

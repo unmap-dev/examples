@@ -1,11 +1,11 @@
 {
   "next/lib/map-context.tsx": {
     "source": "apps/registry/registry/lib/map-context.tsx",
-    "sha256": "827d80c4876932ff44990a72e35a3985d99ee3b3a7963fed4eb967f09d97b5b0"
+    "sha256": "cd5d7ddc18a72e6dff67769b6aa919dd20ff56b518fc098d8ba173c0dbc43c0e"
   },
   "next/components/ui/map.tsx": {
     "source": "apps/registry/registry/ui/map.tsx",
-    "sha256": "18628516e02f73ce0d8b7b760ab0fcef8c2af89a982d7a9d33bfd21e1787de59"
+    "sha256": "570bbb2b2ba1c735dc01be05882efb8b2890119e6cfcbeeec0ccf77f0d19b66c"
   },
   "next/components/ui/marker-popup.tsx": {
     "source": "apps/registry/registry/ui/marker-popup.tsx",
@@ -389,11 +389,11 @@
   },
   "nuxt/app/lib/map-context/index.ts": {
     "source": "apps/registry/registry/vue/components/ui/map-context/index.ts",
-    "sha256": "dec21f6c081fb219b806ad8173535304d59564632d605a3b379a454b770d1f8d"
+    "sha256": "bca207a6dee9f898507c4b1ac8bcbcb1bb2cc590b8bef9558c7af58d7fe83dbe"
   },
   "nuxt/app/components/ui/map/UnmapMap.vue": {
     "source": "apps/registry/registry/vue/components/ui/map/UnmapMap.vue",
-    "sha256": "146e3064eec5a07b194a8e8f4c6c13ccd2258474f5a1d39b962c3f3cee9e25c2"
+    "sha256": "f580674d01f012bbd6a6f7ca7dc391290f98fa7fc4f08e6d8dd3e224d993e09c"
   },
   "nuxt/app/components/ui/map/index.ts": {
     "source": "apps/registry/registry/vue/components/ui/map/index.ts",
@@ -753,7 +753,7 @@
   },
   "sdk/examples/show-the-globe/README.md": {
     "source": "apps/web/content/docs/guides/examples/show-the-globe.mdx",
-    "sha256": "34c7d261ae3051c92c23d6c25fa876ee0751a290ce42d827a3198dca0c04ff09"
+    "sha256": "2ff7c063f99dbf49ea8a86ac0ba1461aadff128477235ebcf489d6f7de701956"
   },
   "sdk/examples/travel-modes/README.md": {
     "source": "apps/web/content/docs/guides/examples/travel-modes.mdx",

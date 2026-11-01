@@ -11,7 +11,7 @@ Autocomplete is the type-ahead endpoint. Fire it on each keystroke. It matches g
 
 <LiveExample kind="autocomplete" query="rue sainte-cath" limit="5" lang="fr" center="-73.5673,45.5017" />
 
-Send the whole input box, not the last word. Every word but the last must match a token in full and the last is treated as the prefix still being typed. Input of three characters or fewer answers with localities, provinces, and points of interest only; addresses and streets come back at the fourth character.
+Send the whole input box, not the last word. Every word but the last must match a token in full and the last is treated as the prefix still being typed. A completed street type or direction matches any of its spellings, so `9 Ave SW`, `9 Av SW` and `9 Avenue Southwest` find the same address. Input of three characters or fewer answers with localities, provinces, and points of interest only; addresses and streets come back at the fourth character.
 
 Autocomplete ranks more crudely than search: no exact-name bonus, no typo tolerance. Use `search` when you want the best single answer and autocomplete when you want fast suggestions. Autocomplete takes no `bbox`.
 

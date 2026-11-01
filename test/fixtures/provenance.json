@@ -681,7 +681,7 @@
   },
   "sdk/examples/autocomplete/README.md": {
     "source": "apps/web/content/docs/guides/examples/autocomplete.mdx",
-    "sha256": "a6c28dc20ce6b573d155feffd8be773ec3707f9dfef02fdcd77989426ea081ba"
+    "sha256": "ed14ecadeda703c0034cead0cbdc41cc623cfb2680db233c484031c3c25ed5b7"
   },
   "sdk/examples/batch-geocode/README.md": {
     "source": "apps/web/content/docs/guides/examples/batch-geocode.mdx",

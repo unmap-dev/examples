@@ -49,7 +49,7 @@ const props = withDefaults(
     /** Gateway base URL. Defaults to the unmap production gateway. */
     gateway?: string;
     /**
-     * A named style ("base" | "muted" | "outdoor" | "blueprint" | "blush" | "orchid" | "canopy" | "lagoon" | "tropic" | "sunset" | "bold" | "pastel" | "atlas" | "swiss"), a full style URL, or a MapLibre style.
+     * A named style ("base" | "muted" | "outdoor" | "blueprint" | "blush" | "orchid" | "canopy" | "lagoon" | "tropic" | "sunset" | "bold" | "pastel" | "atlas" | "swiss" | "winter"), a full style URL, or a MapLibre style.
      * Named `mapStyle` so the plain `style` attribute keeps styling the container. Defaults to "base".
      */
     mapStyle?: string;

@@ -1,13 +1,13 @@
 ---
 title: Change the map style
-description: Switch among the fourteen structural styles, each in light and dark.
+description: Switch among the fifteen structural styles, each in light and dark.
 category: maps
 order: 1
 ---
 
 # Change the map style
 
-A style is one of fourteen structural maps: `base`, `muted`, `outdoor`, `blueprint`, `blush`, `orchid`, `canopy`, `lagoon`, `tropic`, `sunset`, `bold`, `pastel`, `atlas`, `swiss`. Press a control and watch the snippet pick up the option you chose.
+A style is one of fifteen structural maps: `base`, `muted`, `outdoor`, `blueprint`, `blush`, `orchid`, `canopy`, `lagoon`, `tropic`, `sunset`, `bold`, `pastel`, `atlas`, `swiss`, `winter`. Press a control and watch the snippet pick up the option you chose.
 
 <LiveExample kind="map" style="base" mode="light" lang="en" center="-114.0719,51.0447" zoom="11" />
 

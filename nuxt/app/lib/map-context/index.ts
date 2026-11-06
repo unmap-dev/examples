@@ -14,6 +14,8 @@
  * - `useMapReady(id?)`    true while a style is loaded; false before the first load and during a swap.
  * - `useMapGeneration()`  0 until the first load, then +1 per completed style load. Anything that
  *                         adds sources or layers re-adds them when this changes.
+ * - `useMapTerrain(id?)`  asks the map to reload its style with or without 3D terrain
+ *                         (`terrain=on`), over the `terrain` prop. map-controls' 3D button uses it.
  * - `useResolvedMode()`   resolves `"auto"` to the page's light or dark mode, and follows it.
  *
  * Copied into your project by `npx shadcn-vue add` or `unmap add`. Edit it freely.
@@ -70,6 +72,10 @@ export interface MapStore {
   get: (id: string) => MapEntry | undefined;
   /** The reactive entries, keyed by map id. */
   entries: Record<string, MapEntry>;
+  /** Per map id, a control's request to draw the style on 3D terrain. Wins over the `terrain` prop. */
+  terrain: Record<string, boolean>;
+  /** Ask for the style with or without terrain; `null` follows the `terrain` prop again. */
+  requestTerrain: (id: string, on: boolean | null) => void;
 }
 
 /** Injection key for the shared map store. */
@@ -120,8 +126,14 @@ type MaplibreOptions = NonNullable<UnmapMapOptions["maplibre"]>;
 
 export function createMapStore(): MapStore {
   const entries = shallowReactive<Record<string, MapEntry>>({});
+  const terrain = shallowReactive<Record<string, boolean>>({});
   return {
     entries,
+    terrain,
+    requestTerrain: (id, on) => {
+      if (on === null) delete terrain[id];
+      else terrain[id] = on;
+    },
     get: (id) => entries[id],
     set: (id, entry) => {
       entries[id] = entry;
@@ -365,6 +377,12 @@ function withGestures(raw: MaplibreOptions | undefined, options: GestureProps): 
   return Object.keys(set).length === 0 ? raw : { ...raw, ...set };
 }
 
+/** The style URL's terrain options: none at all when off, so a flat map's URL is unchanged. */
+function terrainOptions(on: boolean, exaggeration: number | undefined): { terrain?: true; exaggeration?: number } {
+  if (!on) return {};
+  return exaggeration != null ? { terrain: true, exaggeration } : { terrain: true };
+}
+
 /**
  * `hash` as MapLibre reads it: `true` for the bare `#zoom/lat/lng`, a name for
  * `#name=zoom/lat/lng`, `false` for off. An empty name is off, as it is in MapLibre.
@@ -409,6 +427,9 @@ export function useMapLifecycle(
   let appliedInteractive = true;
   let appliedCooperative = false;
 
+  // A control's request (map-controls' 3D button) wins over the option; the gateway adds the DEM
+  // and the terrain to the style itself, so this works on every style, flat ones included.
+  const drawTerrain = () => store.terrain[id()] ?? options().terrain ?? false;
   const cartography = () => {
     const o = options();
     return {
@@ -418,6 +439,7 @@ export function useMapLifecycle(
       theme: o.theme,
       overlays: o.overlays,
       profile: o.profile,
+      ...terrainOptions(drawTerrain(), o.exaggeration),
     };
   };
 
@@ -541,6 +563,8 @@ export function useMapLifecycle(
       () => options().theme,
       () => options().overlays?.join(",") ?? "",
       () => options().profile,
+      drawTerrain,
+      () => options().exaggeration,
     ],
     () => {
       if (!active) return;
@@ -557,6 +581,13 @@ export function useMapLifecycle(
       active.setStyle(url, { diff: false });
     },
     { flush: "post" },
+  );
+
+  // A new `terrain` option is the caller deciding again: it drops whatever a control asked for.
+  watch(
+    () => options().terrain,
+    () => store.requestTerrain(id(), null),
+    { flush: "sync" },
   );
 
   // Projection applies in place. Before a style has loaded (the first one, or mid-swap)
@@ -718,6 +749,20 @@ export function useMapReady(id: MaybeRefOrGetter<string | undefined> = DEFAULT_M
 export function useMapGeneration(id: MaybeRefOrGetter<string | undefined> = DEFAULT_MAP_ID): ComputedRef<number> {
   const entry = useEntry(id, "useMapGeneration");
   return computed(() => entry.value?.generation ?? 0);
+}
+
+/**
+ * Ask the map for `id` to reload its style with (`true`) or without (`false`) 3D terrain, over
+ * its `terrain` prop; `null` follows the prop again. The gateway adds the elevation source and
+ * the terrain (`terrain=on`), so any style can be lifted. Tilt the camera yourself: seen from
+ * straight above, terrain looks flat.
+ */
+export function useMapTerrain(id: MaybeRefOrGetter<string | undefined> = DEFAULT_MAP_ID): (on: boolean | null) => void {
+  const store = inject(MAP_STORE_KEY, null);
+  if (!store) {
+    throw new Error("useMapTerrain must be used inside an <UnmapMap> (which provides the map store).");
+  }
+  return (on) => store.requestTerrain(toValue(id) ?? DEFAULT_MAP_ID, on);
 }
 
 /**

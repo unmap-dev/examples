@@ -20,7 +20,7 @@ is `energy.mineral-tenure`.
 import { Unmap } from "@unmap/sdk";
 
 const unmap = new Unmap({
-  key: "um_live_...",
+  key: "um_pk_live_...",
   container: "map",
   style: "muted",
   profile: "mining",

@@ -44,7 +44,7 @@ export const ENERGY_COPY = {
       addon_required:
         "This key does not hold the Energy add-on, so the map shows the basemap without wells, pipelines or facilities, and search and identify are off.",
       dev_only:
-        "On the dev plan, energy layers work from localhost and preview origins. From this origin they need a paid plan with the Energy add-on.",
+        "On the dev plan, energy layers work from localhost. From this origin they need a paid plan with the Energy add-on.",
       usage_limit_reached:
         "The dev plan's premium calls for this month are used. Energy layers come back next month, or now with a paid plan.",
     },
@@ -99,7 +99,7 @@ export const ENERGY_COPY = {
       addon_required:
         "Cette clé n'a pas le module complémentaire Énergie : la carte montre le fond sans puits, pipelines ni installations, et la recherche et l'identification sont désactivées.",
       dev_only:
-        "Avec le forfait de développement, les couches énergétiques fonctionnent depuis localhost et les origines de prévisualisation. Depuis cette origine, il faut un forfait payant avec le module complémentaire Énergie.",
+        "Avec le forfait de développement, les couches énergétiques fonctionnent depuis localhost. Depuis cette origine, il faut un forfait payant avec le module complémentaire Énergie.",
       usage_limit_reached:
         "Les appels premium du forfait de développement sont épuisés pour ce mois. Les couches énergétiques reviennent le mois prochain, ou dès maintenant avec un forfait payant.",
     },

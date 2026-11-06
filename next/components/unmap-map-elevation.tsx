@@ -3,6 +3,7 @@
 import { useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { Map } from "@/components/ui/map";
+import { MapControls } from "@/components/ui/map-controls";
 import { GeoJSONLayer } from "@/components/ui/geojson-layer";
 import { ElevationProfile, formatElevation, type ElevationProfileData } from "@/components/ui/elevation-profile";
 import { cn } from "@/lib/utils";
@@ -74,7 +75,9 @@ export function MapElevation({
   return (
     <div className={cn("flex min-w-0 flex-col gap-3", className)}>
       <div role="region" aria-label={copy.title} className="relative h-80">
-        <Map apiKey={apiKey} style="outdoor" center={[-115.5598, 51.1755]} zoom={13.75} lang={lang}>
+        <Map apiKey={apiKey} style="outdoor" center={[-115.5598, 51.1755]} zoom={13.75} lang={lang} controls={false}>
+          {/* Zoom, compass and 3D terrain: the climb on the chart, seen on the mountain. */}
+          <MapControls terrain lang={lang} />
           <GeoJSONLayer data={TRAIL_LINE} />
           <BelowMap slot={slot}>
             <ElevationProfile apiKey={apiKey} line={TRAIL} lang={lang} onProfile={setProfile} />

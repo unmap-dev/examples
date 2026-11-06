@@ -17,6 +17,8 @@ Generated from the docs gallery and API examples.
 | Legal Land and Treaty Inspector | block | react | [Source](next/app/land-treaty-inspector/page.tsx) | [Guide](https://unmap.dev/docs/frontend/blocks#look-up-legal-land-and-treaties) |
 | Address Playground | block | react | [Source](next/app/address-playground/page.tsx) | [Guide](https://unmap.dev/docs/frontend/blocks#look-up-any-place-in-canada) |
 | Energy Explorer | block | react | [Source](next/app/energy-explorer/page.tsx) | [Guide](https://unmap.dev/docs/frontend/blocks#explore-albertas-wells-and-pipelines) |
+| Ski Resort Explorer | block | react | [Source](next/app/ski-resort-explorer/page.tsx) | [Guide](https://unmap.dev/docs/frontend/blocks#explore-canadas-ski-areas) |
+| View Explorer | block | react | [Source](next/app/view-explorer/page.tsx) | [Guide](https://unmap.dev/docs/frontend/blocks#find-the-view) |
 | Marker and popup example | example | react | [Source](next/app/map-markers/page.tsx) | [Guide](https://unmap.dev/docs/frontend/map#markers-and-interaction) |
 | Measure a distance example | example | react | [Source](next/app/map-measure/page.tsx) | [Guide](https://unmap.dev/docs/frontend/tools#measure-distances) |
 | Inspect map features example | example | react | [Source](next/app/map-inspect/page.tsx) | [Guide](https://unmap.dev/docs/frontend/tools#inspect-features) |
@@ -38,6 +40,8 @@ Generated from the docs gallery and API examples.
 | Legal Land and Treaty Inspector (Vue) | block | vue | [Source](nuxt/app/pages/land-treaty-inspector.vue) | [Guide](https://unmap.dev/docs/frontend/blocks#look-up-legal-land-and-treaties) |
 | Address Playground (Vue) | block | vue | [Source](nuxt/app/pages/address-playground.vue) | [Guide](https://unmap.dev/docs/frontend/blocks#look-up-any-place-in-canada) |
 | Energy Explorer (Vue) | block | vue | [Source](nuxt/app/pages/energy-explorer.vue) | [Guide](https://unmap.dev/docs/frontend/blocks#explore-albertas-wells-and-pipelines) |
+| Ski Resort Explorer (Vue) | block | vue | [Source](nuxt/app/pages/ski-resort-explorer.vue) | [Guide](https://unmap.dev/docs/frontend/blocks#explore-canadas-ski-areas) |
+| View Explorer (Vue) | block | vue | [Source](nuxt/app/pages/view-explorer.vue) | [Guide](https://unmap.dev/docs/frontend/blocks#find-the-view) |
 | Add a marker | api-example | typescript | [Source](sdk/examples/add-a-marker/main.ts) | [Guide](https://unmap.dev/docs/guides/examples/add-a-marker) |
 | Agriculture map | api-example | typescript | [Source](sdk/examples/agriculture-map/main.ts) | [Guide](https://unmap.dev/docs/guides/examples/agriculture-map) |
 | Apply a theme | api-example | typescript | [Source](sdk/examples/apply-a-theme/main.ts) | [Guide](https://unmap.dev/docs/guides/examples/apply-a-theme) |

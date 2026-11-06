@@ -7,5 +7,7 @@
 <li class="my-3"><NuxtLink to="/census-choropleth">Census Choropleth (Vue)</NuxtLink></li>
 <li class="my-3"><NuxtLink to="/land-treaty-inspector">Legal Land and Treaty Inspector (Vue)</NuxtLink></li>
 <li class="my-3"><NuxtLink to="/address-playground">Address Playground (Vue)</NuxtLink></li>
-<li class="my-3"><NuxtLink to="/energy-explorer">Energy Explorer (Vue)</NuxtLink></li></ul></main>
+<li class="my-3"><NuxtLink to="/energy-explorer">Energy Explorer (Vue)</NuxtLink></li>
+<li class="my-3"><NuxtLink to="/ski-resort-explorer">Ski Resort Explorer (Vue)</NuxtLink></li>
+<li class="my-3"><NuxtLink to="/view-explorer">View Explorer (Vue)</NuxtLink></li></ul></main>
 </template>

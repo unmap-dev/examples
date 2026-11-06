@@ -605,6 +605,7 @@ import { UnmapDraw } from "@/components/ui/draw";
 import { UnmapElevationProfile } from "@/components/ui/elevation-profile";
 import { UnmapGeocoder } from "@/components/ui/geocoder";
 import { UnmapMap } from "@/components/ui/map";
+import { UnmapMapControls } from "@/components/ui/map-controls";
 import { UnmapMarker, UnmapMarkerLabel } from "@/components/ui/marker-popup";
 import { UnmapRouteLine } from "@/components/ui/route-line";
 import { Spinner } from "@/components/ui/spinner";
@@ -963,8 +964,11 @@ function onDraw(value: DrawnValue) {
       :center="props.center"
       :zoom="props.zoom"
       :lang="props.lang"
+      :controls="false"
       :class="['h-full', GRADE_TOKENS]"
     >
+      <!-- Zoom, compass and 3D terrain, so a climb can be seen as well as charted. -->
+      <UnmapMapControls :map-id="EXPLORER_MAP_ID" terrain :lang="props.lang" />
       <!-- Beside the map's zoom buttons, which hold the top-right corner. -->
       <UnmapDraw
         v-if="source === 'draw'"

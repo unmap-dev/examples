@@ -1,11 +1,11 @@
 {
   "next/lib/map-context.tsx": {
     "source": "apps/registry/registry/lib/map-context.tsx",
-    "sha256": "cd5d7ddc18a72e6dff67769b6aa919dd20ff56b518fc098d8ba173c0dbc43c0e"
+    "sha256": "f94acb29e21cc8d14066daddaffc7c6d0aeeb5ce2a6a38a197913694300dc1dc"
   },
   "next/components/ui/map.tsx": {
     "source": "apps/registry/registry/ui/map.tsx",
-    "sha256": "3e830ed97277ebfb49ace12a06349db9ce6c66835e8f20938d630e334d4ddc4d"
+    "sha256": "f7b78f35539bb2c8d5271e463118283bd46c2d4473707a0d583eba65ba8c9481"
   },
   "next/components/ui/marker-popup.tsx": {
     "source": "apps/registry/registry/ui/marker-popup.tsx",
@@ -111,6 +111,10 @@
     "source": "apps/registry/registry/lib/flow-map-data.ts",
     "sha256": "8c921f60ac927bbadacda0bc22485a2c4f42e345c216ff275f66cc432d2ad2bd"
   },
+  "next/components/ui/map-controls.tsx": {
+    "source": "apps/registry/registry/ui/map-controls.tsx",
+    "sha256": "ccc3426afad65cdbfac92f094a3bfcaf3431ea0056a450791758c1b529ec6c81"
+  },
   "next/components/ui/draw.tsx": {
     "source": "apps/registry/registry/ui/draw.tsx",
     "sha256": "41b54d41e17520e4bee2174735a61643028266c49ed0b8e241c5b6ed452e8a8a"
@@ -125,7 +129,7 @@
   },
   "next/components/ui/elevation-explorer.tsx": {
     "source": "apps/registry/registry/blocks/elevation-explorer/elevation-explorer.tsx",
-    "sha256": "5b3c8e0c9919903b609510e6854a4ec06702f0ba5817ef91d1b9d3d291466f86"
+    "sha256": "36551146fc266fc4b58bc4c88734211d804a8ddebd394bd9cfab6960ad9ac635"
   },
   "next/app/delivery-tracker/page.tsx": {
     "source": "apps/registry/registry/blocks/delivery-tracker/page.tsx",
@@ -161,7 +165,7 @@
   },
   "next/components/ui/land-treaty-inspector.tsx": {
     "source": "apps/registry/registry/blocks/land-treaty-inspector/land-treaty-inspector.tsx",
-    "sha256": "6360c8a41212e71b3d180dc001a73b58cff2a3f260e33525710c8632d1a1df5a"
+    "sha256": "ec528d72cd31f8443e562430435515b6ef3e98663952c1b3ea68a6ac5ca6c23f"
   },
   "next/app/address-playground/page.tsx": {
     "source": "apps/registry/registry/blocks/address-playground/page.tsx",
@@ -197,7 +201,23 @@
   },
   "next/components/ui/energy-explorer.tsx": {
     "source": "apps/registry/registry/blocks/energy-explorer/energy-explorer.tsx",
-    "sha256": "eaef726ebed8b94a5c69cfc6800b366e0a5f79aa820ea4813392f16cac00c491"
+    "sha256": "bb8fbe575a8106bda45a7482bbe13501a16fa553b544febf25a2dedb72f75cab"
+  },
+  "next/app/ski-resort-explorer/page.tsx": {
+    "source": "apps/registry/registry/blocks/ski-resort-explorer/page.tsx",
+    "sha256": "7c22588d02b5ffe1b87a693a79eeab87ec7bf989c9f62d40d9225d5095f4f8d6"
+  },
+  "next/components/ui/ski-resort-explorer.tsx": {
+    "source": "apps/registry/registry/blocks/ski-resort-explorer/ski-resort-explorer.tsx",
+    "sha256": "9b815b4add5d46059961d6b3ed3813ec5ac527879962d2f8aadd69f884f7908b"
+  },
+  "next/app/view-explorer/page.tsx": {
+    "source": "apps/registry/registry/blocks/view-explorer/page.tsx",
+    "sha256": "5c490241b3aca9eaa566cdd079808c37d0173a3c8998164ae260d9b80bdd5452"
+  },
+  "next/components/ui/view-explorer.tsx": {
+    "source": "apps/registry/registry/blocks/view-explorer/view-explorer.tsx",
+    "sha256": "fdbdf07d9fc4ac52eb2cf362ff80af757ea92880172cf467249ca828b5ff1737"
   },
   "next/components/unmap-map-markers.tsx": {
     "source": "apps/registry/registry/blocks/map-markers-01.tsx",
@@ -237,7 +257,7 @@
   },
   "next/components/unmap-map-elevation.tsx": {
     "source": "apps/registry/registry/blocks/map-elevation-01.tsx",
-    "sha256": "2551348062d61e0d66aa783e67eea718fc1037110f2e4278013d209ccde2145b"
+    "sha256": "b6d41e3b0716e393e48af8fcb16eff8d6bc8599fcb531daab350752e3f234b19"
   },
   "next/components/unmap-map-geojson.tsx": {
     "source": "apps/registry/registry/blocks/map-geojson-01.tsx",
@@ -311,6 +331,10 @@
     "source": "apps/registry/preview/ui/slider.tsx",
     "sha256": "59287510153e68f54bc5f59783ae693ec0881ee7ac4daa37ebf1d9898ccf6900"
   },
+  "next/components/ui/button-group.tsx": {
+    "source": "apps/registry/preview/ui/button-group.tsx",
+    "sha256": "292a090b398795589c871f4d50a3704a00f9b831fc3f2cd646104394d650cfe3"
+  },
   "next/components/ui/tooltip.tsx": {
     "source": "apps/registry/preview/ui/tooltip.tsx",
     "sha256": "97f980a349bcbc995fd65911e34bb38ad9f1ec037128e885076bce3c98081223"
@@ -331,13 +355,13 @@
     "source": "apps/registry/preview/ui/checkbox.tsx",
     "sha256": "33844b76e44e1433730d86a58a60ba2a02d3ab5fdc527dbb960673cee0e282a0"
   },
+  "next/components/ui/select.tsx": {
+    "source": "apps/registry/preview/ui/select.tsx",
+    "sha256": "9f00b04bdb3b340334d643193cd8ae83c3b45619c36da826ce362932ab836e3e"
+  },
   "next/components/ui/table.tsx": {
     "source": "apps/registry/preview/ui/table.tsx",
     "sha256": "e3c5b2b93058355b30317dd564ad402bfe1eadf52335733d923f7d5549f3c49e"
-  },
-  "next/components/ui/button-group.tsx": {
-    "source": "apps/registry/preview/ui/button-group.tsx",
-    "sha256": "292a090b398795589c871f4d50a3704a00f9b831fc3f2cd646104394d650cfe3"
   },
   "next/components/ui/collapsible.tsx": {
     "source": "apps/registry/preview/ui/collapsible.tsx",
@@ -354,10 +378,6 @@
   "next/components/ui/popover.tsx": {
     "source": "apps/registry/preview/ui/popover.tsx",
     "sha256": "cdfc8a1b39f26eefb1f25b46203058b94ced8703d2c265c57273198f13537542"
-  },
-  "next/components/ui/select.tsx": {
-    "source": "apps/registry/preview/ui/select.tsx",
-    "sha256": "9f00b04bdb3b340334d643193cd8ae83c3b45619c36da826ce362932ab836e3e"
   },
   "next/components/ui/separator.tsx": {
     "source": "apps/registry/preview/ui/separator.tsx",
@@ -389,11 +409,11 @@
   },
   "nuxt/app/lib/map-context/index.ts": {
     "source": "apps/registry/registry/vue/components/ui/map-context/index.ts",
-    "sha256": "bca207a6dee9f898507c4b1ac8bcbcb1bb2cc590b8bef9558c7af58d7fe83dbe"
+    "sha256": "783b57f654dd70424f769cb4ecdfe454d61e9ec469ee35ca7a2c979f923675f1"
   },
   "nuxt/app/components/ui/map/UnmapMap.vue": {
     "source": "apps/registry/registry/vue/components/ui/map/UnmapMap.vue",
-    "sha256": "eb5a0cd0eb8aaa6d57cb73ab813737c41e8e8df8b21218a6ec6c79a16f52166b"
+    "sha256": "ce39baf1d070f24e09f0744437548ecd9a98ef8a321683b95b8fae4588a2b6a4"
   },
   "nuxt/app/components/ui/map/index.ts": {
     "source": "apps/registry/registry/vue/components/ui/map/index.ts",
@@ -515,6 +535,14 @@
     "source": "apps/registry/registry/vue/components/ui/flow-map-data/index.ts",
     "sha256": "8c921f60ac927bbadacda0bc22485a2c4f42e345c216ff275f66cc432d2ad2bd"
   },
+  "nuxt/app/components/ui/map-controls/UnmapMapControls.vue": {
+    "source": "apps/registry/registry/vue/components/ui/map-controls/UnmapMapControls.vue",
+    "sha256": "e5fe5e7f0d0a63255a692e1938ee6a298f03a78b5800139dbd620bd266c3959e"
+  },
+  "nuxt/app/components/ui/map-controls/index.ts": {
+    "source": "apps/registry/registry/vue/components/ui/map-controls/index.ts",
+    "sha256": "897adf1585ecd83248c914d44d6d2d3e9f08d717c4fde051a2642c3811cd87fb"
+  },
   "nuxt/app/components/ui/draw/UnmapDraw.vue": {
     "source": "apps/registry/registry/vue/components/ui/draw/UnmapDraw.vue",
     "sha256": "94f8d53610a5b62c71a09fedc05ac6136e823d7ea06c9fa8515bd8d98ffba966"
@@ -537,7 +565,7 @@
   },
   "nuxt/app/components/ui/elevation-explorer/UnmapElevationExplorer.vue": {
     "source": "apps/registry/registry/vue/components/ui/elevation-explorer/UnmapElevationExplorer.vue",
-    "sha256": "0b7eeaf812fc794e40217f7c00ac92e3bda0cfd53d359de6a563ecdc019590e6"
+    "sha256": "d0d39018af3e2be59d669957fefbfac302f96eac63843ea4c3c9d2e078a3fe68"
   },
   "nuxt/app/components/ui/elevation-explorer/index.ts": {
     "source": "apps/registry/registry/vue/components/ui/elevation-explorer/index.ts",
@@ -593,7 +621,7 @@
   },
   "nuxt/app/components/ui/land-treaty-inspector/UnmapLandTreatyInspector.vue": {
     "source": "apps/registry/registry/vue/components/ui/land-treaty-inspector/UnmapLandTreatyInspector.vue",
-    "sha256": "e48e0337ffcde84b3ca78f6d4374aa629ec0e7e633f0ecd0b2e1694387adc76f"
+    "sha256": "988bfda212eda087d057a7b203d362ac762f2662fe2c6a0675e98baebecc54b8"
   },
   "nuxt/app/components/ui/land-treaty-inspector/index.ts": {
     "source": "apps/registry/registry/vue/components/ui/land-treaty-inspector/index.ts",
@@ -657,11 +685,35 @@
   },
   "nuxt/app/components/ui/energy-explorer/UnmapEnergyExplorer.vue": {
     "source": "apps/registry/registry/vue/components/ui/energy-explorer/UnmapEnergyExplorer.vue",
-    "sha256": "66552f5c8d10e7a1cb3480c9f977b7a854e81bc748a20df07f6e5b6135cbf478"
+    "sha256": "3403cdf462b0509083e5c946f54c65c633e496eb7e396fec7c01e9fa72498b4a"
   },
   "nuxt/app/components/ui/energy-explorer/index.ts": {
     "source": "apps/registry/registry/vue/components/ui/energy-explorer/index.ts",
     "sha256": "8f3005ac0da2c40e9f8d2485b723b5d894da3076b4cc9e5d3d8acf1da3e0157b"
+  },
+  "nuxt/app/pages/ski-resort-explorer.vue": {
+    "source": "apps/registry/registry/vue/blocks/ski-resort-explorer/page.vue",
+    "sha256": "5f4610e2aeef77a313e16da6d1536b88cd0d82345b2134a49c7ee4731e23cdd6"
+  },
+  "nuxt/app/components/ui/ski-resort-explorer/UnmapSkiResortExplorer.vue": {
+    "source": "apps/registry/registry/vue/components/ui/ski-resort-explorer/UnmapSkiResortExplorer.vue",
+    "sha256": "840ce11a0c9e90114b0aa37e03d56220cd9f8764afb5c0a2e872725d9b85e5ad"
+  },
+  "nuxt/app/components/ui/ski-resort-explorer/index.ts": {
+    "source": "apps/registry/registry/vue/components/ui/ski-resort-explorer/index.ts",
+    "sha256": "0584003baf3cebedf22277150fc38caabc8cb5b1f4e29dc5cf4ddec7fed07e90"
+  },
+  "nuxt/app/pages/view-explorer.vue": {
+    "source": "apps/registry/registry/vue/blocks/view-explorer/page.vue",
+    "sha256": "96b060544d8c418c0f1afc496686657635cbe2832efc74ec12e25866f6e0ab59"
+  },
+  "nuxt/app/components/ui/view-explorer/UnmapViewExplorer.vue": {
+    "source": "apps/registry/registry/vue/components/ui/view-explorer/UnmapViewExplorer.vue",
+    "sha256": "1fb35a53da953d175f4b760d25227e173edc93e7fee3c78b6b6ac2eab26de2d7"
+  },
+  "nuxt/app/components/ui/view-explorer/index.ts": {
+    "source": "apps/registry/registry/vue/components/ui/view-explorer/index.ts",
+    "sha256": "9f54310bd3cb8586b2b7659664106ae66a0a515244c3c01f8ccb5464344f55a7"
   },
   "nuxt/app/lib/utils.ts": {
     "source": "apps/maps/lib/utils.ts",
@@ -669,11 +721,11 @@
   },
   "sdk/examples/add-a-marker/README.md": {
     "source": "apps/web/content/docs/guides/examples/add-a-marker.mdx",
-    "sha256": "19f53f137247b9966b65670926e7a29f367a0eb45092ec42191c2d27cd6cfa45"
+    "sha256": "6bfe0f3994bcd5949f4b7688c167112aa79d4c9c7ec8b39e0943d8b48224b9db"
   },
   "sdk/examples/agriculture-map/README.md": {
     "source": "apps/web/content/docs/guides/examples/agriculture-map.mdx",
-    "sha256": "03517671d1261e041e9cca0f7cb7fcd61fc477095cb74102bd9280721a6864f6"
+    "sha256": "eaa934891bd524b833b66056dc0ca818b8573a200c6a1ef2cb6b7facbe346b14"
   },
   "sdk/examples/apply-a-theme/README.md": {
     "source": "apps/web/content/docs/guides/examples/apply-a-theme.mdx",
@@ -685,7 +737,7 @@
   },
   "sdk/examples/batch-geocode/README.md": {
     "source": "apps/web/content/docs/guides/examples/batch-geocode.mdx",
-    "sha256": "ef6a8967e76987485830171c01438e2b8b10d07e828ab86945e092bb1e1e3e10"
+    "sha256": "378937f4924f76b5a1424fe54face09c935330dff7d7009ed5894f3da9854fc8"
   },
   "sdk/examples/canadian-overlays/README.md": {
     "source": "apps/web/content/docs/guides/examples/canadian-overlays.mdx",
@@ -709,7 +761,7 @@
   },
   "sdk/examples/energy-map/README.md": {
     "source": "apps/web/content/docs/guides/examples/energy-map.mdx",
-    "sha256": "289ff4cf1e87055a9e848fba85ad8e19a3c7ab687faf89c6f62b319c138639a9"
+    "sha256": "b2bcaa633e598aff010767852c56c73cfac32af37a4bc17f7e4e9f78d88ff329"
   },
   "sdk/examples/find-nearby-places/README.md": {
     "source": "apps/web/content/docs/guides/examples/find-nearby-places.mdx",
@@ -725,11 +777,11 @@
   },
   "sdk/examples/mining-map/README.md": {
     "source": "apps/web/content/docs/guides/examples/mining-map.mdx",
-    "sha256": "1ce1b30f598e163bdc7f3422d434e6d137f3dae1b6f0c1322d88029f494903e7"
+    "sha256": "a926500925c0ddb1c14c756519b3a3f6dfd5bb9e38bad6cdbf596e3bb8d2857c"
   },
   "sdk/examples/navigation-controls/README.md": {
     "source": "apps/web/content/docs/guides/examples/navigation-controls.mdx",
-    "sha256": "aa7150b8bcc27d0bd1b0ec361dedb553546dcc5e50dc7072d1c48f65887fa549"
+    "sha256": "3f81b398663b64f98034626bd79abe6274021d886f1821af32064659b10553b7"
   },
   "sdk/examples/outdoor-map/README.md": {
     "source": "apps/web/content/docs/guides/examples/outdoor-map.mdx",
@@ -741,7 +793,7 @@
   },
   "sdk/examples/remote-map/README.md": {
     "source": "apps/web/content/docs/guides/examples/remote-map.mdx",
-    "sha256": "eb1faf1da7093405209aa22ad42dce9eaaf9820f0af67946b28c7d89db97fe84"
+    "sha256": "29e06cb8af5c5a9d426b57258104687fc46b4011760c43c5c730b64188d3f9e4"
   },
   "sdk/examples/reverse-geocode/README.md": {
     "source": "apps/web/content/docs/guides/examples/reverse-geocode.mdx",

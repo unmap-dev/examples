@@ -21,7 +21,7 @@ curl -X POST "https://api.unmap.dev/geocode/batch" \
 ```ts
 import { Geocoder } from "@unmap/geocoding";
 
-const geocoder = new Geocoder({ key: "um_live_..." });
+const geocoder = new Geocoder({ key: "um_sk_live_..." });
 const results = await geocoder.batch(
   ["17 Ave SW Calgary", "Springfield", ""],
   { limit: 1 },

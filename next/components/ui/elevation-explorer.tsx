@@ -28,6 +28,7 @@ import { Draw, type DrawValue } from "@/components/ui/draw";
 import { ElevationProfile, type ProfilePoint } from "@/components/ui/elevation-profile";
 import { Geocoder } from "@/components/ui/geocoder";
 import { Map } from "@/components/ui/map";
+import { MapControls } from "@/components/ui/map-controls";
 import { Marker, MarkerLabel } from "@/components/ui/marker-popup";
 import { RouteLine } from "@/components/ui/route-line";
 import { Spinner } from "@/components/ui/spinner";
@@ -649,7 +650,9 @@ export function ElevationExplorer({ apiKey, gateway, center = BANFF, zoom = 8, l
   }
   return (
     <div data-unmap-block="elevation-explorer" className={["relative h-full min-h-[480px]", className].filter(Boolean).join(" ")}>
-      <Map id={EXPLORER_MAP_ID} apiKey={apiKey} gateway={gateway} center={center} zoom={zoom} lang={lang} className={`h-full ${GRADE_TOKENS}`}>
+      <Map id={EXPLORER_MAP_ID} apiKey={apiKey} gateway={gateway} center={center} zoom={zoom} lang={lang} controls={false} className={`h-full ${GRADE_TOKENS}`}>
+        {/* Zoom, compass and 3D terrain, so a climb can be seen as well as charted. */}
+        <MapControls mapId={EXPLORER_MAP_ID} terrain lang={lang} />
         <Explorer apiKey={apiKey} gateway={gateway} lang={lang} />
       </Map>
     </div>

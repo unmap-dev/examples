@@ -17,7 +17,7 @@ Pass an object to move them, or `false` to add none:
 import { Unmap } from "@unmap/sdk";
 
 const unmap = new Unmap({
-  key: "um_live_...",
+  key: "um_pk_live_...",
   container: "map",
   center: [-114.0719, 51.0447],
   controls: { position: "top-left" },
@@ -26,7 +26,7 @@ const unmap = new Unmap({
 
 ```ts
 const unmap = new Unmap({
-  key: "um_live_...",
+  key: "um_pk_live_...",
   container: "map",
   center: [-114.0719, 51.0447],
   controls: false,

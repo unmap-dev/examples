@@ -12,6 +12,8 @@ export default function Page() { return <main className="mx-auto max-w-3xl p-6">
 <li className="my-3"><Link href="/land-treaty-inspector/">Legal Land and Treaty Inspector</Link> — block</li>
 <li className="my-3"><Link href="/address-playground/">Address Playground</Link> — block</li>
 <li className="my-3"><Link href="/energy-explorer/">Energy Explorer</Link> — block</li>
+<li className="my-3"><Link href="/ski-resort-explorer/">Ski Resort Explorer</Link> — block</li>
+<li className="my-3"><Link href="/view-explorer/">View Explorer</Link> — block</li>
 <li className="my-3"><Link href="/map-markers/">Marker and popup example</Link> — example</li>
 <li className="my-3"><Link href="/map-measure/">Measure a distance example</Link> — example</li>
 <li className="my-3"><Link href="/map-inspect/">Inspect map features example</Link> — example</li>

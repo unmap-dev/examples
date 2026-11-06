@@ -282,6 +282,49 @@
     ]
   },
   {
+    "slug": "ski-resort-explorer",
+    "kind": "block",
+    "item": "ski-resort-explorer",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "addon": "ski",
+    "guide": "/docs/frontend/blocks#explore-canadas-ski-areas",
+    "lane": "react",
+    "title": "Ski Resort Explorer",
+    "description": "A page with every ski area in Canada on the winter style in 3D: name search, a province filter and an activity toggle, and, for the area you pick, a tilted camera facing its slopes with vertical, runs, lifts, aspect and drive time, click cards for runs and lifts, a run legend, credited to OpenStreetMap under the ODbL. Needs the Ski add-on; without it the page says why and shows the 3D map. Calls /ski/areas on load and per filter change.",
+    "route": "next/app/ski-resort-explorer/page.tsx",
+    "url": "/ski-resort-explorer/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#explore-canadas-ski-areas",
+    "files": [
+      "apps/registry/registry/blocks/ski-resort-explorer/page.tsx",
+      "apps/registry/registry/blocks/ski-resort-explorer/ski-resort-explorer.tsx"
+    ]
+  },
+  {
+    "slug": "view-explorer",
+    "kind": "block",
+    "item": "view-explorer",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/blocks#find-the-view",
+    "lane": "react",
+    "title": "View Explorer",
+    "description": "A page that answers whether you can see the Rockies from a home: Calgary in 3D, click any building and the view from its window opens west as a surface in the air, wedges that leave the window at its height and run out until they meet the ground, those that reach the mountains in your --primary with a rim where they strike the slopes and those a nearer hill cuts short in your --muted-foreground, with a score, the skyline you would see from that window and fifteen named summits marked in sight or hidden. Downtown asks the same of the downtown towers, with one sight line to their tops and the ground between drawn as a cross-section. The surface is drawn by deck.gl through @unmap/deck, loaded on the first pick. Calls /terrain for the map's own terrain tiles, read in the browser, fine near the home and coarse in the mountains, and accounts for the Earth's curve.",
+    "route": "next/app/view-explorer/page.tsx",
+    "url": "/view-explorer/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#find-the-view",
+    "files": [
+      "apps/registry/registry/blocks/view-explorer/page.tsx",
+      "apps/registry/registry/blocks/view-explorer/view-explorer.tsx"
+    ]
+  },
+  {
     "slug": "map-markers",
     "kind": "example",
     "item": "map-markers-01",
@@ -715,6 +758,51 @@
       "apps/registry/registry/vue/blocks/energy-explorer/page.vue",
       "apps/registry/registry/vue/components/ui/energy-explorer/UnmapEnergyExplorer.vue",
       "apps/registry/registry/vue/components/ui/energy-explorer/index.ts"
+    ]
+  },
+  {
+    "slug": "ski-resort-explorer",
+    "kind": "block",
+    "item": "ski-resort-explorer",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "addon": "ski",
+    "guide": "/docs/frontend/blocks#explore-canadas-ski-areas",
+    "lane": "vue",
+    "title": "Ski Resort Explorer (Vue)",
+    "description": "A Nuxt page with every ski area in Canada on the winter style in 3D: name search, a province filter and an activity toggle, and, for the area you pick, a tilted camera facing its slopes with vertical, runs, lifts, aspect and drive time, click cards for runs and lifts, a run legend, credited to OpenStreetMap under the ODbL. Needs the Ski add-on; without it the page says why and shows the 3D map. Calls /ski/areas on load and per filter change.",
+    "route": "nuxt/app/pages/ski-resort-explorer.vue",
+    "url": "/ski-resort-explorer/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#explore-canadas-ski-areas",
+    "files": [
+      "apps/registry/registry/vue/blocks/ski-resort-explorer/page.vue",
+      "apps/registry/registry/vue/components/ui/ski-resort-explorer/UnmapSkiResortExplorer.vue",
+      "apps/registry/registry/vue/components/ui/ski-resort-explorer/index.ts"
+    ]
+  },
+  {
+    "slug": "view-explorer",
+    "kind": "block",
+    "item": "view-explorer",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/blocks#find-the-view",
+    "lane": "vue",
+    "title": "View Explorer (Vue)",
+    "description": "A Nuxt page that answers whether you can see the Rockies from a home: Calgary in 3D, click any building and the view from its window opens west as a surface in the air, wedges that leave the window at its height and run out until they meet the ground, those that reach the mountains in your --primary with a rim where they strike the slopes and those a nearer hill cuts short in your --muted-foreground, with a score, the skyline you would see from that window and fifteen named summits marked in sight or hidden. Downtown asks the same of the downtown towers, with one sight line to their tops and the ground between drawn as a cross-section. The surface is drawn by deck.gl through @unmap/deck, loaded on the first pick. Calls /terrain for the map's own terrain tiles, read in the browser, fine near the home and coarse in the mountains, and accounts for the Earth's curve.",
+    "route": "nuxt/app/pages/view-explorer.vue",
+    "url": "/view-explorer/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#find-the-view",
+    "files": [
+      "apps/registry/registry/vue/blocks/view-explorer/page.vue",
+      "apps/registry/registry/vue/components/ui/view-explorer/UnmapViewExplorer.vue",
+      "apps/registry/registry/vue/components/ui/view-explorer/index.ts"
     ]
   },
   {

@@ -20,7 +20,7 @@ without the `remote` add-on still gets the basemap and the core layers in the pr
 import { Unmap } from "@unmap/sdk";
 
 const unmap = new Unmap({
-  key: "um_live_...",
+  key: "um_pk_live_...",
   container: "map",
   style: "muted",
   profile: "remote",

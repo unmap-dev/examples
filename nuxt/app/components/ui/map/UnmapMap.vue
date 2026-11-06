@@ -26,7 +26,7 @@ import {
   type MapMode,
   type MapViewport,
 } from "@/lib/map-context";
-import type { MapProfile, Projection, UnmapControlsOptions } from "@unmap/maps";
+import type { MapProfile, Projection, UnmapControlsOptions, UnmapMapOptions } from "@unmap/maps";
 import { Spinner } from "@/components/ui/spinner";
 import { cn } from "@/lib/utils";
 
@@ -70,6 +70,18 @@ const props = withDefaults(
     overlays?: string[];
     /** Composition preset. Not a style. Explicit overlays replace the profile list. */
     profile?: MapProfile;
+    /**
+     * Draw the style on 3D terrain (`terrain=on`). Any style, flat ones included. Pair it with a
+     * `pitch`: seen from straight above, terrain looks flat. Changing it reloads the style in place.
+     */
+    terrain?: boolean;
+    /** Vertical exaggeration for `terrain`, 0.1 to 5. The gateway's default is 1. */
+    exaggeration?: number;
+    /**
+     * Raw MapLibre options, merged last when the map is created, such as `deckMapOptions` from
+     * @unmap/deck. Changing it recreates the map, so pass a constant, not a new object each render.
+     */
+    maplibre?: UnmapMapOptions["maplibre"];
     /**
      * Which accent markers and routes use by default. Defaults to "theme" when a `theme` is set
      * (you composed that accent on purpose) and to "system" otherwise.
@@ -135,6 +147,7 @@ const props = withDefaults(
     id: DEFAULT_MAP_ID,
     mode: "auto",
     controls: undefined,
+    terrain: undefined,
     interactive: undefined,
     cooperativeGestures: undefined,
     hash: undefined,
@@ -172,6 +185,9 @@ useMapLifecycle(
     theme: props.theme,
     ...(props.overlays && props.overlays.length > 0 ? { overlays: props.overlays } : {}),
     ...(props.profile ? { profile: props.profile } : {}),
+    ...(props.terrain !== undefined ? { terrain: props.terrain } : {}),
+    ...(props.exaggeration != null ? { exaggeration: props.exaggeration } : {}),
+    ...(props.maplibre ? { maplibre: props.maplibre } : {}),
     ...(props.center ? { center: props.center } : {}),
     ...(props.zoom != null ? { zoom: props.zoom } : {}),
     ...(props.bearing != null ? { bearing: props.bearing } : {}),

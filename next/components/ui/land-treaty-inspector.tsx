@@ -109,7 +109,7 @@ export const LAND_COPY = {
       addon_required:
         "This key holds no add-on with legal land (Legal Land, or Energy or Agriculture, which include it), so survey cells and legal land search are off. Treaty context is part of every plan: pick a point on the map to look it up.",
       dev_only:
-        "On the dev plan, legal land works from localhost and preview origins. From this origin it needs a paid plan with an add-on that includes it: Legal Land, Energy or Agriculture. Treaty context still works: pick a point on the map.",
+        "On the dev plan, legal land works from localhost. From this origin it needs a paid plan with an add-on that includes it: Legal Land, Energy or Agriculture. Treaty context still works: pick a point on the map.",
       usage_limit_reached:
         "The dev plan's premium calls for this month are used. Legal land comes back next month, or now with a paid plan. Treaty context still works: pick a point on the map.",
     },
@@ -188,7 +188,7 @@ export const LAND_COPY = {
       addon_required:
         "Cette clé n'a aucun module qui comprend les terres légales (Terres légales, ou Énergie ou Agriculture, qui les comprennent)\u00a0: les cellules d'arpentage et la recherche de terres légales sont désactivées. Le contexte des traités fait partie de chaque forfait\u00a0: choisissez un point sur la carte pour le consulter.",
       dev_only:
-        "Avec le forfait de développement, les terres légales fonctionnent depuis localhost et les origines de prévisualisation. Depuis cette origine, il faut un forfait payant avec un module qui les comprend\u00a0: Terres légales, Énergie ou Agriculture. Le contexte des traités fonctionne toujours\u00a0: choisissez un point sur la carte.",
+        "Avec le forfait de développement, les terres légales fonctionnent depuis localhost. Depuis cette origine, il faut un forfait payant avec un module qui les comprend\u00a0: Terres légales, Énergie ou Agriculture. Le contexte des traités fonctionne toujours\u00a0: choisissez un point sur la carte.",
       usage_limit_reached:
         "Les appels premium du forfait de développement sont épuisés pour ce mois. Les terres légales reviennent le mois prochain, ou dès maintenant avec un forfait payant. Le contexte des traités fonctionne toujours\u00a0: choisissez un point sur la carte.",
     },

@@ -73,7 +73,7 @@ new project with the components already in it.
 
 ## Components
 
-Both lanes ship the same thirty-nine items, nine of them blocks (below). `map-themes` and `api-calls` are one shared file each.
+Both lanes ship the same forty items, nine of them blocks (below). `map-themes` and `api-calls` are one shared file each.
 
 | Item            | React                                                                                  | Vue                                                                              |
 | --------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
@@ -94,6 +94,7 @@ Both lanes ship the same thirty-nine items, nine of them blocks (below). `map-th
 | `map-controls`  | `<MapControls>`: zoom, compass, locate, fullscreen, globe and 3D terrain buttons on your ButtonGroup, Button and Tooltip. Pair with `<Map controls={false}>`. | `<UnmapMapControls>`: the same on your shadcn-vue primitives; `@locate` and `@locate-error`. |
 | `layer-legend` | `<LayerLegend>`: a checkbox per row that switches style layers on and off (ids, or `prefix*`), optional per-value filters and swatches, controlled or not; survives a style swap. On your shadcn Field and Checkbox. | `<UnmapLayerLegend>`: the same, with `v-model`. |
 | `measure` | `<Measure>`: click to add points; the great-circle distance in metres or kilometres (English or French), a live label on the map, Undo and Clear on your shadcn Button; survives a style swap. | `<UnmapMeasure>`: the same; `@change`. |
+| `map-announcer` | `<MapAnnouncer>`: says the street, nearest address and up to three nearby places at the map centre in a polite live region once it stops moving; Enter repeats it; a centre cross in your `--foreground`; English or French. | `<UnmapMapAnnouncer>`: the same; `useMapAnnouncer` returns the text. |
 | `feature-inspector` | `<FeatureInspector>`: the features under a click (or in view, `scope="view"`) in your shadcn Card and Table; click a row to outline the feature and read its properties. | `<UnmapFeatureInspector>`: the same; `@select`. |
 | `time-slider` | `<TimeSlider>`: your shadcn Slider driving a time window on style layers, with play, pause, step and loop, controlled or not; sits on each layer's own filter next to a legend's. | `<UnmapTimeSlider>`: the same, with `v-model`. |
 | `draw` | `<Draw>`: terra-draw tools for points, lines, polygons and circles, plus select, reshape and delete, on your ToggleGroup, Button and Tooltip. GeoJSON through `value`/`onValueChange`; survives a style swap; layers sit above the labels. | `<UnmapDraw>`: the same, with `v-model`. |
@@ -133,6 +134,8 @@ Every block here ships in React and Vue. The React-only templates (`business-loc
 | `land-treaty-inspector` | Legal land search and click, hatched survey cell and unit list, dotted treaty records, add-on explanation | One add-on check, `/identify`, `/geocode/reverse`, `/geocode/autocomplete` | Survey-grid credit on the page; treaty and survey layers credited in the map attribution |
 | `address-playground` | Search with no map, every name with its language, result details, nearby by category | `/geocode/autocomplete`, `/geocode/reverse`, `/geocode/nearby` | None |
 | `energy-explorer` | Wells, pipelines and facilities, UWI search, layer legend, identify, add-on explanation | One add-on check, `/geocode/autocomplete`, `/identify` | None; Alberta Energy Regulator credit on the page, energy layers credited in the map attribution |
+| `ski-resort-explorer` | Every ski area on the winter style in 3D terrain, name search, province and activity filters, a tilted fly-to and the picked area's vertical, runs, lifts, aspect and drive time, add-on explanation. `lifts3d` draws the picked area's lift cables in 3D, loading `@unmap/deck` (deck.gl) on demand | `/ski/areas` on load and per filter change, plus `/ski/areas/{id}/lifts-3d` per pick with `lifts3d` on | None; ski data © OpenStreetMap contributors (ODbL) on the page, with a not-safety-advice line |
+| `view-explorer` | "Find the view": Calgary in 3D, click a building and its view opens west as one surface in the air (deck.gl via `@unmap/deck`, loaded on the first pick), in `--primary`, its far edge bright on the Rockies and grey where a nearer hill cuts it short, with a score, the skyline from that window and 15 named summits marked in sight or hidden; a Downtown toggle checks the towers with a ground cross-section. Terrain only (bare ground, houses and trees not counted). No add-on | `/terrain` tiles (the map's own), about 25 the first time | Summit names from the Canadian Geographical Names Database (Open Government Licence – Canada); elevation from the active DEM, supplier credits at unmap.dev/attribution |
 
 ## Usage
 

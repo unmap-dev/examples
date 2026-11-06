@@ -26,7 +26,7 @@ npx shadcn@latest add https://registry.unmap.dev/r/map-markers-01.json
 ```tsx
 import { MapMarkers } from "@/components/unmap-map-markers"
 
-<MapMarkers apiKey="um_live_..." />
+<MapMarkers apiKey="um_pk_live_..." />
 ```
 
 The block uses Prince's Island Park as sample content. Replace its coordinates and popup text in the copied component. Allow your site's origin on your browser key. For a complete location list or guided experience, explore [map templates](/templates).

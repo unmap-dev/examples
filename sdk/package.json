@@ -8,9 +8,9 @@
     "check": "tsc --noEmit && pnpm build"
   },
   "dependencies": {
-    "@unmap/sdk": "0.28.0",
+    "@unmap/sdk": "0.30.0",
     "maplibre-gl": "^6.9.0",
-    "@unmap/geocoding": "0.28.0"
+    "@unmap/geocoding": "0.30.0"
   },
   "devDependencies": {
     "vite": "^7.3.1",

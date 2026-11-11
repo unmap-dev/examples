@@ -14,6 +14,8 @@ export default function Page() { return <main className="mx-auto max-w-3xl p-6">
 <li className="my-3"><Link href="/energy-explorer/">Energy Explorer</Link> — block</li>
 <li className="my-3"><Link href="/ski-resort-explorer/">Ski Resort Explorer</Link> — block</li>
 <li className="my-3"><Link href="/view-explorer/">View Explorer</Link> — block</li>
+<li className="my-3"><Link href="/urban-noise-map/">Urban Noise Map</Link> — block</li>
+<li className="my-3"><Link href="/alive-route-explorer/">Alive Route Explorer</Link> — block</li>
 <li className="my-3"><Link href="/map-markers/">Marker and popup example</Link> — example</li>
 <li className="my-3"><Link href="/map-measure/">Measure a distance example</Link> — example</li>
 <li className="my-3"><Link href="/map-inspect/">Inspect map features example</Link> — example</li>

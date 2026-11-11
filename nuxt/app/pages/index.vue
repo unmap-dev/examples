@@ -9,5 +9,6 @@
 <li class="my-3"><NuxtLink to="/address-playground">Address Playground (Vue)</NuxtLink></li>
 <li class="my-3"><NuxtLink to="/energy-explorer">Energy Explorer (Vue)</NuxtLink></li>
 <li class="my-3"><NuxtLink to="/ski-resort-explorer">Ski Resort Explorer (Vue)</NuxtLink></li>
-<li class="my-3"><NuxtLink to="/view-explorer">View Explorer (Vue)</NuxtLink></li></ul></main>
+<li class="my-3"><NuxtLink to="/view-explorer">View Explorer (Vue)</NuxtLink></li>
+<li class="my-3"><NuxtLink to="/urban-noise-map">Urban Noise Map (Vue)</NuxtLink></li></ul></main>
 </template>

@@ -219,6 +219,62 @@
     "source": "apps/registry/registry/blocks/view-explorer/view-explorer.tsx",
     "sha256": "fdbdf07d9fc4ac52eb2cf362ff80af757ea92880172cf467249ca828b5ff1737"
   },
+  "next/app/urban-noise-map/page.tsx": {
+    "source": "apps/registry/registry/blocks/urban-noise-map/page.tsx",
+    "sha256": "e28608ad4c100bd2939733bc100e87d0f0066179209346453a888876ba82aae4"
+  },
+  "next/components/ui/urban-noise-map.tsx": {
+    "source": "apps/registry/registry/blocks/urban-noise-map/urban-noise-map.tsx",
+    "sha256": "f334dbc33562140c2a22ed53f6e68e89fbab7ac7432f525b2206d856ee06b2d8"
+  },
+  "next/app/alive-route-explorer/page.tsx": {
+    "source": "apps/registry/registry/blocks/alive-route-explorer/page.tsx",
+    "sha256": "d6c2c9909d03eb588096c8ca37b00265b8e0ad07a6f48034841df3c31e548c6e"
+  },
+  "next/components/ui/alive-route-explorer.tsx": {
+    "source": "apps/registry/registry/blocks/alive-route-explorer/alive-route-explorer.tsx",
+    "sha256": "5d60a606795850b62f639e7fc2402eea4a288534a031887b3d963625deaf765b"
+  },
+  "next/components/ui/alive-panel.tsx": {
+    "source": "apps/registry/registry/blocks/alive-route-explorer/alive-panel.tsx",
+    "sha256": "fe7b175d7d8e8170c17c563a42dcfa52ad2ae3898db9804928af06043e5e511f"
+  },
+  "next/components/ui/alive-map.tsx": {
+    "source": "apps/registry/registry/blocks/alive-route-explorer/alive-map.tsx",
+    "sha256": "8ba81a1e45125cda7b4736303cd3248e856657fd65f43913bf20e468abb52937"
+  },
+  "next/components/ui/alive-illustrations.tsx": {
+    "source": "apps/registry/registry/blocks/alive-route-explorer/alive-illustrations.tsx",
+    "sha256": "c520a59e2f1d11962ed877b3cb02a260e22219da7dc56cabff6ea7cb76f1ed88"
+  },
+  "next/lib/alive-signals.ts": {
+    "source": "apps/registry/registry/blocks/alive-route-explorer/alive-signals.ts",
+    "sha256": "9abead925d48ad3ca0be6a85cb49be00987b34c61acff3bc6900067c153a0162"
+  },
+  "next/lib/alive-rank.ts": {
+    "source": "apps/registry/registry/blocks/alive-route-explorer/alive-rank.ts",
+    "sha256": "fca8d830cb1b329ba397b3e367e5bb44320e09dded5a613f7af2371f155279dc"
+  },
+  "next/lib/alive-data.ts": {
+    "source": "apps/registry/registry/blocks/alive-route-explorer/alive-data.ts",
+    "sha256": "a8f678b08634ad66192993129d9316a8e27b12f5a9a03c70daf961d853423197"
+  },
+  "next/lib/alive-graph.ts": {
+    "source": "apps/registry/registry/blocks/alive-route-explorer/alive-graph.ts",
+    "sha256": "9004cc21897186ed75ae9f54388a1607f5f449791388ec1a32401020b7b5d4f9"
+  },
+  "next/lib/alive-candidates.ts": {
+    "source": "apps/registry/registry/blocks/alive-route-explorer/alive-candidates.ts",
+    "sha256": "a56e550e0c6f087a775087efc275d4c083436ba5440ea6d052b69ec7f319494c"
+  },
+  "next/lib/alive-walks.ts": {
+    "source": "apps/registry/registry/blocks/alive-route-explorer/alive-walks.ts",
+    "sha256": "f9c37b196a51eff2b9b4b4cca8757cf569b491510a8bd84b3dc483209aadd110"
+  },
+  "next/lib/alive-view.ts": {
+    "source": "apps/registry/registry/blocks/alive-route-explorer/alive-view.ts",
+    "sha256": "f81e074fea43ed89c7b7d3b850b0d880f5da9d699a084e1d71719a05edc8934b"
+  },
   "next/components/unmap-map-markers.tsx": {
     "source": "apps/registry/registry/blocks/map-markers-01.tsx",
     "sha256": "8b6d4a83bd58c17a085fc47f19945c6d3f742370b13ec3872fe2fce02f66e54b"
@@ -363,6 +419,22 @@
     "source": "apps/registry/preview/ui/table.tsx",
     "sha256": "e3c5b2b93058355b30317dd564ad402bfe1eadf52335733d923f7d5549f3c49e"
   },
+  "next/components/ui/radio-group.tsx": {
+    "source": "apps/registry/preview/ui/radio-group.tsx",
+    "sha256": "70af3d9e0a7e197d6d6e54ea1dfd7f1871cabed55b1610818be7c7e5ec496016"
+  },
+  "next/components/ui/separator.tsx": {
+    "source": "apps/registry/preview/ui/separator.tsx",
+    "sha256": "0a07eaf7503777ccbfcb59adef3045225afed26f4b8ddbf38915aa6a9d94c517"
+  },
+  "next/components/ui/sheet.tsx": {
+    "source": "apps/registry/preview/ui/sheet.tsx",
+    "sha256": "2f950a0339e1e2d50f5fe1b31b641985968ca1029b38d6ec0038c4ebb4ea2c13"
+  },
+  "next/components/ui/popover.tsx": {
+    "source": "apps/registry/preview/ui/popover.tsx",
+    "sha256": "cdfc8a1b39f26eefb1f25b46203058b94ced8703d2c265c57273198f13537542"
+  },
   "next/components/ui/collapsible.tsx": {
     "source": "apps/registry/preview/ui/collapsible.tsx",
     "sha256": "8f1907e4ec23c4f14472b01d31f8e2cc04c46967704b1aeffa023349c8c491c0"
@@ -374,18 +446,6 @@
   "next/components/ui/label.tsx": {
     "source": "apps/registry/preview/ui/label.tsx",
     "sha256": "e89f09c991e6b5df681c56ac5d4f0d97fd6b88b61daa6108883869b6336dff1d"
-  },
-  "next/components/ui/popover.tsx": {
-    "source": "apps/registry/preview/ui/popover.tsx",
-    "sha256": "cdfc8a1b39f26eefb1f25b46203058b94ced8703d2c265c57273198f13537542"
-  },
-  "next/components/ui/separator.tsx": {
-    "source": "apps/registry/preview/ui/separator.tsx",
-    "sha256": "0a07eaf7503777ccbfcb59adef3045225afed26f4b8ddbf38915aa6a9d94c517"
-  },
-  "next/components/ui/sheet.tsx": {
-    "source": "apps/registry/preview/ui/sheet.tsx",
-    "sha256": "2f950a0339e1e2d50f5fe1b31b641985968ca1029b38d6ec0038c4ebb4ea2c13"
   },
   "next/components/ui/tabs.tsx": {
     "source": "apps/registry/preview/ui/tabs.tsx",
@@ -714,6 +774,18 @@
   "nuxt/app/components/ui/view-explorer/index.ts": {
     "source": "apps/registry/registry/vue/components/ui/view-explorer/index.ts",
     "sha256": "9f54310bd3cb8586b2b7659664106ae66a0a515244c3c01f8ccb5464344f55a7"
+  },
+  "nuxt/app/pages/urban-noise-map.vue": {
+    "source": "apps/registry/registry/vue/blocks/urban-noise-map/page.vue",
+    "sha256": "414f856f69b5aa0b10d69feb7a9b0971fbef955dbd3dc39c24db8ab1e0b78839"
+  },
+  "nuxt/app/components/ui/urban-noise-map/UnmapUrbanNoiseMap.vue": {
+    "source": "apps/registry/registry/vue/components/ui/urban-noise-map/UnmapUrbanNoiseMap.vue",
+    "sha256": "2e42eea5f408f1775704e201237a0c27bf291321e448c8c98f7700888f00a6fd"
+  },
+  "nuxt/app/components/ui/urban-noise-map/index.ts": {
+    "source": "apps/registry/registry/vue/components/ui/urban-noise-map/index.ts",
+    "sha256": "ac188c90dd201088b52322b2cf07e42eb303036b84dfe20ab2a011c177cb6fc4"
   },
   "nuxt/app/lib/utils.ts": {
     "source": "apps/maps/lib/utils.ts",

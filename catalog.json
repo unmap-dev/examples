@@ -325,6 +325,58 @@
     ]
   },
   {
+    "slug": "urban-noise-map",
+    "kind": "block",
+    "item": "urban-noise-map",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "addon": "urbanNoise",
+    "guide": "/docs/frontend/blocks#check-how-loud-a-street-is",
+    "lane": "react",
+    "title": "Urban Noise Map",
+    "description": "A page that answers how loud a street is, day and night, in Calgary, Edmonton, Vancouver, Toronto, Montréal and Québec City: the modelled noise overlay with a legend, a Day (Lden) / Night (Lnight) switch that recolours the map, and, for a spot you click or an address you search, a card with its level against the WHO guideline (53 dB by day, 45 dB at night), its score, its main source and a bar per source. A place outside the six cities is said to be not covered, with the cities to jump to. Credited to OpenStreetMap under the ODbL and to the PickYourPlace noise model; the levels are modelled, not measured. Needs the Urban Noise add-on; without it the page says why and shows the basemap. Calls /noise/point per spot and /geocode/autocomplete as you type, after one add-on check.",
+    "route": "next/app/urban-noise-map/page.tsx",
+    "url": "/urban-noise-map/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#check-how-loud-a-street-is",
+    "files": [
+      "apps/registry/registry/blocks/urban-noise-map/page.tsx",
+      "apps/registry/registry/blocks/urban-noise-map/urban-noise-map.tsx"
+    ]
+  },
+  {
+    "slug": "alive-route-explorer",
+    "kind": "block",
+    "item": "alive-route-explorer",
+    "lanes": [
+      "react"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/blocks#find-a-livelier-walk",
+    "lane": "react",
+    "title": "Alive Route Explorer",
+    "description": "A page with walking directions that trade a minute for a nicer walk: start and destination search with three Calgary samples, the fastest walk and livelier detours past parks, the river, streets away from traffic, cafés and public art, five dials and an extra-time budget that re-rank without calling, the pick in your --primary with time bubbles, highlight cards and a why-this-route card, a bottom sheet on a phone. When places or the basemap tiles are unavailable it ranks without the signals they feed and says so. Calls /route, /match, POST /places/along and up to 24 basemap tiles for scoring, at most 40 per search. Needs @unmap/maps 0.30.0 or later, for @unmap/maps/tiles.",
+    "route": "next/app/alive-route-explorer/page.tsx",
+    "url": "/alive-route-explorer/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#find-a-livelier-walk",
+    "files": [
+      "apps/registry/registry/blocks/alive-route-explorer/page.tsx",
+      "apps/registry/registry/blocks/alive-route-explorer/alive-route-explorer.tsx",
+      "apps/registry/registry/blocks/alive-route-explorer/alive-panel.tsx",
+      "apps/registry/registry/blocks/alive-route-explorer/alive-map.tsx",
+      "apps/registry/registry/blocks/alive-route-explorer/alive-illustrations.tsx",
+      "apps/registry/registry/blocks/alive-route-explorer/alive-signals.ts",
+      "apps/registry/registry/blocks/alive-route-explorer/alive-rank.ts",
+      "apps/registry/registry/blocks/alive-route-explorer/alive-data.ts",
+      "apps/registry/registry/blocks/alive-route-explorer/alive-graph.ts",
+      "apps/registry/registry/blocks/alive-route-explorer/alive-candidates.ts",
+      "apps/registry/registry/blocks/alive-route-explorer/alive-walks.ts",
+      "apps/registry/registry/blocks/alive-route-explorer/alive-view.ts"
+    ]
+  },
+  {
     "slug": "map-markers",
     "kind": "example",
     "item": "map-markers-01",
@@ -803,6 +855,29 @@
       "apps/registry/registry/vue/blocks/view-explorer/page.vue",
       "apps/registry/registry/vue/components/ui/view-explorer/UnmapViewExplorer.vue",
       "apps/registry/registry/vue/components/ui/view-explorer/index.ts"
+    ]
+  },
+  {
+    "slug": "urban-noise-map",
+    "kind": "block",
+    "item": "urban-noise-map",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "addon": "urbanNoise",
+    "guide": "/docs/frontend/blocks#check-how-loud-a-street-is",
+    "lane": "vue",
+    "title": "Urban Noise Map (Vue)",
+    "description": "A Nuxt page that answers how loud a street is, day and night, in Calgary, Edmonton, Vancouver, Toronto, Montréal and Québec City: the modelled noise overlay with a legend, a Day (Lden) / Night (Lnight) switch that recolours the map, and, for a spot you click or an address you search, a card with its level against the WHO guideline (53 dB by day, 45 dB at night), its score, its main source and a bar per source. A place outside the six cities is said to be not covered, with the cities to jump to. Credited to OpenStreetMap under the ODbL and to the PickYourPlace noise model; the levels are modelled, not measured. Needs the Urban Noise add-on; without it the page says why and shows the basemap. Calls /noise/point per spot and /geocode/autocomplete as you type, after one add-on check.",
+    "route": "nuxt/app/pages/urban-noise-map.vue",
+    "url": "/urban-noise-map/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#check-how-loud-a-street-is",
+    "files": [
+      "apps/registry/registry/vue/blocks/urban-noise-map/page.vue",
+      "apps/registry/registry/vue/components/ui/urban-noise-map/UnmapUrbanNoiseMap.vue",
+      "apps/registry/registry/vue/components/ui/urban-noise-map/index.ts"
     ]
   },
   {

@@ -29,23 +29,23 @@ importers:
         specifier: ~9.4.0
         version: 9.4.2
       '@unmap/deck':
-        specifier: 0.28.0
-        version: 0.28.0(3b1254791c4a67b31b40655cd011da4c)
+        specifier: 0.30.0
+        version: 0.30.0(3b1254791c4a67b31b40655cd011da4c)
       '@unmap/elevation':
-        specifier: 0.28.0
-        version: 0.28.0
+        specifier: 0.30.0
+        version: 0.30.0
       '@unmap/geocoding':
-        specifier: 0.28.0
-        version: 0.28.0
+        specifier: 0.30.0
+        version: 0.30.0
       '@unmap/maps':
-        specifier: 0.28.0
-        version: 0.28.0(maplibre-gl@6.13.0)
+        specifier: 0.30.0
+        version: 0.30.0(maplibre-gl@6.13.0)
       '@unmap/routing':
-        specifier: 0.28.0
-        version: 0.28.0
+        specifier: 0.30.0
+        version: 0.30.0
       '@unmap/sdk':
-        specifier: 0.28.0
-        version: 0.28.0
+        specifier: 0.30.0
+        version: 0.30.0
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -138,23 +138,23 @@ importers:
         specifier: ~9.4.0
         version: 9.4.2
       '@unmap/deck':
-        specifier: 0.28.0
-        version: 0.28.0(3b1254791c4a67b31b40655cd011da4c)
+        specifier: 0.30.0
+        version: 0.30.0(3b1254791c4a67b31b40655cd011da4c)
       '@unmap/elevation':
-        specifier: 0.28.0
-        version: 0.28.0
+        specifier: 0.30.0
+        version: 0.30.0
       '@unmap/geocoding':
-        specifier: 0.28.0
-        version: 0.28.0
+        specifier: 0.30.0
+        version: 0.30.0
       '@unmap/maps':
-        specifier: 0.28.0
-        version: 0.28.0(maplibre-gl@6.13.0)
+        specifier: 0.30.0
+        version: 0.30.0(maplibre-gl@6.13.0)
       '@unmap/routing':
-        specifier: 0.28.0
-        version: 0.28.0
+        specifier: 0.30.0
+        version: 0.30.0
       '@unmap/sdk':
-        specifier: 0.28.0
-        version: 0.28.0
+        specifier: 0.30.0
+        version: 0.30.0
       '@unovis/ts':
         specifier: 1.7.1
         version: 1.7.1
@@ -217,11 +217,11 @@ importers:
   sdk:
     dependencies:
       '@unmap/geocoding':
-        specifier: 0.28.0
-        version: 0.28.0
+        specifier: 0.30.0
+        version: 0.30.0
       '@unmap/sdk':
-        specifier: 0.28.0
-        version: 0.28.0
+        specifier: 0.30.0
+        version: 0.30.0
       maplibre-gl:
         specifier: ^6.9.0
         version: 6.13.0
@@ -2009,11 +2009,11 @@ packages:
       webpack:
         optional: true
 
-  '@unmap/core@0.28.0':
-    resolution: {integrity: sha512-YhYzeMbklqKYqd6xRzqijV+EyZ2rC1bPm2X73pE0cuSZ7bFHW0qwd/9p4EkgFgIk3KZ201q39rNpfdPpixGH3Q==}
+  '@unmap/core@0.30.0':
+    resolution: {integrity: sha512-T6JmC3HxeZZjvufVC80omW2RNEF5NSsT4Qwsoaykjz37v6uyHNmt9XPC/Y/rwr5u7aOvpUK43QwHPsp35rHrog==}
 
-  '@unmap/deck@0.28.0':
-    resolution: {integrity: sha512-opAanCbSazEJ/frqGBCr2AXVCE3KwYeEj8eAwsk6jblpKMzSxdkx0GVgQbkRh92kem3DmqVga5OkALTLgnEBiQ==}
+  '@unmap/deck@0.30.0':
+    resolution: {integrity: sha512-OQjTQbyabxHmbmXJ1ZQOnWPjUPEJyD9hsVfqdeN0Waii/8tHd8namTLMpnl9zXE8vCldkGklDyDfKHvE5eGYdw==}
     peerDependencies:
       '@deck.gl/core': ~9.4.0
       '@deck.gl/layers': ~9.4.0
@@ -2022,14 +2022,14 @@ packages:
       '@luma.gl/core': ~9.4.0
       maplibre-gl: ^6.9.0
 
-  '@unmap/elevation@0.28.0':
-    resolution: {integrity: sha512-nOpTzef2EZzFG2vKcZSQP8wnfWokiC/cAUEKGqider1DVdPp3Es70xntoYe80L+r2dQ6Y4INNkq3wTVAPCojng==}
+  '@unmap/elevation@0.30.0':
+    resolution: {integrity: sha512-IMrDdZP4T0LLVRWG+Ekv/IBiB3+MI53p6onDnnsYV3WA+NI1lZl3CLSPV6EGFH7mWsBSHm7PxDXZHj1+vyr9Pg==}
 
-  '@unmap/geocoding@0.28.0':
-    resolution: {integrity: sha512-0t582lFz5mpAxpRiMXzSnfjc66GWoX+seaiZKhBm1z7cyemo0HOfrr2ssJicylwlkrlOhV3UZ8mjhXbri+OgYw==}
+  '@unmap/geocoding@0.30.0':
+    resolution: {integrity: sha512-RdnBYuQ1Hnkrhb+DRAYc0g2/nM+UY7lrEoEaCmvMfbzW0BoQWXbFgifOSZBBmdzyLxckhLgDgVkX6fr6Xfv8Jw==}
 
-  '@unmap/maps@0.28.0':
-    resolution: {integrity: sha512-7goVi+Db+1Xa32IxSRJQWdJIE/bd9ebcLIYCOh6VEMMvwlVXUNuui/QV71MqAwkK1E6HZ9pe1rP6GPhvSzOn1g==}
+  '@unmap/maps@0.30.0':
+    resolution: {integrity: sha512-QtyXAXSMLPKNMfafJe2mikEtzaWtjsTzH6fYU6q1yv7uUTQOaKDSQVoM3wlp5ELCq7Alalio6aIdqffS2AASGQ==}
     peerDependencies:
       '@maplibre/maplibre-gl-geocoder': ^1.9.0
       maplibre-gl: ^6.9.0
@@ -2037,11 +2037,11 @@ packages:
       '@maplibre/maplibre-gl-geocoder':
         optional: true
 
-  '@unmap/routing@0.28.0':
-    resolution: {integrity: sha512-ps0GKevFK+FQG5Cg0JXjKMzaEjFHNxFNdutW+cH0/CJiEIOVy4yUbLM1IN1Dtcm/S5D18/6KSU+JgNZHAtjAeg==}
+  '@unmap/routing@0.30.0':
+    resolution: {integrity: sha512-ixZIwYst/rYTK/zfjLBo6IZQc3BgD0qMWN9CwE7nl8BIEGu3Ao8Xal6wjQEuumz7HSZfzSh7XIPr9fXQjB7HGg==}
 
-  '@unmap/sdk@0.28.0':
-    resolution: {integrity: sha512-CmoPN52YLy8y4Tfb21IwERJQ4B9WUUdneqSD0+G49bpocAgC4sTCqtQxSVfR2Ih+tlo88n2qUvBdJCtabuchoA==}
+  '@unmap/sdk@0.30.0':
+    resolution: {integrity: sha512-35zM1grGksT4c74pVE4TQN2j1xqSKvf/xypw4bHiIzcw14DMx+McVoU/KoC+Cj8k+j2HRGg+BNtdryGTLcFD0g==}
 
   '@unovis/dagre-layout@0.8.8-3':
     resolution: {integrity: sha512-RAL2fhQN1acO5QS82oe/yz0npSe80nDYWbxDpcTKWmb+4x2/WMwmgr8ScdiySkwmK7oDvEN72RIvzJkx5A3pUA==}
@@ -7627,43 +7627,46 @@ snapshots:
       - rollup
       - unloader
 
-  '@unmap/core@0.28.0': {}
+  '@unmap/core@0.30.0': {}
 
-  '@unmap/deck@0.28.0(3b1254791c4a67b31b40655cd011da4c)':
+  '@unmap/deck@0.30.0(3b1254791c4a67b31b40655cd011da4c)':
     dependencies:
       '@deck.gl/core': 9.4.1(@luma.gl/webgpu@9.4.2(@luma.gl/core@9.4.2)(@luma.gl/shadertools@9.4.2(@luma.gl/core@9.4.2)))
       '@deck.gl/layers': 9.4.1(@deck.gl/core@9.4.1(@luma.gl/webgpu@9.4.2(@luma.gl/core@9.4.2)(@luma.gl/shadertools@9.4.2(@luma.gl/core@9.4.2))))(@loaders.gl/core@4.5.4)(@luma.gl/core@9.4.2)(@luma.gl/engine@9.4.2(@luma.gl/core@9.4.2)(@luma.gl/shadertools@9.4.2(@luma.gl/core@9.4.2)))
       '@deck.gl/maplibre': 9.4.1(@deck.gl/core@9.4.1(@luma.gl/webgpu@9.4.2(@luma.gl/core@9.4.2)(@luma.gl/shadertools@9.4.2(@luma.gl/core@9.4.2))))(@luma.gl/core@9.4.2)(maplibre-gl@6.13.0)
       '@deck.gl/mesh-layers': 9.4.1(@deck.gl/core@9.4.1(@luma.gl/webgpu@9.4.2(@luma.gl/core@9.4.2)(@luma.gl/shadertools@9.4.2(@luma.gl/core@9.4.2))))(@loaders.gl/core@4.5.4)(@luma.gl/core@9.4.2)(@luma.gl/engine@9.4.2(@luma.gl/core@9.4.2)(@luma.gl/shadertools@9.4.2(@luma.gl/core@9.4.2)))(@luma.gl/gltf@9.4.2(@luma.gl/core@9.4.2)(@luma.gl/engine@9.4.2(@luma.gl/core@9.4.2)(@luma.gl/shadertools@9.4.2(@luma.gl/core@9.4.2)))(@luma.gl/shadertools@9.4.2(@luma.gl/core@9.4.2)))(@luma.gl/shadertools@9.4.2(@luma.gl/core@9.4.2))(texture-compressor@1.0.2)
       '@luma.gl/core': 9.4.2
-      '@unmap/core': 0.28.0
+      '@unmap/core': 0.30.0
       maplibre-gl: 6.13.0
 
-  '@unmap/elevation@0.28.0':
+  '@unmap/elevation@0.30.0':
     dependencies:
-      '@unmap/core': 0.28.0
+      '@unmap/core': 0.30.0
 
-  '@unmap/geocoding@0.28.0':
+  '@unmap/geocoding@0.30.0':
     dependencies:
-      '@unmap/core': 0.28.0
+      '@unmap/core': 0.30.0
 
-  '@unmap/maps@0.28.0(maplibre-gl@6.13.0)':
+  '@unmap/maps@0.30.0(maplibre-gl@6.13.0)':
     dependencies:
-      '@unmap/core': 0.28.0
-      '@unmap/geocoding': 0.28.0
+      '@mapbox/vector-tile': 3.0.0
+      '@types/geojson': 7946.0.16
+      '@unmap/core': 0.30.0
+      '@unmap/geocoding': 0.30.0
       maplibre-gl: 6.13.0
+      pbf: 5.1.2
 
-  '@unmap/routing@0.28.0':
+  '@unmap/routing@0.30.0':
     dependencies:
-      '@unmap/core': 0.28.0
+      '@unmap/core': 0.30.0
 
-  '@unmap/sdk@0.28.0':
+  '@unmap/sdk@0.30.0':
     dependencies:
-      '@unmap/core': 0.28.0
-      '@unmap/elevation': 0.28.0
-      '@unmap/geocoding': 0.28.0
-      '@unmap/maps': 0.28.0(maplibre-gl@6.13.0)
-      '@unmap/routing': 0.28.0
+      '@unmap/core': 0.30.0
+      '@unmap/elevation': 0.30.0
+      '@unmap/geocoding': 0.30.0
+      '@unmap/maps': 0.30.0(maplibre-gl@6.13.0)
+      '@unmap/routing': 0.30.0
       maplibre-gl: 6.13.0
     transitivePeerDependencies:
       - '@maplibre/maplibre-gl-geocoder'

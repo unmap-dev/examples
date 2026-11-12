@@ -351,7 +351,8 @@
     "kind": "block",
     "item": "alive-route-explorer",
     "lanes": [
-      "react"
+      "react",
+      "vue"
     ],
     "preview": "frame",
     "guide": "/docs/frontend/blocks#find-a-livelier-walk",
@@ -878,6 +879,46 @@
       "apps/registry/registry/vue/blocks/urban-noise-map/page.vue",
       "apps/registry/registry/vue/components/ui/urban-noise-map/UnmapUrbanNoiseMap.vue",
       "apps/registry/registry/vue/components/ui/urban-noise-map/index.ts"
+    ]
+  },
+  {
+    "slug": "alive-route-explorer",
+    "kind": "block",
+    "item": "alive-route-explorer",
+    "lanes": [
+      "react",
+      "vue"
+    ],
+    "preview": "frame",
+    "guide": "/docs/frontend/blocks#find-a-livelier-walk",
+    "lane": "vue",
+    "title": "Alive Route Explorer (Vue)",
+    "description": "A Nuxt page with walking directions that trade a minute for a nicer walk: start and destination search with three Calgary samples, the fastest walk and livelier detours past parks, the river, streets away from traffic, cafés and public art, five dials and an extra-time budget that re-rank without calling, the pick in your --primary with time bubbles, highlight cards and a why-this-route card, a bottom sheet on a phone. When places or the basemap tiles are unavailable it ranks without the signals they feed and says so. Calls /route, /match, POST /places/along and up to 24 basemap tiles for scoring, at most 40 per search. Needs @unmap/maps 0.30.0 or later, for @unmap/maps/tiles.",
+    "route": "nuxt/app/pages/alive-route-explorer.vue",
+    "url": "/alive-route-explorer/",
+    "docs": "https://unmap.dev/docs/frontend/blocks#find-a-livelier-walk",
+    "files": [
+      "apps/registry/registry/vue/blocks/alive-route-explorer/page.vue",
+      "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveRouteExplorer.vue",
+      "apps/registry/registry/vue/components/ui/alive-route-explorer/index.ts",
+      "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveCamera.vue",
+      "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveCardBody.vue",
+      "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveControls.vue",
+      "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveDial.vue",
+      "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveEndPin.vue",
+      "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveIllustration.vue",
+      "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveLayers.vue",
+      "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveOverlay.vue",
+      "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveRoutesList.vue",
+      "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveStartDot.vue",
+      "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveWhyCard.vue",
+      "apps/registry/registry/vue/components/ui/alive-route-explorer/alive-signals.ts",
+      "apps/registry/registry/vue/components/ui/alive-route-explorer/alive-rank.ts",
+      "apps/registry/registry/vue/components/ui/alive-route-explorer/alive-data.ts",
+      "apps/registry/registry/vue/components/ui/alive-route-explorer/alive-graph.ts",
+      "apps/registry/registry/vue/components/ui/alive-route-explorer/alive-candidates.ts",
+      "apps/registry/registry/vue/components/ui/alive-route-explorer/alive-walks.ts",
+      "apps/registry/registry/vue/components/ui/alive-route-explorer/alive-view.ts"
     ]
   },
   {

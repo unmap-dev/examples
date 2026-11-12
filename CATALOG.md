@@ -45,6 +45,7 @@ Generated from the docs gallery and API examples.
 | Ski Resort Explorer (Vue) | block | vue | [Source](nuxt/app/pages/ski-resort-explorer.vue) | [Guide](https://unmap.dev/docs/frontend/blocks#explore-canadas-ski-areas) |
 | View Explorer (Vue) | block | vue | [Source](nuxt/app/pages/view-explorer.vue) | [Guide](https://unmap.dev/docs/frontend/blocks#find-the-view) |
 | Urban Noise Map (Vue) | block | vue | [Source](nuxt/app/pages/urban-noise-map.vue) | [Guide](https://unmap.dev/docs/frontend/blocks#check-how-loud-a-street-is) |
+| Alive Route Explorer (Vue) | block | vue | [Source](nuxt/app/pages/alive-route-explorer.vue) | [Guide](https://unmap.dev/docs/frontend/blocks#find-a-livelier-walk) |
 | Add a marker | api-example | typescript | [Source](sdk/examples/add-a-marker/main.ts) | [Guide](https://unmap.dev/docs/guides/examples/add-a-marker) |
 | Agriculture map | api-example | typescript | [Source](sdk/examples/agriculture-map/main.ts) | [Guide](https://unmap.dev/docs/guides/examples/agriculture-map) |
 | Apply a theme | api-example | typescript | [Source](sdk/examples/apply-a-theme/main.ts) | [Guide](https://unmap.dev/docs/guides/examples/apply-a-theme) |

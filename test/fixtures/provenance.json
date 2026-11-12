@@ -249,7 +249,7 @@
   },
   "next/lib/alive-signals.ts": {
     "source": "apps/registry/registry/blocks/alive-route-explorer/alive-signals.ts",
-    "sha256": "9abead925d48ad3ca0be6a85cb49be00987b34c61acff3bc6900067c153a0162"
+    "sha256": "761b0a2733a6562e886d02ae1ff46f083d0697a94e4f657c0defaf1677bbb428"
   },
   "next/lib/alive-rank.ts": {
     "source": "apps/registry/registry/blocks/alive-route-explorer/alive-rank.ts",
@@ -261,7 +261,7 @@
   },
   "next/lib/alive-graph.ts": {
     "source": "apps/registry/registry/blocks/alive-route-explorer/alive-graph.ts",
-    "sha256": "9004cc21897186ed75ae9f54388a1607f5f449791388ec1a32401020b7b5d4f9"
+    "sha256": "133ea3c3e373e0a246f23186af625318247ab2fadb259fab4f9fe4affeee3be1"
   },
   "next/lib/alive-candidates.ts": {
     "source": "apps/registry/registry/blocks/alive-route-explorer/alive-candidates.ts",
@@ -269,11 +269,11 @@
   },
   "next/lib/alive-walks.ts": {
     "source": "apps/registry/registry/blocks/alive-route-explorer/alive-walks.ts",
-    "sha256": "f9c37b196a51eff2b9b4b4cca8757cf569b491510a8bd84b3dc483209aadd110"
+    "sha256": "ffe3d17d577b24e6b21a75fb938d607502e3b5f1a3b207565d08564643d60120"
   },
   "next/lib/alive-view.ts": {
     "source": "apps/registry/registry/blocks/alive-route-explorer/alive-view.ts",
-    "sha256": "f81e074fea43ed89c7b7d3b850b0d880f5da9d699a084e1d71719a05edc8934b"
+    "sha256": "f23a98de618fbabf1afc2fe8222dac96926459d22d92e5c1350289efe006380c"
   },
   "next/components/unmap-map-markers.tsx": {
     "source": "apps/registry/registry/blocks/map-markers-01.tsx",
@@ -786,6 +786,90 @@
   "nuxt/app/components/ui/urban-noise-map/index.ts": {
     "source": "apps/registry/registry/vue/components/ui/urban-noise-map/index.ts",
     "sha256": "ac188c90dd201088b52322b2cf07e42eb303036b84dfe20ab2a011c177cb6fc4"
+  },
+  "nuxt/app/pages/alive-route-explorer.vue": {
+    "source": "apps/registry/registry/vue/blocks/alive-route-explorer/page.vue",
+    "sha256": "01e20c31451e3145e3faeca3c46392c040adb559bfcab8a014e98ed9c98b2d50"
+  },
+  "nuxt/app/components/ui/alive-route-explorer/UnmapAliveRouteExplorer.vue": {
+    "source": "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveRouteExplorer.vue",
+    "sha256": "6a0180523bb5ddd8b423b9262c267bdad264bd154d2fa9c7bdbe2fd5dc45b7c8"
+  },
+  "nuxt/app/components/ui/alive-route-explorer/index.ts": {
+    "source": "apps/registry/registry/vue/components/ui/alive-route-explorer/index.ts",
+    "sha256": "1cd35a38b6f74d1650af9bca04dd2c41ccd417deca8326c29f2aea095d5883f2"
+  },
+  "nuxt/app/components/ui/alive-route-explorer/UnmapAliveCamera.vue": {
+    "source": "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveCamera.vue",
+    "sha256": "b7ce603cc802ac70d8fbedd43b4242a0357746e2284024703c08b7f1b526f8af"
+  },
+  "nuxt/app/components/ui/alive-route-explorer/UnmapAliveCardBody.vue": {
+    "source": "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveCardBody.vue",
+    "sha256": "34fc98a74766391f4cb7353cdabe577ddb9490798a057aa586c26bd4732a5e9b"
+  },
+  "nuxt/app/components/ui/alive-route-explorer/UnmapAliveControls.vue": {
+    "source": "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveControls.vue",
+    "sha256": "d0d9ba2527aef969821a7920b89e15b7f4d08cf00073d76baf0c3175e59e9f75"
+  },
+  "nuxt/app/components/ui/alive-route-explorer/UnmapAliveDial.vue": {
+    "source": "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveDial.vue",
+    "sha256": "8347b897b3ac25d33b06f82c1d8de255c08273610cbe920adefdf74babfa7de2"
+  },
+  "nuxt/app/components/ui/alive-route-explorer/UnmapAliveEndPin.vue": {
+    "source": "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveEndPin.vue",
+    "sha256": "7cb9b7aa16d5e9932824b4fcb48904e68c99bbdc4cfe12e4bd060ceb4c7b5f75"
+  },
+  "nuxt/app/components/ui/alive-route-explorer/UnmapAliveIllustration.vue": {
+    "source": "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveIllustration.vue",
+    "sha256": "ca9b7824cc110153c55baa245a1c0def5ef6d0c66a18ebe8545eb5ca646923c5"
+  },
+  "nuxt/app/components/ui/alive-route-explorer/UnmapAliveLayers.vue": {
+    "source": "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveLayers.vue",
+    "sha256": "680f7b6739c1946714208718cff285a6f03258b56f5de0038308821383e3a38b"
+  },
+  "nuxt/app/components/ui/alive-route-explorer/UnmapAliveOverlay.vue": {
+    "source": "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveOverlay.vue",
+    "sha256": "2f12378c1e307658eeaf6901f25fde7f194f83566cf996c1f2a8d0c2e16995ce"
+  },
+  "nuxt/app/components/ui/alive-route-explorer/UnmapAliveRoutesList.vue": {
+    "source": "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveRoutesList.vue",
+    "sha256": "0ac0d4a2f4c3118b09d268658bdcc2fff3d731b8112e19b3d43ca5e732d46a41"
+  },
+  "nuxt/app/components/ui/alive-route-explorer/UnmapAliveStartDot.vue": {
+    "source": "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveStartDot.vue",
+    "sha256": "25299e135c58e90fec7da63e12c430cafb4b996837d43b44b0703fb96c6c1e63"
+  },
+  "nuxt/app/components/ui/alive-route-explorer/UnmapAliveWhyCard.vue": {
+    "source": "apps/registry/registry/vue/components/ui/alive-route-explorer/UnmapAliveWhyCard.vue",
+    "sha256": "c903bf950cb60fe9502751450bb079e4bc76af4d2012f31ce584a2c45e57f73f"
+  },
+  "nuxt/app/lib/alive-route-explorer/alive-signals.ts": {
+    "source": "apps/registry/registry/vue/components/ui/alive-route-explorer/alive-signals.ts",
+    "sha256": "761b0a2733a6562e886d02ae1ff46f083d0697a94e4f657c0defaf1677bbb428"
+  },
+  "nuxt/app/lib/alive-route-explorer/alive-rank.ts": {
+    "source": "apps/registry/registry/vue/components/ui/alive-route-explorer/alive-rank.ts",
+    "sha256": "fca8d830cb1b329ba397b3e367e5bb44320e09dded5a613f7af2371f155279dc"
+  },
+  "nuxt/app/lib/alive-route-explorer/alive-data.ts": {
+    "source": "apps/registry/registry/vue/components/ui/alive-route-explorer/alive-data.ts",
+    "sha256": "a8f678b08634ad66192993129d9316a8e27b12f5a9a03c70daf961d853423197"
+  },
+  "nuxt/app/lib/alive-route-explorer/alive-graph.ts": {
+    "source": "apps/registry/registry/vue/components/ui/alive-route-explorer/alive-graph.ts",
+    "sha256": "133ea3c3e373e0a246f23186af625318247ab2fadb259fab4f9fe4affeee3be1"
+  },
+  "nuxt/app/lib/alive-route-explorer/alive-candidates.ts": {
+    "source": "apps/registry/registry/vue/components/ui/alive-route-explorer/alive-candidates.ts",
+    "sha256": "a56e550e0c6f087a775087efc275d4c083436ba5440ea6d052b69ec7f319494c"
+  },
+  "nuxt/app/lib/alive-route-explorer/alive-walks.ts": {
+    "source": "apps/registry/registry/vue/components/ui/alive-route-explorer/alive-walks.ts",
+    "sha256": "ffe3d17d577b24e6b21a75fb938d607502e3b5f1a3b207565d08564643d60120"
+  },
+  "nuxt/app/lib/alive-route-explorer/alive-view.ts": {
+    "source": "apps/registry/registry/vue/components/ui/alive-route-explorer/alive-view.ts",
+    "sha256": "f23a98de618fbabf1afc2fe8222dac96926459d22d92e5c1350289efe006380c"
   },
   "nuxt/app/lib/utils.ts": {
     "source": "apps/maps/lib/utils.ts",

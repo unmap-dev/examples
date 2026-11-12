@@ -1,6 +1,6 @@
 // What the alive-route-explorer block shows, framework-free: its words in English and French, the
 // sample walks, the SDK adapted to findWalks, and how a walk is read for the map (where its
-// highlights are, where a time bubble goes). The React files beside it only draw this.
+// highlights are, where a time bubble goes). The React and Vue files beside it only draw this.
 
 import { tileFeatures, tilesCovering } from "@unmap/maps/tiles";
 import { poisFromPlaces, type TileFeature } from "./alive-data";
@@ -163,7 +163,8 @@ export const ALIVE_COPY = {
     errorTitle: "No directions",
     noKeyTitle: "Add your unmap key to load the map.",
     getKey: "Get a key",
-    noKey: "No unmap key. Pass apiKey. On Next.js, set NEXT_PUBLIC_UNMAP_KEY in .env.local, then restart the dev server.",
+    noKey:
+      'No unmap key. Pass apiKey. On Next.js, set NEXT_PUBLIC_UNMAP_KEY in .env.local. On Nuxt, set NUXT_PUBLIC_UNMAP_KEY in .env. If you installed with unmap add, nuxt.config already declares runtimeConfig: { public: { unmapKey: "" } }; otherwise add it there. Then restart the dev server.',
   },
   fr: {
     title: "Trouver une marche plus vivante",
@@ -248,7 +249,8 @@ export const ALIVE_COPY = {
     errorTitle: "Aucun itinéraire",
     noKeyTitle: "Ajoutez votre clé unmap pour charger la carte.",
     getKey: "Obtenir une clé",
-    noKey: "Aucune clé unmap. Passez apiKey. Avec Next.js, définissez NEXT_PUBLIC_UNMAP_KEY dans .env.local, puis redémarrez le serveur de développement.",
+    noKey:
+      'Aucune clé unmap. Passez apiKey. Avec Next.js, définissez NEXT_PUBLIC_UNMAP_KEY dans .env.local. Avec Nuxt, définissez NUXT_PUBLIC_UNMAP_KEY dans .env. Si vous avez installé le bloc avec unmap add, nuxt.config déclare déjà runtimeConfig: { public: { unmapKey: "" } } ; sinon, ajoutez-le. Redémarrez ensuite le serveur de développement.',
   },
 } as const;
 

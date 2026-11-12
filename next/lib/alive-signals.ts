@@ -51,6 +51,12 @@ export interface Seg {
 export interface Grid<T> {
   addBox(item: T, x0: number, y0: number, x1: number, y1: number): void;
   near(p: XY, r: number): Set<T>;
+  /**
+   * Calls `fn` for every item in the cells within `r` of `p`, stopping when it returns true. An
+   * item spanning several cells is visited once per cell, so this suits a min or an any, not a
+   * count; it skips the Set `near` builds.
+   */
+  visit(p: XY, r: number, fn: (item: T) => boolean | void): void;
 }
 
 export interface PreparedPark {
@@ -147,14 +153,19 @@ export function resample(xy: XY[], step: number): XY[] {
   return out;
 }
 
+/** Packs a cell's two indices into one number key: exact for 2^20 cells either way of the origin. */
+const GRID_OFFSET = 2 ** 20;
+const GRID_SPAN = 2 ** 21;
+const cellKey = (x: number, y: number): number => (x + GRID_OFFSET) * GRID_SPAN + (y + GRID_OFFSET);
+
 /** A spatial hash, so a 200-sample route against 20k road segments stays in the low milliseconds. */
 export function grid<T>(cell: number): Grid<T> {
-  const m = new Map<string, T[]>();
+  const m = new Map<number, T[]>();
   return {
     addBox(item, x0, y0, x1, y1) {
       for (let x = Math.floor(x0 / cell); x <= Math.floor(x1 / cell); x++)
         for (let y = Math.floor(y0 / cell); y <= Math.floor(y1 / cell); y++) {
-          const k = `${x},${y}`;
+          const k = cellKey(x, y);
           const list = m.get(k);
           if (list) list.push(item);
           else m.set(k, [item]);
@@ -163,9 +174,18 @@ export function grid<T>(cell: number): Grid<T> {
     near(p, r) {
       const seen = new Set<T>();
       for (let x = Math.floor((p[0] - r) / cell); x <= Math.floor((p[0] + r) / cell); x++)
-        for (let y = Math.floor((p[1] - r) / cell); y <= Math.floor((p[1] + r) / cell); y++)
-          for (const it of m.get(`${x},${y}`) ?? []) seen.add(it);
+        for (let y = Math.floor((p[1] - r) / cell); y <= Math.floor((p[1] + r) / cell); y++) {
+          const list = m.get(cellKey(x, y));
+          if (list) for (const it of list) seen.add(it);
+        }
       return seen;
+    },
+    visit(p, r, fn) {
+      for (let x = Math.floor((p[0] - r) / cell); x <= Math.floor((p[0] + r) / cell); x++)
+        for (let y = Math.floor((p[1] - r) / cell); y <= Math.floor((p[1] + r) / cell); y++) {
+          const list = m.get(cellKey(x, y));
+          if (list) for (const it of list) if (fn(it)) return;
+        }
     },
   };
 }
@@ -256,17 +276,34 @@ export function prepare(data: AliveData, origin: LngLat): Prepared {
 // ---------------------------------------------------------------------------------------------
 // Scoring one route
 
-export function parksAt(p: Prepared, s: XY): PreparedPark[] {
+/** Inside the park's outer ring, or within the park radius of its edge. */
+export function inPark(park: PreparedPark, s: XY): boolean {
   const r = SCORE_RADII.park;
-  const out: PreparedPark[] = [];
-  for (const park of p.parkGrid.near(s, r)) {
-    const [x0, y0, x1, y1] = park.box;
-    if (s[0] < x0 - r || s[0] > x1 + r || s[1] < y0 - r || s[1] > y1 + r) continue;
-    const outer = park.rings[0]!;
-    let hit = inRing(s, outer);
-    for (let i = 1; i < outer.length && !hit; i++) hit = segDist(s, outer[i - 1]!, outer[i]!) <= r;
-    if (hit) out.push(park);
+  const [x0, y0, x1, y1] = park.box;
+  if (s[0] < x0 - r || s[0] > x1 + r || s[1] < y0 - r || s[1] > y1 + r) return false;
+  const outer = park.rings[0]!;
+  if (inRing(s, outer)) return true;
+  const [x, y] = s;
+  for (let i = 1; i < outer.length; i++) {
+    const a = outer[i - 1]!;
+    const b = outer[i]!;
+    // A side whose box is more than r away cannot be within r; skip its distance.
+    if ((x < a[0] - r && x < b[0] - r) || (x > a[0] + r && x > b[0] + r) || (y < a[1] - r && y < b[1] - r) || (y > a[1] + r && y > b[1] + r)) continue;
+    if (segDist(s, a, b) <= r) return true;
   }
+  return false;
+}
+
+/** Whether `s` is in or beside any park: parksAt(...).length > 0 without building the list. */
+export function inAnyPark(p: Prepared, s: XY): boolean {
+  let hit = false;
+  p.parkGrid.visit(s, SCORE_RADII.park, (park) => (hit = inPark(park, s)));
+  return hit;
+}
+
+export function parksAt(p: Prepared, s: XY): PreparedPark[] {
+  const out: PreparedPark[] = [];
+  for (const park of p.parkGrid.near(s, SCORE_RADII.park)) if (inPark(park, s)) out.push(park);
   return out;
 }
 
@@ -277,13 +314,18 @@ export function parksAt(p: Prepared, s: XY): PreparedPark[] {
  */
 export function quietAt(p: Prepared, xy: XY): number {
   let q = 1;
-  for (const seg of p.segs.near(xy, SCORE_RADII.road)) if (seg.quiet < q && segDist(xy, seg.a, seg.b) <= SCORE_RADII.road) q = seg.quiet;
+  p.segs.visit(xy, SCORE_RADII.road, (seg) => {
+    if (seg.quiet < q && segDist(xy, seg.a, seg.b) <= SCORE_RADII.road) q = seg.quiet;
+    // Nothing is louder than a highway.
+    return q === 0;
+  });
   return q;
 }
 
 export function nearWater(p: Prepared, s: XY): boolean {
-  for (const w of p.waterGrid.near(s, SCORE_RADII.water)) if (segDist(s, w.a, w.b) <= SCORE_RADII.water) return true;
-  return false;
+  let hit = false;
+  p.waterGrid.visit(s, SCORE_RADII.water, (w) => (hit = segDist(s, w.a, w.b) <= SCORE_RADII.water));
+  return hit;
 }
 
 const toPoi = ({ id, name, category, at }: PreparedPoi): Poi => ({ id, name, category, at });

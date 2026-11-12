@@ -1,5 +1,5 @@
 // Finding candidate walks for Alive Maps. The orchestrator: it asks injected deps for the fastest
-// walk, the basemap and the places along it, makes detours two ways (a via routed by the engine,
+// walk, the basemap and the places between the two ends, makes detours two ways (a via routed by the engine,
 // and a path from the aliveness-weighted graph snapped by map matching), and scores them all.
 // Pure apart from the deps, so the UI adapts the SDK to WalkDeps and tests pass fakes.
 
@@ -67,10 +67,11 @@ export interface WalkResult {
 export const CALL_BUDGET = 40;
 
 /**
- * The most basemap tiles one search reads. The tile read has no budget check of its own, so this
- * must leave room in CALL_BUDGET for the fastest route, the two corridor places calls and at least
- * three detours (six route calls): 1 + 24 + 2 + 6 = 33. The detour and match loops check the
- * budget before every call, so whatever the tiles leave is all they spend.
+ * The most basemap tiles one search reads. The first wave (the fastest route, the tiles and the
+ * two corridor places calls) goes out with no budget check, so this must leave room in
+ * CALL_BUDGET for it and at least three detours (six route calls): 1 + 24 + 2 + 6 = 33. Detours,
+ * matches and top-ups check the budget as each is sent, so whatever the tiles leave is all they
+ * spend.
  */
 export const MAX_TILES = 24;
 
@@ -82,7 +83,7 @@ const STRETCH = 1.45;
 const TILE_MARGIN_M = 150;
 /** Corridor places: the widest radius /places/along allows, so most detours stay inside it. */
 const CORRIDOR_M = 500;
-/** A candidate this far from the fastest line leaves the corridor (500 m less the 35-60 m scoring reach). */
+/** A candidate this far from the corridor line leaves the corridor (500 m less the 35-60 m scoring reach). */
 const STRAY_M = 450;
 /** Top-up radius: scoring looks at most 60 m off a route, so this is ample. */
 const TOP_UP_M = 100;
@@ -158,7 +159,66 @@ function mergePois(into: Poi[], more: Poi[]): number {
   return added;
 }
 
+/** A call's outcome, so a call nobody ends up waiting for cannot surface as an unhandled rejection. */
+type Settled<T> = { ok: true; value: T } | { ok: false; error: unknown };
+
+/** Sends now (a synchronous throw counts as a rejection) and never rejects. */
+function settle<T>(send: () => Promise<T>): Promise<Settled<T>> {
+  let sent: Promise<T>;
+  try {
+    sent = send();
+  } catch (e) {
+    sent = Promise.reject(e);
+  }
+  return sent.then(
+    (value) => ({ ok: true as const, value }),
+    (error: unknown) => ({ ok: false as const, error }),
+  );
+}
+
+/**
+ * A turn of the event loop, so the requests just sent leave before the graph build holds the
+ * thread (a fetch can need one to go out) and answers already in can be read. Not a timer when
+ * anything else will do: a hidden tab holds a 0 ms timer back for up to a second.
+ */
+function yieldToEvents(): Promise<void> {
+  const scheduler = (globalThis as { scheduler?: { yield?: () => Promise<void> } }).scheduler;
+  if (typeof scheduler?.yield === "function") return scheduler.yield();
+  if (typeof MessageChannel === "function") {
+    return new Promise((resolve) => {
+      const channel = new MessageChannel();
+      channel.port1.onmessage = () => {
+        channel.port1.close();
+        resolve();
+      };
+      channel.port2.postMessage(null);
+    });
+  }
+  return new Promise((resolve) => setTimeout(resolve, 0));
+}
+
+type Draft = Omit<Candidate, "scores">;
+
+/**
+ * Every independent call goes out as soon as what it needs is known, in three waves: the fastest
+ * route, the basemap and the corridor places together; then every detour leg at once, with the
+ * graph built while they fly and every match sent right after; then a places top-up for each
+ * kept candidate that strays, sent as soon as it and every candidate before it have answered (so
+ * dedupe has settled whether it is kept). Counting at issue is exact
+ * (JS runs one thing at a time), so the budget holds, and it is spent in the same priority as
+ * ever: detours, then matches, then top-ups.
+ */
 export async function findWalks(deps: WalkDeps, from: LngLat, to: LngLat, signal: AbortSignal): Promise<WalkResult> {
+  const run = { done: false };
+  try {
+    return await search(deps, from, to, signal, run);
+  } finally {
+    // Matches still out when the search settles (a rejection included) must send nothing.
+    run.done = true;
+  }
+}
+
+async function search(deps: WalkDeps, from: LngLat, to: LngLat, signal: AbortSignal, run: { done: boolean }): Promise<WalkResult> {
   let calls = 0;
   let skipped = 0;
   const guard = (): void => {
@@ -170,63 +230,76 @@ export async function findWalks(deps: WalkDeps, from: LngLat, to: LngLat, signal
     if (isAbort(e)) throw e;
   };
   const fits = (n: number): boolean => calls + n <= CALL_BUDGET;
-  /**
-   * Two calls issued together, each guarded and counted. If the second guard trips, the first
-   * call's eventual rejection is swallowed so it does not surface as unhandled.
-   */
-  const pair = <T>(first: () => Promise<T>, second: () => Promise<T>): Promise<[T, T]> => {
+  /** One call, guarded, counted and sent now. */
+  const issue = <T>(send: () => Promise<T>): Promise<Settled<T>> => {
     guard();
     calls++;
-    const p1 = first();
-    try {
-      guard();
-    } catch (e) {
-      p1.catch(() => undefined);
-      throw e;
-    }
-    calls++;
-    return Promise.all([p1, second()]);
+    return settle(send);
   };
 
+  const P = projector(from);
   guard();
-  calls++;
-  const fastest = await deps.route(from, to, signal);
-  const fastestCandidate = {
+  if (dist(P.to(from), P.to(to)) < TOO_SHORT_M) {
+    calls++;
+    const fastest = await deps.route(from, to, signal);
+    const coords = fastest.geometry.coordinates;
+    const empty = prepare({ parks: [], water: [], roads: [], life: [], landmarks: [] }, from);
+    return {
+      candidates: [{ id: "fastest", method: "fastest", coords, durationS: fastest.durationSeconds, distanceM: fastest.distanceMeters, scores: scoreRoute(empty, coords) }],
+      calls,
+      placesAvailable: true,
+      basemapAvailable: true,
+      skipped: 0,
+      tooShort: true,
+    };
+  }
+
+  // Wave 1, all at once. The corridor places run along the straight line rather than the fastest
+  // walk so they need not wait for it; at 500 m either way they cover the same neighbourhood, and
+  // strays are measured from this same line, so whatever leaves it is topped up below.
+  // No budget checks: 1 + MAX_TILES + 2 always fits.
+  const corridor: LngLat[] = [from, to];
+  const bbox = ellipseBox(P, from, to);
+  const fastestP = issue(() => deps.route(from, to, signal));
+  guard();
+  // Counted when it answers: only the reader knows how many tiles it fetched.
+  const tilesP = settle(() => deps.tiles(bbox, signal));
+  const lifeP = issue(() => deps.placesAlong(corridor, LIFE_CATEGORIES, CORRIDOR_M, signal));
+  const landmarksP = issue(() => deps.placesAlong(corridor, LANDMARK_CATEGORIES, CORRIDOR_M, signal));
+  const [fastestR, tilesR, lifeR, landmarksR] = await Promise.all([fastestP, tilesP, lifeP, landmarksP]);
+
+  if (!fastestR.ok) {
+    rethrowAbort(fastestR.error);
+    throw fastestR.error;
+  }
+  const fastest = fastestR.value;
+  const fastestCandidate: Draft = {
     id: "fastest",
-    method: "fastest" as const,
+    method: "fastest",
     coords: fastest.geometry.coordinates,
     durationS: fastest.durationSeconds,
     distanceM: fastest.distanceMeters,
   };
 
-  const P = projector(from);
-  if (dist(P.to(from), P.to(to)) < TOO_SHORT_M) {
-    const empty = prepare({ parks: [], water: [], roads: [], life: [], landmarks: [] }, from);
-    return { candidates: [{ ...fastestCandidate, scores: scoreRoute(empty, fastestCandidate.coords) }], calls, placesAvailable: true, basemapAvailable: true, skipped: 0, tooShort: true };
-  }
-
   // Basemap. A failure here costs the graph method and the parks, water and quiet scores (the
-  // result says so with basemapAvailable); detours need no tiles. No budget check: the reader's
-  // MAX_TILES cap means this lands at 1 + MAX_TILES calls at most. A RangeError is refused before
-  // any fetch and counts 0; any other failure counts the fetches it made, so the cap still holds.
+  // result says so with basemapAvailable); detours need no tiles. The reader's MAX_TILES cap
+  // means this lands at MAX_TILES calls at most. A RangeError is refused before any fetch and
+  // counts 0; any other failure counts the fetches it made, so the cap still holds.
   let base: Omit<AliveData, "life" | "landmarks"> = { parks: [], water: [], roads: [] };
   let graphSkipped: WalkResult["graphSkipped"];
-  const bbox = ellipseBox(P, from, to);
-  guard();
-  try {
-    const t = await deps.tiles(bbox, signal);
-    calls += t.requests;
-    base = dataFromTiles(t.features);
-  } catch (e) {
-    rethrowAbort(e);
-    if (e instanceof RangeError) graphSkipped = "too-big";
+  if (tilesR.ok) {
+    calls += tilesR.value.requests;
+    base = dataFromTiles(tilesR.value.features);
+  } else {
+    rethrowAbort(tilesR.error);
+    if (tilesR.error instanceof RangeError) graphSkipped = "too-big";
     else {
       graphSkipped = "tiles-failed";
-      calls += requestsOf(e) ?? tilesInBox(bbox);
+      calls += requestsOf(tilesR.error) ?? tilesInBox(bbox);
     }
   }
 
-  // Corridor places, before candidates: cafe clusters and landmarks become vias.
+  // Corridor places: cafe clusters and landmarks become vias.
   let placesAvailable = true;
   const life: Poi[] = [];
   const landmarks: Poi[] = [];
@@ -235,53 +308,101 @@ export async function findWalks(deps: WalkDeps, from: LngLat, to: LngLat, signal
     life.length = 0;
     landmarks.length = 0;
   };
-  if (fits(2)) {
-    try {
-      const [l, k] = await pair(
-        () => deps.placesAlong(fastest.geometry.coordinates, LIFE_CATEGORIES, CORRIDOR_M, signal),
-        () => deps.placesAlong(fastest.geometry.coordinates, LANDMARK_CATEGORIES, CORRIDOR_M, signal),
-      );
-      mergePois(life, l);
-      mergePois(landmarks, k);
-    } catch (e) {
-      rethrowAbort(e);
-      if (statusOf(e) !== 503) throw e;
-      unavailable();
-    }
+  for (const r of [lifeR, landmarksR]) {
+    if (r.ok) continue;
+    rethrowAbort(r.error);
+    if (statusOf(r.error) !== 503) throw r.error;
   }
+  if (lifeR.ok && landmarksR.ok) {
+    mergePois(life, lifeR.value);
+    mergePois(landmarks, landmarksR.value);
+  } else unavailable();
+  guard();
 
   let p = prepare({ ...base, life, landmarks }, from);
-  const candidates: Omit<Candidate, "scores">[] = [fastestCandidate];
-  const add = (c: Omit<Candidate, "scores">): void => {
-    if (candidates.some((k) => overlap(p, c.coords, k.coords) >= SAME_WALK && overlap(p, k.coords, c.coords) >= SAME_WALK)) return;
-    candidates.push(c);
+
+  // Candidates, in the order they were asked for: the fastest, every detour, every graph path.
+  // Each slot fills as its answer arrives; `settleUpTo` walks the filled run from the front,
+  // keeping a walk unless it repeats one kept before it, and tops up each one kept. So only a
+  // walk the result will show is topped up, the fastest included (the corridor is the straight
+  // line, which the fastest walk can bow far off), and in candidate order.
+  type Slot = { state: "pending" } | { state: "ok"; draft: Draft } | { state: "failed"; error: unknown };
+  const slots: Slot[] = [{ state: "ok", draft: fastestCandidate }];
+  const candidates: Draft[] = [];
+  let front = 0;
+  /** False until every detour and match is out, so a short budget goes to them before top-ups. */
+  let topUpsOpen = false;
+  const settleUpTo = (): void => {
+    if (!topUpsOpen) return;
+    while (front < slots.length && slots[front]!.state !== "pending") {
+      const slot = slots[front++]!;
+      if (slot.state !== "ok") continue;
+      const c = slot.draft;
+      if (candidates.some((k) => overlap(p, c.coords, k.coords) >= SAME_WALK && overlap(p, k.coords, c.coords) >= SAME_WALK)) continue;
+      candidates.push(c);
+      topUp(c.coords);
+    }
+  };
+  const fill = (at: number, slot: Slot): void => {
+    slots[at] = slot;
+    settleUpTo();
   };
 
-  // Detours: one via each, two routing calls. A via the engine cannot reach is just skipped.
+  // Top-ups. A candidate that leaves the 500 m corridor would be scored as if its far half had no
+  // cafes or landmarks, so places are fetched along it too, once it is kept.
+  const corridorXY = corridor.map(P.to);
+  const topUps: Promise<[Settled<Poi[]>, Settled<Poi[]>]>[] = [];
+  let topUpRefused = false;
+  const topUp = (coords: LngLat[]): void => {
+    // Often called from an answer's callback: an abort, or a search already settled, stops it
+    // quietly (the main flow throws or has returned).
+    if (run.done || signal.aborted || !placesAvailable || topUpRefused || !fits(2)) return;
+    if (strayM(P, coords, corridorXY) <= STRAY_M) return;
+    calls += 2;
+    const pair = Promise.all([
+      settle(() => deps.placesAlong(coords, LIFE_CATEGORIES, TOP_UP_M, signal)),
+      settle(() => deps.placesAlong(coords, LANDMARK_CATEGORIES, TOP_UP_M, signal)),
+    ]);
+    topUps.push(
+      pair.then((both) => {
+        // Scoring some candidates with places and some without would rank them unfairly.
+        if (both.some((r) => !r.ok && statusOf(r.error) === 503)) topUpRefused = true;
+        return both;
+      }),
+    );
+  };
+
+  // Detours: one via each, two routing calls, every leg sent now. A via the engine cannot reach
+  // is just skipped.
+  const detours: Promise<void>[] = [];
   for (const [i, v] of candidateVias(p, from, to).entries()) {
     if (!fits(2)) break;
-    let legs: [WalkLeg, WalkLeg];
-    try {
-      legs = await pair(
-        () => deps.route(from, v.via, signal),
-        () => deps.route(v.via, to, signal),
-      );
-    } catch (e) {
-      rethrowAbort(e);
-      skipped++;
-      continue;
-    }
-    const [l1, l2] = legs;
-    const { coords, trimmedM } = joinLegs(p, l1.geometry.coordinates, l2.geometry.coordinates);
-    const rawM = l1.distanceMeters + l2.distanceMeters;
-    const distanceM = Math.max(rawM - trimmedM, 0);
-    // Walking time scales with distance (grade aside), so a trimmed spur takes its share of time.
-    const durationS = rawM > 0 ? ((l1.durationSeconds + l2.durationSeconds) * distanceM) / rawM : l1.durationSeconds + l2.durationSeconds;
-    add({ id: `detour-${i + 1}`, method: "detour", coords, durationS, distanceM });
+    const at = slots.length;
+    slots.push({ state: "pending" });
+    const leg1 = issue(() => deps.route(from, v.via, signal));
+    const leg2 = issue(() => deps.route(v.via, to, signal));
+    const detour = Promise.all([leg1, leg2]).then(([r1, r2]): void => {
+      if (!r1.ok) return fill(at, { state: "failed", error: r1.error });
+      if (!r2.ok) return fill(at, { state: "failed", error: r2.error });
+      const [l1, l2] = [r1.value, r2.value];
+      const { coords, trimmedM } = joinLegs(p, l1.geometry.coordinates, l2.geometry.coordinates);
+      const rawM = l1.distanceMeters + l2.distanceMeters;
+      const distanceM = Math.max(rawM - trimmedM, 0);
+      // Walking time scales with distance (grade aside), so a trimmed spur takes its share of time.
+      const durationS = rawM > 0 ? ((l1.durationSeconds + l2.durationSeconds) * distanceM) / rawM : l1.durationSeconds + l2.durationSeconds;
+      fill(at, { state: "ok", draft: { id: `detour-${i + 1}`, method: "detour", coords, durationS, distanceM } });
+    });
+    // Awaited below; until then a throw elsewhere must not leave it unhandled.
+    detour.catch(() => undefined);
+    detours.push(detour);
   }
 
-  // Graph paths: built once with the default weights; the dials re-rank, they do not re-route.
+  // Graph paths, built while the detours fly: once, with the default weights; the dials re-rank,
+  // they do not re-route.
+  const matches: Promise<void>[] = [];
   if (!graphSkipped) {
+    await yieldToEvents();
+    guard();
     const g = buildWalkGraph(p, base.roads);
     // The plain shortest path on the graph is the fastest walk again, not a candidate; seeding
     // with it means a gamma that does not leave it spends no call.
@@ -293,44 +414,44 @@ export async function findWalks(deps: WalkDeps, from: LngLat, to: LngLat, signal
       if (seen.some((q) => overlap(p, path, q) >= SAME_PATH && overlap(p, q, path) >= SAME_PATH)) continue;
       seen.push(path);
       if (!fits(1)) break;
-      let matched: WalkLeg;
-      guard();
-      calls++;
-      try {
-        matched = await deps.match(resampleTo(path, MAX_MATCH_POINTS), signal);
-      } catch (e) {
-        rethrowAbort(e);
-        skipped++;
-        continue;
-      }
-      const coords = matched.geometry.coordinates;
-      add({ id: `graph-${gamma}`, method: "graph", coords, durationS: matched.durationSeconds, distanceM: matched.distanceMeters, fidelity: overlap(p, path, coords) });
+      const at = slots.length;
+      slots.push({ state: "pending" });
+      const match = issue(() => deps.match(resampleTo(path, MAX_MATCH_POINTS), signal)).then((r): void => {
+        if (!r.ok) return fill(at, { state: "failed", error: r.error });
+        const coords = r.value.geometry.coordinates;
+        fill(at, { state: "ok", draft: { id: `graph-${gamma}`, method: "graph", coords, durationS: r.value.durationSeconds, distanceM: r.value.distanceMeters, fidelity: overlap(p, path, coords) } });
+      });
+      match.catch(() => undefined);
+      matches.push(match);
     }
   }
 
-  // A candidate that leaves the 500 m corridor would be scored as if its far half had no cafes
-  // or landmarks; fetch places along it so it competes on the same footing.
-  let toppedUp = false;
-  if (placesAvailable) {
-    const ref = fastest.geometry.coordinates.map(P.to);
-    for (const c of candidates.slice(1)) {
-      if (strayM(P, c.coords, ref) <= STRAY_M) continue;
-      if (!fits(2)) break;
-      try {
-        const [l, k] = await pair(
-          () => deps.placesAlong(c.coords, LIFE_CATEGORIES, TOP_UP_M, signal),
-          () => deps.placesAlong(c.coords, LANDMARK_CATEGORIES, TOP_UP_M, signal),
-        );
-        if (mergePois(life, l) + mergePois(landmarks, k) > 0) toppedUp = true;
-      } catch (e) {
-        rethrowAbort(e);
-        if (statusOf(e) !== 503) throw e;
-        // Scoring some candidates with places and some without would rank them unfairly.
-        unavailable();
-        toppedUp = true;
-        break;
-      }
+  // Every detour and match is out: top-ups may spend what is left, from the fastest walk on.
+  topUpsOpen = true;
+  settleUpTo();
+
+  // Once every answer is in, every slot is filled, every kept walk is in `candidates` and every
+  // top-up that will ever be sent is in `topUps`.
+  await Promise.all(detours);
+  await Promise.all(matches);
+  for (const slot of slots)
+    if (slot.state === "failed") {
+      rethrowAbort(slot.error);
+      skipped++;
     }
+
+  let toppedUp = false;
+  for (const [l, k] of await Promise.all(topUps)) {
+    if (!placesAvailable) break;
+    if (l.ok && k.ok) {
+      if (mergePois(life, l.value) + mergePois(landmarks, k.value) > 0) toppedUp = true;
+      continue;
+    }
+    const error = l.ok ? (k as { error: unknown }).error : l.error;
+    rethrowAbort(error);
+    if (statusOf(error) !== 503) throw error;
+    unavailable();
+    toppedUp = true;
   }
   // Once, so every candidate is scored against the same data.
   if (toppedUp) p = prepare({ ...base, life, landmarks }, from);

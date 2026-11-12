@@ -9,20 +9,24 @@ import {
   SCORE_RADII,
   dist,
   grid,
+  inAnyPark,
   nearWater,
-  parksAt,
   quietAt,
   resample,
   segDist,
   type AliveData,
+  type Grid,
   type LngLat,
   type Prepared,
+  type PreparedPoi,
   type XY,
 } from "./alive-signals";
 
 /** Snap tolerance for joining vertices, and the reach for joining a dangling end to a segment. */
 const SNAP_M = 1.5;
 const DANGLE_M = 4;
+/** Signal samples along an edge, every this many metres from its first end. */
+const SAMPLE_M = 10;
 
 /** Gamma ladder: how hard each candidate route leans toward pleasant streets. */
 export const GAMMAS = [0.5, 1, 1.5, 2, 3] as const;
@@ -69,8 +73,13 @@ export function buildWalkGraph(p: Prepared, roads: AliveData["roads"]): GraphInt
     return id;
   };
   const nodeAt = (q: XY): number => {
-    for (const id of nodeGrid.near(q, SNAP_M)) if (dist(xy[id]!, q) <= SNAP_M) return id;
-    return addNode(q);
+    let found = -1;
+    nodeGrid.visit(q, SNAP_M, (id) => {
+      if (dist(xy[id]!, q) > SNAP_M) return false;
+      found = id;
+      return true;
+    });
+    return found >= 0 ? found : addNode(q);
   };
 
   const edges: Edge[] = [];
@@ -108,16 +117,17 @@ export function buildWalkGraph(p: Prepared, roads: AliveData["roads"]): GraphInt
   });
   for (const id of dangling) {
     const q = xy[id]!;
-    let best: Edge | null = null;
+    // Typed by assertion: assigned only inside the visit callback, which flow analysis cannot see.
+    let best = null as Edge | null;
     let bestD = DANGLE_M;
-    for (const e of edgeGrid.near(q, DANGLE_M)) {
-      if (e.dead || e.a === id || e.b === id) continue;
+    edgeGrid.visit(q, DANGLE_M, (e) => {
+      if (e.dead || e.a === id || e.b === id) return;
       const d = segDist(q, xy[e.a]!, xy[e.b]!);
       if (d < bestD) {
         bestD = d;
         best = e;
       }
-    }
+    });
     if (!best) continue;
     const a = xy[best.a]!;
     const b = xy[best.b]!;
@@ -141,10 +151,41 @@ export function buildWalkGraph(p: Prepared, roads: AliveData["roads"]): GraphInt
     joined++;
   }
 
-  // Per-edge signals, the same five as scoreRoute, computed once. Weights apply later.
+  // Per-edge signals, the same five as scoreRoute, computed once. Weights apply later. Every
+  // sample gets exactly what quietAt, parksAt, nearWater and the place grids would tell it (a
+  // test holds the build to that); what changed is how often the grids are asked. Places and
+  // water are gathered once per edge, and the per-sample lookups visit grid cells without
+  // building a Set. A place is a point, so it sits in one grid cell and a visit meets it once.
+  const lifeBuf: PreparedPoi[] = [];
+  const landmarkBuf: PreparedPoi[] = [];
+  const pointsNear = (g: Grid<PreparedPoi>, at: XY, r: number, into: PreparedPoi[]): PreparedPoi[] => {
+    into.length = 0;
+    g.visit(at, r, (q) => {
+      into.push(q);
+    });
+    return into;
+  };
+  /** Metres to the nearest water within `r` of `at`, or Infinity. */
+  const waterWithin = (at: XY, r: number): number => {
+    let d = Infinity;
+    p.waterGrid.visit(at, r, (w) => {
+      d = Math.min(d, segDist(at, w.a, w.b));
+    });
+    return d;
+  };
   const live = edges.filter((e) => !e.dead);
   for (const e of live) {
-    const pts = resample([xy[e.a]!, xy[e.b]!], 10);
+    const a = xy[e.a]!;
+    const b = xy[e.b]!;
+    const pts = resample([a, b], SAMPLE_M);
+    const mid: XY = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+    const half = e.len / 2;
+    const lifeNear = pointsNear(p.lifeGrid, mid, half + SCORE_RADII.life, lifeBuf);
+    const landmarksNear = pointsNear(p.landmarkGrid, mid, half + SCORE_RADII.landmark, landmarkBuf);
+    // Every sample is within `half` of the midpoint, so the water nearest the midpoint settles
+    // the whole edge unless it lies within `half` of the 80 m reach.
+    const dw = waterWithin(mid, half + SCORE_RADII.water);
+    const wet = dw + half <= SCORE_RADII.water ? "all" : dw - half > SCORE_RADII.water ? "none" : "some";
     let green = 0;
     let water = 0;
     let quiet = 0;
@@ -152,10 +193,10 @@ export function buildWalkGraph(p: Prepared, roads: AliveData["roads"]): GraphInt
     const landmarks = new Set<string>();
     for (const s of pts) {
       quiet += quietAt(p, s);
-      if (parksAt(p, s).length) green++;
-      if (nearWater(p, s)) water++;
-      for (const q of p.lifeGrid.near(s, SCORE_RADII.life)) if (dist(s, q.xy) <= SCORE_RADII.life) life.add(q.id);
-      for (const q of p.landmarkGrid.near(s, SCORE_RADII.landmark)) if (dist(s, q.xy) <= SCORE_RADII.landmark) landmarks.add(q.id);
+      if (inAnyPark(p, s)) green++;
+      if (wet === "all" || (wet === "some" && nearWater(p, s))) water++;
+      for (const q of lifeNear) if (dist(s, q.xy) <= SCORE_RADII.life) life.add(q.id);
+      for (const q of landmarksNear) if (dist(s, q.xy) <= SCORE_RADII.landmark) landmarks.add(q.id);
     }
     // Storefront density smoothed over 100 m, so a 5 m edge beside one cafe is not "100%".
     const km = e.len / 1000 + 0.1;

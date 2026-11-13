@@ -210,6 +210,11 @@ export function useLayerSet(set: () => LayerSet): { map: ComputedRef<Map | null>
     ],
     ([current, isReady], _previous, onCleanup) => {
       if (!current || !isReady) return;
+      // `ready` can lag a swap: a re-run before it turns false (a key change in the same tick as
+      // `setStyle`) finds the new style still loading. `getStyle()` is undefined exactly then; its
+      // `style.load` bumps `generation` and runs this again. Not `isStyleLoaded()`, which stays
+      // false while tiles load.
+      if (!current.getStyle()) return;
       const { sourceId, source, data, layers, beforeId } = set();
       let removed = false;
       const onRemove = () => {

@@ -45,7 +45,7 @@
   },
   "next/lib/map-layers.ts": {
     "source": "apps/registry/registry/lib/map-layers.ts",
-    "sha256": "a537271e0d0b67c9c5eb9dabfa2d8801892c35ea00b760f597b3602e4c978c59"
+    "sha256": "ffccaa866ec528c38483f0d8b2cd3be624e01434500d1391045ccdd800b6324e"
   },
   "next/components/ui/route-line.tsx": {
     "source": "apps/registry/registry/ui/route-line.tsx",
@@ -217,7 +217,7 @@
   },
   "next/components/ui/view-explorer.tsx": {
     "source": "apps/registry/registry/blocks/view-explorer/view-explorer.tsx",
-    "sha256": "fdbdf07d9fc4ac52eb2cf362ff80af757ea92880172cf467249ca828b5ff1737"
+    "sha256": "fecb0eaac530751691105dd8dc9adfbeb2cefe1ac80c97b10fd7820562f9727a"
   },
   "next/app/urban-noise-map/page.tsx": {
     "source": "apps/registry/registry/blocks/urban-noise-map/page.tsx",
@@ -489,7 +489,7 @@
   },
   "nuxt/app/lib/map-layers/index.ts": {
     "source": "apps/registry/registry/vue/components/ui/map-layers/index.ts",
-    "sha256": "93144c5f7c18b247b7ac58ab941aadf56d2ceeb36d92795d806bd13768776cae"
+    "sha256": "c1b3eacb5edb287685a4b149238f2b25ed15e702eb6666d715ebdb3671460d03"
   },
   "nuxt/app/components/ui/cluster-layer/UnmapClusterLayer.vue": {
     "source": "apps/registry/registry/vue/components/ui/cluster-layer/UnmapClusterLayer.vue",
@@ -769,7 +769,7 @@
   },
   "nuxt/app/components/ui/view-explorer/UnmapViewExplorer.vue": {
     "source": "apps/registry/registry/vue/components/ui/view-explorer/UnmapViewExplorer.vue",
-    "sha256": "1fb35a53da953d175f4b760d25227e173edc93e7fee3c78b6b6ac2eab26de2d7"
+    "sha256": "992f449185e430245ba6a292802a3f79fbbacd82337e647ce21874bba22bc0ec"
   },
   "nuxt/app/components/ui/view-explorer/index.ts": {
     "source": "apps/registry/registry/vue/components/ui/view-explorer/index.ts",

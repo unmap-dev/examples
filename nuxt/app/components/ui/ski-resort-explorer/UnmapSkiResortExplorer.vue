@@ -645,7 +645,8 @@ const SKI_MAP_OPTIONS = {
 /**
  * The MapLibre options the explorer's map is created with, plus the 3D lifts' when they are on.
  * Always the same object for the same `lifts3d`: the map is rebuilt when this object changes, so a
- * new one on every render would rebuild it on every render.
+ * new one on every render would rebuild it on every render. 3D trees need no antialiasing, so
+ * they never rebuild it.
  */
 export function skiMapOptions(lifts3d: boolean): { maxPitch: number; canvasContextAttributes?: { antialias: true } } {
   return lifts3d ? SKI_MAP_OPTIONS.on : SKI_MAP_OPTIONS.off;
@@ -940,7 +941,10 @@ export function areaFigures(area: Parameters<typeof statRows>[0], lang: SkiLang)
  * load and again when a filter changes (a search waits for a pause in typing), then the map's own
  * style and tile requests. Picking an area makes no call: the list already holds it. With
  * `lifts3d` on, picking an area also calls `GET /ski/areas/{id}/lifts-3d` (again after a style swap, which redraws the map), and the first such
- * pick imports @unmap/deck (deck.gl); with it off, neither is ever loaded.
+ * pick imports @unmap/deck (deck.gl); with it off, neither is ever loaded. `trees3d` draws the
+ * basemap's woods as 3D trees near the camera from zoom 13.5 in, cleared along the runs and lifts:
+ * it makes no call (the trees are placed from tiles the map already holds) and imports @unmap/deck
+ * when it is turned on.
  *
  * The data is derived from OpenStreetMap and is ODbL; the panel carries the attribution and the
  * licence. It is terrain information, not avalanche or safety advice, and the panel says so.
@@ -985,6 +989,12 @@ const props = withDefaults(
      */
     lifts3d?: boolean;
     /**
+     * Draw the basemap's woods as 3D trees on the terrain, near the camera, from zoom 13.5 in, with
+     * strips cleared along the runs and lifts. Off by default. When on, @unmap/deck is imported;
+     * it makes no call, and switching it leaves the map as it is (trees need no antialiasing).
+     */
+    trees3d?: boolean;
+    /**
      * The area to show, by its slug (`nakiska`, see `areaSlug`) or its id, such as one read from the
      * page URL (`v-model:area`). Picks that area once the list holds it; `null` closes it. Omit it
      * and the block keeps its own selection.
@@ -992,7 +1002,7 @@ const props = withDefaults(
     area?: string | null;
     class?: HTMLAttributes["class"];
   }>(),
-  { lang: "en", center: () => CANADA_VIEW.center, zoom: CANADA_VIEW.zoom, lifts3d: false, area: undefined },
+  { lang: "en", center: () => CANADA_VIEW.center, zoom: CANADA_VIEW.zoom, lifts3d: false, trees3d: false, area: undefined },
 );
 
 const emit = defineEmits<{
@@ -1015,6 +1025,8 @@ const map = computed(() => mapStore.get(SKI_MAP_ID)?.map ?? null);
 // Ready once the style has loaded: the terrain, and its exaggeration, are on the map. A style swap
 // (a new exaggeration, light or dark) clears it, so the cables are drawn again on the new one.
 const mapReady = computed(() => mapStore.get(SKI_MAP_ID)?.ready ?? false);
+// +1 for every completed style load: the trees are drawn again on each.
+const mapGeneration = computed(() => mapStore.get(SKI_MAP_ID)?.generation ?? 0);
 
 const copy = computed(() => SKI_COPY[props.lang]);
 const hasKey = computed(() => props.apiKey.trim() !== "");
@@ -1138,6 +1150,30 @@ watch(
       },
     });
     onCleanup(stop);
+  },
+  { immediate: true },
+);
+
+// The woods as 3D trees through @unmap/deck's `showTrees` (imported only now), drawn again after a
+// style swap, which redraws the terrain they stand on, and taken off when trees3d turns off.
+watch(
+  [() => props.trees3d, map, mapReady, mapGeneration],
+  ([on, live, ready], _previous, onCleanup) => {
+    if (!on || !live || !ready) return;
+    let stop: (() => void) | null = null;
+    let cancelled = false;
+    import("@unmap/deck")
+      .then(({ showTrees }) => {
+        if (!cancelled) stop = showTrees(live as unknown as Parameters<typeof showTrees>[0]);
+      })
+      .catch((caught: unknown) => {
+        // The map is whole without them: say why in the console and draw none.
+        if (!cancelled) console.warn("3D trees are off:", caught);
+      });
+    onCleanup(() => {
+      cancelled = true;
+      stop?.();
+    });
   },
   { immediate: true },
 );

@@ -16,7 +16,10 @@
  * load and again when a filter changes (a search waits for a pause in typing), then the map's own
  * style and tile requests. Picking an area makes no call: the list already holds it. With
  * `lifts3d` on, picking an area also calls `GET /ski/areas/{id}/lifts-3d` (again after a style swap, which redraws the map), and the first such
- * pick imports @unmap/deck (deck.gl); with it off, neither is ever loaded.
+ * pick imports @unmap/deck (deck.gl); with it off, neither is ever loaded. `trees3d` draws the
+ * basemap's woods as 3D trees near the camera from zoom 13.5 in, cleared along the runs and lifts:
+ * it makes no call (the trees are placed from tiles the map already holds) and imports @unmap/deck
+ * when it is turned on.
  *
  * The data is derived from OpenStreetMap and is ODbL; the panel carries the attribution and the
  * licence. It is terrain information, not avalanche or safety advice, and the panel says so.
@@ -39,7 +42,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Spinner } from "@/components/ui/spinner";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { useMap, useMapReady } from "@/lib/map-context";
+import { useMap, useMapGeneration, useMapReady } from "@/lib/map-context";
 
 // --- ski-resort-explorer helpers (kept identical across both lanes) ---
 export type SkiLang = "en" | "fr";
@@ -687,7 +690,8 @@ const SKI_MAP_OPTIONS = {
 /**
  * The MapLibre options the explorer's map is created with, plus the 3D lifts' when they are on.
  * Always the same object for the same `lifts3d`: the map is rebuilt when this object changes, so a
- * new one on every render would rebuild it on every render.
+ * new one on every render would rebuild it on every render. 3D trees need no antialiasing, so
+ * they never rebuild it.
  */
 export function skiMapOptions(lifts3d: boolean): { maxPitch: number; canvasContextAttributes?: { antialias: true } } {
   return lifts3d ? SKI_MAP_OPTIONS.on : SKI_MAP_OPTIONS.off;
@@ -984,6 +988,12 @@ export interface SkiResortExplorerProps {
    */
   lifts3d?: boolean;
   /**
+   * Draw the basemap's woods as 3D trees on the terrain, near the camera, from zoom 13.5 in, with
+   * strips cleared along the runs and lifts. Off by default. When on, @unmap/deck is imported;
+   * it makes no call, and switching it leaves the map as it is (trees need no antialiasing).
+   */
+  trees3d?: boolean;
+  /**
    * The area to show, by its slug (`nakiska`, see `areaSlug`) or its id, such as one read from the
    * page URL. Picks that area once the list holds it; `null` closes it. Omit it and the block keeps
    * its own selection.
@@ -1005,6 +1015,7 @@ export function SkiResortExplorer({
   zoom = CANADA_VIEW.zoom,
   exaggeration,
   lifts3d = false,
+  trees3d = false,
   area,
   onAreaChange,
   className,
@@ -1176,6 +1187,7 @@ export function SkiResortExplorer({
         className="h-full"
       >
         <FlyToArea area={selected} panelRef={panelRef} />
+        {trees3d ? <Trees3d /> : null}
         {lifts3d && granted && selected ? (
           <Lifts3d key={liftsAttempt} areaId={selected.id} apiKey={apiKey} gateway={gateway} onError={setLiftsFailure} onPicker={setLiftPicker} />
         ) : null}
@@ -1487,6 +1499,34 @@ function Lifts3d({
     if (!map || !ready) return;
     return showLifts3d(map as unknown as SkiLiftsMap, { key: apiKey, areaId, gateway, onError, onPicker });
   }, [map, ready, areaId, apiKey, gateway, onError, onPicker]);
+  return null;
+}
+
+/**
+ * The woods as 3D trees while this renders, through @unmap/deck's `showTrees` (imported only now),
+ * drawn again after a style swap, which redraws the terrain they stand on.
+ */
+function Trees3d() {
+  const map = useMap(SKI_MAP_ID);
+  const ready = useMapReady(SKI_MAP_ID);
+  const generation = useMapGeneration(SKI_MAP_ID);
+  useEffect(() => {
+    if (!map || !ready) return;
+    let stop: (() => void) | null = null;
+    let cancelled = false;
+    import("@unmap/deck")
+      .then(({ showTrees }) => {
+        if (!cancelled) stop = showTrees(map as unknown as Parameters<typeof showTrees>[0]);
+      })
+      .catch((caught: unknown) => {
+        // The map is whole without them: say why in the console and draw none.
+        if (!cancelled) console.warn("3D trees are off:", caught);
+      });
+    return () => {
+      cancelled = true;
+      stop?.();
+    };
+  }, [map, ready, generation]);
   return null;
 }
 

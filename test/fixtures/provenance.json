@@ -209,7 +209,7 @@
   },
   "next/components/ui/ski-resort-explorer.tsx": {
     "source": "apps/registry/registry/blocks/ski-resort-explorer/ski-resort-explorer.tsx",
-    "sha256": "9b815b4add5d46059961d6b3ed3813ec5ac527879962d2f8aadd69f884f7908b"
+    "sha256": "0e5f9bcf0abe26652f09acf6dde0a2c78c48f850c00c4558974f2850b8e55043"
   },
   "next/app/view-explorer/page.tsx": {
     "source": "apps/registry/registry/blocks/view-explorer/page.tsx",
@@ -757,7 +757,7 @@
   },
   "nuxt/app/components/ui/ski-resort-explorer/UnmapSkiResortExplorer.vue": {
     "source": "apps/registry/registry/vue/components/ui/ski-resort-explorer/UnmapSkiResortExplorer.vue",
-    "sha256": "840ce11a0c9e90114b0aa37e03d56220cd9f8764afb5c0a2e872725d9b85e5ad"
+    "sha256": "f8ffb8ba27c7c79cf3d045e9581e2cfac4a7f47c6ca3e7a6d8ba1875c925901e"
   },
   "nuxt/app/components/ui/ski-resort-explorer/index.ts": {
     "source": "apps/registry/registry/vue/components/ui/ski-resort-explorer/index.ts",

@@ -225,7 +225,7 @@
   },
   "next/components/ui/urban-noise-map.tsx": {
     "source": "apps/registry/registry/blocks/urban-noise-map/urban-noise-map.tsx",
-    "sha256": "f334dbc33562140c2a22ed53f6e68e89fbab7ac7432f525b2206d856ee06b2d8"
+    "sha256": "c505b5762b43fcfae7a493985da70f187d0203554e5e74de07a163d18a332bcb"
   },
   "next/app/alive-route-explorer/page.tsx": {
     "source": "apps/registry/registry/blocks/alive-route-explorer/page.tsx",
@@ -781,7 +781,7 @@
   },
   "nuxt/app/components/ui/urban-noise-map/UnmapUrbanNoiseMap.vue": {
     "source": "apps/registry/registry/vue/components/ui/urban-noise-map/UnmapUrbanNoiseMap.vue",
-    "sha256": "2e42eea5f408f1775704e201237a0c27bf291321e448c8c98f7700888f00a6fd"
+    "sha256": "728f37c3ff0a63454d37cf73130b3e82d1939a17eec90c7c67d77a8926ab185a"
   },
   "nuxt/app/components/ui/urban-noise-map/index.ts": {
     "source": "apps/registry/registry/vue/components/ui/urban-noise-map/index.ts",

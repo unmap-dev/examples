@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * <SkiResortExplorer> - every ski area in Canada on the winter style in 3D: a searchable list
+ * <SkiResortExplorer> - every ski area in Canada and the US on the winter style in 3D: a searchable list
  * (name, province, activity) beside the map, and, for the area you pick, its vertical, runs,
  * lifts, aspect and drive time. Picking an area flies to it, turned to face its slopes and tilted
  * onto its terrain. Click a run or a lift on the map for its card (difficulty, pitch and aspect;
@@ -75,7 +75,7 @@ export const PROVINCES = ["AB", "BC", "MB", "NB", "NL", "NS", "NT", "NU", "ON", 
 export const SKI_COPY = {
   en: {
     title: "Ski areas",
-    description: "Every ski area in Canada on 3D terrain. Search by name, filter by province or activity, and pick one for its numbers.",
+    description: "Every ski area in Canada and the US on 3D terrain. Search by name, filter by province or activity, and pick one for its numbers.",
     checking: "Loading ski areas...",
     search: "Search ski areas",
     searchPlaceholder: "Whistler, Mont-Sainte-Anne...",
@@ -125,7 +125,7 @@ export const SKI_COPY = {
     liftsDenied: "3D lifts need the Ski add-on on this key.",
     liftsMissing: "This ski area has no 3D lifts yet.",
     liftsFailed: "The 3D lifts did not load.",
-    summary: "Every ski area in Canada on 3D terrain.",
+    summary: "Every ski area in Canada and the US on 3D terrain.",
     legend: "Legend",
     legendRuns: "Runs",
     legendKeys: {
@@ -218,7 +218,7 @@ export const SKI_COPY = {
   fr: {
     title: "Stations de ski",
     description:
-      "Toutes les stations de ski du Canada sur relief 3D. Cherchez par nom, filtrez par province ou par activité, et choisissez-en une pour ses chiffres.",
+      "Toutes les stations de ski du Canada et des États-Unis sur relief 3D. Cherchez par nom, filtrez par province ou par activité, et choisissez-en une pour ses chiffres.",
     checking: "Chargement des stations de ski...",
     search: "Chercher une station",
     searchPlaceholder: "Whistler, Mont-Sainte-Anne...",
@@ -268,7 +268,7 @@ export const SKI_COPY = {
     liftsDenied: "Les remontées 3D nécessitent le module complémentaire Ski sur cette clé.",
     liftsMissing: "Cette station n'a pas encore de remontées 3D.",
     liftsFailed: "Les remontées 3D ne se sont pas chargées.",
-    summary: "Toutes les stations de ski du Canada sur relief 3D.",
+    summary: "Toutes les stations de ski du Canada et des États-Unis sur relief 3D.",
     legend: "Légende",
     legendRuns: "Pistes",
     legendKeys: {
@@ -397,11 +397,11 @@ export function requestError(caught: unknown, lang: SkiLang): string {
 }
 
 /** The `areas()` options for the filters: nothing for "all", nothing for an empty search. */
-export function areaQuery(q: string, province: string, activity: SkiActivityFilter): { q?: string; province?: string; activity?: "downhill" | "nordic" } {
+export function areaQuery(q: string, region: string, activity: SkiActivityFilter): { q?: string; region?: string; activity?: "downhill" | "nordic" } {
   const text = q.trim();
   return {
     ...(text ? { q: text } : {}),
-    ...(province && province !== "all" ? { province } : {}),
+    ...(region && region !== "all" ? { region } : {}),
     ...(activity !== "all" ? { activity } : {}),
   };
 }
@@ -437,10 +437,10 @@ export function formatDrive(drive: { from: string; minutes: number } | null, lan
   return drive ? SKI_COPY[lang].driveFrom(formatMinutes(drive.minutes), drive.from) : null;
 }
 
-/** "Whistler, British Columbia"; whichever half is known; "" when neither is. */
-export function placeLine(area: { locality: string; province: string }, lang: SkiLang): string {
-  const province = SKI_COPY[lang].provinceNames[area.province] ?? area.province;
-  return [area.locality, province].filter((part) => part !== "").join(", ");
+/** "Whistler, British Columbia", "Fayston, VT"; whichever half is known; "" when neither is. */
+export function placeLine(area: { locality: string; country: string; region: string }, lang: SkiLang): string {
+  const region = (area.country === "CA" ? SKI_COPY[lang].provinceNames[area.region] : undefined) ?? area.region;
+  return [area.locality, region].filter((part) => part !== "").join(", ");
 }
 
 /** The aspect readout: one cell per direction in compass order, and the direction most runs face. */
@@ -499,7 +499,7 @@ export function slugify(name: string): string {
 
 /**
  * The short key a link names an area by: its name as a slug (`nakiska`). Two areas of the same
- * name each add their OSM type and number (`fortress-mountain-resort-w909322254`), and a name
+ * name each add their id without its prefix (`fortress-mountain-resort-3f8k2m9qxa`), and a name
  * with nothing left to slug (no Latin letters) is the id. Clashes are found among `known`, every
  * area the block has listed, which the first, unfiltered list already holds in full.
  */
@@ -507,13 +507,14 @@ export function areaSlug(area: { id: string; name: string }, known: ReadonlyArra
   const base = slugify(area.name);
   if (base === "") return area.id;
   if (!known.some((other) => other.id !== area.id && slugify(other.name) === base)) return base;
-  const id = /^osm-(way|relation|node)-(\d+)$/.exec(area.id);
-  return id ? `${base}-${id[1]![0]}${id[2]}` : `${base}-${slugify(area.id)}`;
+  const ska = /^ska_([0-9a-z]+)$/.exec(area.id);
+  return ska ? `${base}-${ska[1]}` : `${base}-${slugify(area.id)}`;
 }
 
 /** The area a link names, by its slug or by its id, among `areas`. */
-export function findArea<T extends { id: string; name: string }>(key: string, areas: readonly T[], known: ReadonlyArray<{ id: string; name: string }>): T | undefined {
-  return areas.find((entry) => entry.id === key) ?? areas.find((entry) => areaSlug(entry, known) === key);
+export function findArea<T extends { id: string; name: string; previous_ids?: readonly string[] }>(key: string, areas: readonly T[], known: ReadonlyArray<{ id: string; name: string }>): T | undefined {
+  // A link made before the id registry names the area by an OSM-derived id, now in previous_ids.
+  return areas.find((entry) => entry.id === key) ?? areas.find((entry) => entry.previous_ids?.includes(key)) ?? areas.find((entry) => areaSlug(entry, known) === key);
 }
 
 /** The labelled numbers the panel shows for an area, in a fixed order. */
